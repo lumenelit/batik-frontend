@@ -30,7 +30,7 @@ export default function PageIndustri() {
                             <div className="w-full relative">
                                 <div>Pemilik</div>
                                 <div className="w-full text-sm font-normal">
-                                    John Doe
+                                    Griffin
                                 </div>
                             </div>
                             <div className=" w-full relative">
