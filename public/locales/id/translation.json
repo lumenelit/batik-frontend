@@ -1,0 +1,112 @@
+{
+  "welcomePage": {
+    "title": "Selamat Datang",
+    "description": "Selamat datang di UBS Pre-Registration, Tujuan kami adalah untuk membuat proses pendaftaran Anda semudah mungkin. Silakan ikuti langkah-langkah di bawah ini untuk menyelesaikan pendaftaran Anda."
+  },
+  "languagePage": {
+    "title": "Pilih Bahasa"
+  },
+  "loginPage": {
+    "title": "Masuk Sekarang",
+    "description": "Silakan masuk menggunakan akun Google Unklab Anda! Jika Anda belum memiliki akun, silakan hubungi Helpdesk IT",
+    "loading": "Memuat..."
+  },
+  "button": {
+    "loginGoogle": "Masuk dengan Google",
+    "previous": "Sebelumnya",
+    "next": "Selanjutnya",
+    "done": "Selesai",
+    "cancel": "Batal",
+    "submit": "Kirim",
+    "delete": "Hapus"
+  },
+  "loginFailedPage": {
+    "title": "Gagal Masuk",
+    "description": "Silakan gunakan akun Google Unklab Anda! Nomor pendaftaran Anda tidak terdaftar",
+    "button": "Kembali ke Halaman Masuk"
+  },
+  "noSessionPage": {
+    "title": "Tidak Ada Sesi",
+    "description": "Silakan tunggu hingga sesi Pre-Registration dimulai untuk mengakses halaman ini",
+    "button": "Kembali ke Halaman Masuk"
+  },
+  "finishPage": {
+    "title": "Terima Kasih!",
+    "description": "Informasi Pre-Registration Anda telah diterima. Semoga berhasil!"
+  },
+  "filterSheet": {
+    "title": "Saring",
+    "titleType": "Tipe",
+    "titleCredits": "SKS",
+    "titleSemester": "Semester",
+    "reset": "Atur Ulang",
+    "credits": "SKS"
+  },
+  "header": {
+    "tab1": "Sen",
+    "tab2": "Sel",
+    "tab3": "Rab",
+    "tab4": "Kam",
+    "tab5": "Jum"
+  },
+  "navigation": {
+    "modalTitle": "Keluar",
+    "modalDescription": "Anda yakin ingin keluar?",
+    "modalButton": "Keluar",
+    "title": "Pilih Kelas Anda"
+  },
+  "scheduleButton": {
+    "modalTitle": "Anda yakin?",
+    "modalDescription": "Jika Anda yakin, silakan kirim",
+    "subject": "MatKul"
+  },
+  "scheduleContainer": {
+    "day1": "Senin",
+    "day2": "Selasa",
+    "day3": "Rabu",
+    "day4": "Kamis",
+    "day5": "Jumat"
+  },
+  "scheduleDailyItem": {
+    "noClass": "Tidak Ada Kelas"
+  },
+  "searchAndFilterBar": {
+    "search": "Cari"
+  },
+  "subjectContainer": {
+    "loading": "Memuat...",
+    "modalSksTitle": "Terlalu Banyak SKS",
+    "modalSksDescription": "Anda hanya dapat memilih 20 SKS. Anda dapat menghapus 1 kelas atau mencari kelas dengan jumlah SKS yang tepat.",
+    "modalCollisionTitle": "Benturan Kelas!",
+    "modalCollisionDescription": "Kelas yang Anda pilih memiliki benturan dengan kelas yang sudah dipilih. Silakan pilih kelas lain.",
+    "choice": "Pilihan Anda",
+    "noClass": "Maaf... Tidak Ada Kelas Ditemukan :)",
+    "noClassDescription": "Tidak ada kelas pada hari ini",
+    "noResult": "Maaf... Tidak Ada Hasil Ditemukan :)",
+    "noResultDescription": "Kami tidak dapat menemukan hasil untuk ",
+    "day1": "Hanya Senin",
+    "day2": "Hanya Selasa",
+    "day3": "Hanya Rabu",
+    "day4": "Hanya Kamis",
+    "day5": "Hanya Jumat",
+    "twoDay1": "Senin/Rabu",
+    "twoDay2": "Selasa/Kamis"
+  },
+  "subjectItem": {
+    "noSchedule": "Tidak Ada Jadwal",
+    "only": "Hanya",
+    "everyday": "Setiap Hari",
+    "modalEditTitle": "Edit Kelas?",
+    "modalEditDescription": "Anda akan diarahkan kembali untuk mengedit kelas Anda",
+    "modalDeleteTitle": "Hapus Kelas?",
+    "modalDeleteDescription": "Anda masih dapat memilih kelas ini lagi jika Anda menghapusnya.",
+    "modalDeleteSubject": "Anda sedang menghapus",
+    "description": "Deskripsi"
+  },
+  "submitClass": {
+    "credit": "SKS",
+    "tooltip": "Tekan disini untuk mengirimkan kelas",
+    "modalNoClassSelectedTitle": "Tidak Ada Kelas Dipilih",
+    "modalNoClassSelectedDescription": "Anda belum memilih kelas. Silakan pilih setidaknya 1 kelas."
+  }
+}

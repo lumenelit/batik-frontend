@@ -1,0 +1,112 @@
+{
+  "welcomePage": {
+    "title": "Welcome",
+    "description": "Welcome to UBS Pre-Registration, Our goal is to make your registration process as easy as possible. Please follow the steps below to complete your registration."
+  },
+  "languagePage": {
+    "title": "Choose Language"
+  },
+  "loginPage": {
+    "title": "Login Now",
+    "description": "Please login using your Unklab google Account! if you don't have one, please contact IT Helpdesk",
+    "loading": "Loading..."
+  },
+  "button": {
+    "loginGoogle": "Login with Google",
+    "previous": "Previous",
+    "next": "Next",
+    "done": "Done",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "delete": "Delete"
+  },
+  "loginFailedPage": {
+    "title": "Login Failed",
+    "description": "Please use your Unklab google account! Your registration number is not registered",
+    "button": "Back to Login"
+  },
+  "noSessionPage": {
+    "title": "No Session",
+    "description": "Please wait until pre registration session start to access this page",
+    "button": "Back to Login"
+  },
+  "finishPage": {
+    "title": "Thank You!",
+    "description": "Your pre-registration information has been received. Good Luck!"
+  },
+  "filterSheet": {
+    "title": "Filter",
+    "titleType": "Type",
+    "titleCredits": "Credits",
+    "titleSemester": "Semester",
+    "reset": "Reset",
+    "credits": "Credits"
+  },
+  "header": {
+    "tab1": "Mon",
+    "tab2": "Tue",
+    "tab3": "Wed",
+    "tab4": "Thu",
+    "tab5": "Fri"
+  },
+  "navigation": {
+    "modalTitle": "Logout",
+    "modalDescription": "Are you sure you want to logout?",
+    "modalButton": "Logout",
+    "title": "Choose Your Class"
+  },
+  "scheduleButton": {
+    "modalTitle": "Are you sure?",
+    "modalDescription": "If you are sure, please submit",
+    "subject": "Subject"
+  },
+  "scheduleContainer": {
+    "day1": "Monday",
+    "day2": "Tuesday",
+    "day3": "Wednesday",
+    "day4": "Thursday",
+    "day5": "Friday"
+  },
+  "scheduleDailyItem": {
+    "noClass": "No Class"
+  },
+  "searchAndFilterBar": {
+    "search": "Search"
+  },
+  "subjectContainer": {
+    "loading": "Loading...",
+    "modalSksTitle": "Too many SKS",
+    "modalSksDescription": "You can only have 20 SKS. You can delete 1 class or look for a class with the right number of SKS.",
+    "modalCollisionTitle": "Class Collision!",
+    "modalCollisionDescription": "Class you've chosen have collision. Please choose another class.",
+    "choice": "Your Choice",
+    "noClass": "Sorry... No Class Found :)",
+    "noClassDescription": "No Class in this day",
+    "noResult": "Sorry... No Result Found :)",
+    "noResultDescription": "We can't find any results for",
+    "day1": "Monday Only",
+    "day2": "Tuesday Only",
+    "day3": "Wednesday Only",
+    "day4": "Thursday Only",
+    "day5": "Friday Only",
+    "twoDay1": "Monday/Wednesday",
+    "twoDay2": "Tuesday/Thursday"
+  },
+  "subjectItem": {
+    "noSchedule": "No Schedule",
+    "only": "Only",
+    "everyday": "Everyday",
+    "modalEdiTitle": "Edit Class?",
+    "modalEditDescription": "You will be redirected back to edit your class",
+    "modalDeleteTitle": "Delete Class?",
+    "modalDeleteDescription": "You can still select this class again if you delete it.",
+    "modalDeleteSubject": "You are deleting",
+    "description": "Description"
+  },
+  "submitClass": {
+    "credit": "Credits",
+    "tooltip": "Click here to submit your class",
+    "modalNoClassSelectedTitle": "No Class Selected",
+    "modalNoClassSelectedDescription": "You haven't selected any class yet. Please select at least 1 class."
+  }
+}
