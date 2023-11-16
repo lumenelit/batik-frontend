@@ -5,6 +5,7 @@ import PageHome from "./pages/PageHome/PageHome";
 import PageIndustri from "./pages/PageIndustri/PageIndustri";
 import PageMotif from "./pages/PageMotif/PageMotif";
 import PageLanding from "./pages/PageLanding.tsx/PageLanding";
+import PageCheckout from "./pages/PageCheckout/PageCheckout";
 
 export const ROUTES = {
     LANDING: "/",
@@ -38,6 +39,10 @@ export const routerList = [
     {
         path: ROUTES.MOTIF,
         element: <PageMotif />
+    },
+    {
+        path: ROUTES.CHECKOUT,
+        element: <PageCheckout />
     },
     {
         path: ROUTES.PAGE_404,

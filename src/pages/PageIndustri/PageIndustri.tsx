@@ -1,30 +1,85 @@
 // import React, { useState, useEffect, useContext } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import Container from "../../components/layouts/Container";
 import MotifCard from "../../components/MotifCard";
 
 export default function PageIndustri() {
     // const handleTabChange = (index) => {};
+    const navigate = useNavigate;
     const motifData = [
         {
-            nama: "Batik akatsuki air",
-            harga: 200000
+            idMotif: "AD123",
+            idIndustri: "HF356542",
+            nama: "Motif akatsuki air - 2mx3m",
+            harga: 100000,
+            desc: "Lorem ipsum dolor sit amet consectetur. Urna justo elementum tortor massa. Vel morbi accumsan sit laoreet massa auctor enim. Sed vestibulum quam tellus morbi magna.",
+            varian: [
+                {
+                    id: "AD123",
+                    image: "ini pake file.bit64", //ambil dari field image1 dari motif variant
+                    nama: "Motif akatsuki air - 2mx3m"
+                },
+                {
+                    id: "AD125",
+                    image: "ini pake file.bit64", //ambil dari field image1 dari motif variant
+                    nama: "Motif akatsuki air - 2mx3m"
+                }
+            ],
+            image1: "ini pake file.bit64",
+            image2: "ini pake file.bit64",
+            image3: "ini pake file.bit64"
         },
-
         {
-            nama: "Batik akatsuki tanah",
-            harga: 100000
+            idMotif: "AD123124",
+            idIndustri: "HF356542",
+            nama: "Motif akatsuki tanah - 2mx3m",
+            harga: 200000,
+            desc: "Lorem ipsum dolor sit amet consectetur. Urna justo elementum tortor massa. Vel morbi accumsan sit laoreet massa auctor enim. Sed vestibulum quam tellus morbi magna.",
+            varian: [
+                {
+                    id: "AD123",
+                    image: "ini pake file.bit64", //ambil dari field image1 dari motif variant
+                    nama: "Motif akatsuki air - 2mx3m"
+                },
+                {
+                    id: "AD125",
+                    image: "ini pake file.bit64", //ambil dari field image1 dari motif variant
+                    nama: "Motif akatsuki air - 2mx3m"
+                }
+            ],
+            image1: "ini pake file.bit64",
+            image2: "ini pake file.bit64",
+            image3: "ini pake file.bit64"
         }
     ];
     return (
         <>
-            <Container center={false}>
+            <Container center={true}>
                 <Header />
                 <div className="flex flex-row items-start gap-4">
                     <div className="w-1/2 max-w-[400px] h-fit p-4 bg-white rounded-xl shadow flex-col justify-start items-start gap-4 inline-flex text-[#231010] text-l font-semibold font-['Inter']">
                         <div className="w-full text-xl font-semibold">
                             Nama Industri
+                        </div>
+                        <div className="flex flex-row-reverse gap-2 min-w-1/2 h-fit">
+                            <img
+                                className="aspect-square rounded-xl bg-cover bg-center shadow-lg"
+                                src="https://via.placeholder.com/250x250"
+                                alt="motif"
+                            />
+                            <div className="flex flex-col justify-between w-full gap-2">
+                                <img
+                                    className="aspect-square h-1/2 rounded-xl bg-cover bg-center shadow-lg"
+                                    src="https://via.placeholder.com/250x250"
+                                    alt="motif"
+                                />
+                                <img
+                                    className="aspect-square h-1/2 rounded-xl bg-cover bg-center shadow-lg"
+                                    src="https://via.placeholder.com/250x250"
+                                    alt="motif"
+                                />
+                            </div>
                         </div>
                         <div className="flex flex-col items-start self-stretch justify-start w-full gap-2 h-fit">
                             <div className="relative w-full">

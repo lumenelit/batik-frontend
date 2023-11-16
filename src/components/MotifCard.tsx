@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 function formatRupiah(int) {
     let rupiah = new Intl.NumberFormat("id-ID", {
         style: "currency",
@@ -7,12 +9,15 @@ function formatRupiah(int) {
 }
 
 export default function MotifCard({ data }) {
+    const navigate = useNavigate();
+
     const handleClickCard = () => {
         console.log("clicked");
+        navigate(`../motif/${data.idMotif}`);
     };
     return (
         <div
-            className="max-w-[180px] h-[250px] p-2 bg-white rounded-xl shadow flex-col justify-start items-start gap-2 inline-flex font-['Inter'] text-sm"
+            className="max-w-[180px] h-[250px] p-2 bg-white rounded-xl shadow flex-col justify-start items-start gap-2 inline-flex font-['Inter'] text-sm cursor-pointer hover:scale-105 transition-all"
             onClick={handleClickCard}
         >
             <img
