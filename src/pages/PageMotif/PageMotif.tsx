@@ -1,40 +1,52 @@
 // import React, { useState, useEffect, useContext } from "react";
-// import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Header from "../../components/Header";
 import Container from "../../components/layouts/Container";
 
 export default function PageMotif() {
-    // const { idMotif } = useParams();
-    // const motifData = [
-    //     {
-    //         nama: "Batik akatsuki air",
-    //         harga: 200000
-    //     },
-
-    //     {
-    //         nama: "Batik akatsuki tanah",
-    //         harga: 100000
-    //     }
-    // ];
+    const { idMotif } = useParams();
+    const navigate = useNavigate();
+    const data = {
+        idMotif: "AD123",
+        idIndustri: "HF356542",
+        nama: "Motif akatsuki tanah - 2mx3m",
+        harga: 200000,
+        desc: "Lorem ipsum dolor sit amet consectetur. Urna justo elementum tortor massa. Vel morbi accumsan sit laoreet massa auctor enim. Sed vestibulum quam tellus morbi magna.",
+        varian: [
+            {
+                id: "AD123",
+                image: "ini pake file.bit64", //ambil dari field image1 dari motif variant
+                nama: "Motif akatsuki air - 2mx3m"
+            },
+            {
+                id: "AD125",
+                image: "ini pake file.bit64", //ambil dari field image1 dari motif variant
+                nama: "Motif akatsuki air - 2mx3m"
+            }
+        ],
+        image1: "ini pake file.bit64",
+        image2: "ini pake file.bit64",
+        image3: "ini pake file.bit64"
+    };
     return (
         <>
             <Container center={true}>
                 <Header />
                 <div className="flex flex-row justify-center items-start gap-4 font-['Inter'] ">
-                    <div className="flex flex-row-reverse gap-2 min-w-1/2 h-fit">
+                    <div className="flex flex-row-reverse gap-2 h-fit w-1/2">
                         <img
-                            className="w-[400px] h-[400px] rounded-xl bg-cover bg-center shadow-lg"
-                            src="https://via.placeholder.com/520x520"
+                            className="aspect-square w-full rounded-xl bg-cover bg-center shadow-lg"
+                            src="https://via.placeholder.com/250x250"
                             alt="motif"
                         />
-                        <div className="flex flex-col justify-between w-full gap-2">
+                        <div className="flex flex-col justify-between w-fit gap-2">
                             <img
-                                className="w-[180px] h-1/2 rounded-xl bg-cover bg-center shadow-lg"
+                                className="aspect-square h-1/2 rounded-xl bg-cover bg-center shadow-lg"
                                 src="https://via.placeholder.com/250x250"
                                 alt="motif"
                             />
                             <img
-                                className="w-[180px] h-1/2 rounded-xl bg-cover bg-center shadow-lg"
+                                className="aspect-square h-1/2 rounded-xl bg-cover bg-center shadow-lg"
                                 src="https://via.placeholder.com/250x250"
                                 alt="motif"
                             />
@@ -81,7 +93,12 @@ export default function PageMotif() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="self-stretch h-[50px] px-2 bg-[#A25B4C] rounded-xl justify-center items-center inline-flex">
+                            <div
+                                className="self-stretch h-[50px] px-2 bg-[#A25B4C] rounded-xl justify-center items-center inline-flex cursor-pointer"
+                                onClick={() =>
+                                    navigate(`../checkout/${data.idMotif}`)
+                                }
+                            >
                                 <div className="inline-flex flex-col items-center justify-center">
                                     <div className="inline-flex items-center justify-start h-6">
                                         <div className="flex items-center justify-center gap-1">
@@ -90,9 +107,6 @@ export default function PageMotif() {
                                             </div>
                                             <div className="relative w-5 h-5 origin-top-left rotate-180" />
                                         </div>
-                                    </div>
-                                    <div className="inline-flex items-start justify-start px-3">
-                                        <div className="w-[0px] h-[0px] bg-white" />
                                     </div>
                                 </div>
                             </div>
