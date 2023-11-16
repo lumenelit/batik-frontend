@@ -18,9 +18,10 @@ export default function MotifCard({ data }) {
             <img
                 className="rounded-lg w-[160px] min-h-[160px]"
                 src="https://via.placeholder.com/218x177"
+                alt="motif"
             />
 
-            <div className="h-full flex flex-col justify-between">
+            <div className="flex flex-col justify-between h-full">
                 <div className="text-[#231010] font-normal line-clamp-2 w-full">
                     {data.nama}
                 </div>
