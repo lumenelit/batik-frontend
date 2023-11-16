@@ -30,20 +30,20 @@ export default function PageHome() {
             api.get("/industri").then(async (res) => {
                 // sort by distance
                 const sorted = res.data.sort((a: any, b: any) => {
-                    return (
-                        distance(
-                            currentLocation.lat,
-                            currentLocation.lon,
-                            a.coordinate.lat,
-                            a.coordinate.long
-                        ) -
-                        distance(
-                            currentLocation.lat,
-                            currentLocation.lon,
-                            b.coordinate.lat,
-                            b.coordinate.long
-                        )
+                    const distanceA = distance(
+                        currentLocation.lat,
+                        currentLocation.lon,
+                        a.coordinate.lat,
+                        a.coordinate.long
                     );
+                    const distanceB = distance(
+                        currentLocation.lat,
+                        currentLocation.lon,
+                        b.coordinate.lat,
+                        b.coordinate.long
+                    );
+
+                    return distanceA - distanceB;
                 });
                 setIndustry(sorted);
             });
