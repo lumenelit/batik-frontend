@@ -1,12 +1,10 @@
-import { Navigate, createBrowserRouter } from "react-router-dom";
-import PageIntroduction from "./pages/PageIntroduction/PageIntroduction";
+import { createBrowserRouter } from "react-router-dom";
 import PageError from "./pages/PageError/PageError";
-import PageLanguage from "./pages/PageLanguage/PageLanguage";
 import PageLogin from "./pages/PageLogin/PageLogin";
 import PageHome from "./pages/PageHome/PageHome";
 import PageIndustri from "./pages/PageIndustri/PageIndustri";
 import PageMotif from "./pages/PageMotif/PageMotif";
-import PageCheckout from "./pages/PageCheckout/PageCheckout";
+import PageLanding from "./pages/PageLanding.tsx/PageLanding";
 
 export const ROUTES = {
     LANDING: "/",
@@ -23,15 +21,7 @@ export const ROUTES = {
 export const routerList = [
     {
         path: ROUTES.LANDING,
-        element: <Navigate to={ROUTES.INTRODUCTION} />
-    },
-    {
-        path: ROUTES.INTRODUCTION,
-        element: <PageIntroduction />
-    },
-    {
-        path: ROUTES.LANGUAGE,
-        element: <PageLanguage />
+        element: <PageLanding />
     },
     {
         path: ROUTES.LOGIN,
@@ -48,10 +38,6 @@ export const routerList = [
     {
         path: ROUTES.MOTIF,
         element: <PageMotif />
-    },
-    {
-        path: ROUTES.CHECKOUT,
-        element: <PageCheckout />
     },
     {
         path: ROUTES.PAGE_404,
