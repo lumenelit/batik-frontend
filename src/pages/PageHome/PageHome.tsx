@@ -1,34 +1,202 @@
-import Container from "../../components/layouts/Container";
+import { useEffect, useRef, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
+import { HiMagnifyingGlass, HiMapPin, HiUser } from "react-icons/hi2";
+import api from "../../config/api";
+import { DivIcon } from "leaflet";
+import * as ReactDOMServer from "react-dom/server";
 
 export default function PageHome() {
+    const [industry, setIndustry]: Array<any> = useState([]);
+    const [currentLocation, setCurrentLocation] = useState({
+        lat: 0,
+        lon: 0
+    });
+    const mapRef = useRef(null);
+
     const ResizeMap = () => {
         const map = useMap() as any;
         map._onResize();
         return null;
     };
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition((position) => {
+            setCurrentLocation({
+                lat: position.coords.latitude,
+                lon: position.coords.longitude
+            });
+        });
+        try {
+            api.get("/industri").then(async (res) => {
+                // sort by distance
+                const sorted = res.data.sort((a: any, b: any) => {
+                    return (
+                        distance(
+                            currentLocation.lat,
+                            currentLocation.lon,
+                            a.coordinate.lat,
+                            a.coordinate.long
+                        ) -
+                        distance(
+                            currentLocation.lat,
+                            currentLocation.lon,
+                            b.coordinate.lat,
+                            b.coordinate.long
+                        )
+                    );
+                });
+                setIndustry(sorted);
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    }, []);
+
+    console.log(industry);
+
+    const marker = new DivIcon({
+        className: "marker",
+        html: ReactDOMServer.renderToString(<HiMapPin className="text-4xl" />),
+        iconAnchor: [24, 24]
+    });
+
+    // get distance from current location to industry
+    const distance = (
+        lat1: number,
+        lon1: number,
+        lat2: number,
+        lon2: number
+    ) => {
+        const R = 6371; // Radius of the earth in km
+        const dLat = deg2rad(lat2 - lat1); // deg2rad below
+        const dLon = deg2rad(lon2 - lon1);
+        const a =
+            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(deg2rad(lat1)) *
+                Math.cos(deg2rad(lat2)) *
+                Math.sin(dLon / 2) *
+                Math.sin(dLon / 2);
+
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        const d = R * c; // Distance in km
+
+        return d;
+    };
+
+    const deg2rad = (deg: number) => {
+        return deg * (Math.PI / 180);
+    };
+
+    const getDistance = (
+        lat1: number,
+        lon1: number,
+        lat2: number,
+        lon2: number
+    ) => {
+        const distanceGap = distance(lat1, lon1, lat2, lon2);
+
+        if (distanceGap > 99) {
+            return ">99";
+        }
+        return distanceGap.toFixed(1);
+    };
+
     return (
-        <>
+        <div className="w-screen h-screen">
             <MapContainer
-                style={{ height: "310px" }}
-                center={[51.505, -0.09]}
-                zoom={15}
-                scrollWheelZoom={false}
+                className="z-0 w-full h-full"
+                // center to sulawesi utara
+                center={[1.34693, 124.774998]}
+                zoom={11}
+                scrollWheelZoom={true}
+                attributionControl={false}
+                ref={mapRef}
             >
                 <ResizeMap />
-                <TileLayer
-                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                    url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
-                />
-                <Marker position={[51.505, -0.09]}>
-                    <Popup>
-                        A pretty CSS3 popup. <br /> Easily customizable.
-                    </Popup>
-                </Marker>
+                <TileLayer url="https://api.mapbox.com/styles/v1/sitouxz/clp1n3f0m01ci01qy2q4q3qax/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoic2l0b3V4eiIsImEiOiJja3k1emE4YnQwYTV3MnVwMXM1NzJ1aWpsIn0.yzj632wgHQSoI8MZQD9qxg" />
+                {industry.map((item: any, index: number) => {
+                    return (
+                        <Marker
+                            key={index}
+                            position={[
+                                item.coordinate.lat,
+                                item.coordinate.long
+                            ]}
+                            icon={marker}
+                        >
+                            <Popup>
+                                <div className="flex flex-col gap-1">
+                                    <div className="text-lg font-bold">
+                                        {item.nama}
+                                    </div>
+                                    <div className="flex items-center">
+                                        <HiUser className="text-lg" />
+                                        <span className="ml-2">
+                                            {item.pemilik}
+                                        </span>
+                                    </div>
+                                    <div className="flex items-center">
+                                        <HiMapPin className="text-lg" />
+                                        <span className="ml-2">
+                                            {item.alamat}
+                                        </span>
+                                    </div>
+                                </div>
+                            </Popup>
+                        </Marker>
+                    );
+                })}
             </MapContainer>
-            <Container>
-                <h1 className="text-5xl">Homepage</h1>
-            </Container>
-        </>
+            <div className="absolute top-0 right-0 h-full p-8 w-[400px]">
+                <div className="h-full p-4 bg-white rounded-xl backdrop-filter backdrop-blur-lg bg-opacity-20">
+                    {/* Search Bar */}
+                    <div className="max-w-md mx-auto">
+                        <div className="relative flex items-center w-full h-12 overflow-hidden border rounded-lg border-primary-500 focus-within:shadow-lg ">
+                            <input
+                                className="w-full h-full pl-2 text-sm bg-transparent outline-none text-dark peer"
+                                type="text"
+                                id="search"
+                                placeholder="Search something.."
+                            />
+                            <div className="grid w-12 h-full text-primary-500 place-items-center">
+                                <HiMagnifyingGlass />
+                            </div>
+                        </div>
+                    </div>
+                    {/* List Industry */}
+                    <div className="mt-4">
+                        {industry.map((item: any, index: number) => {
+                            return (
+                                <div
+                                    key={index}
+                                    className="flex items-center p-2 space-x-4 transition duration-300 ease-in-out rounded-lg cursor-pointer hover:bg-gray-100"
+                                >
+                                    <div className="flex flex-col items-center justify-center rounded-full">
+                                        <HiMapPin className="text-2xl" />
+                                        <span>
+                                            {getDistance(
+                                                currentLocation.lat,
+                                                currentLocation.lon,
+                                                item.coordinate.lat,
+                                                item.coordinate.long
+                                            )}
+                                            km
+                                        </span>
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <div className="font-bold">
+                                            {item.nama}
+                                        </div>
+                                        <div className="text-sm">
+                                            {item.pemilik}
+                                        </div>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 }

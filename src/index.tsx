@@ -1,14 +1,15 @@
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
-import reportWebVitals from './reportWebVitals';
-import { RouterProvider } from 'react-router-dom';
-import { router } from './routes';
-import './lang';
-import 'react-lazy-load-image-component/src/effects/blur.css';
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
+import reportWebVitals from "./reportWebVitals";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./routes";
+import "./lang";
+import "react-lazy-load-image-component/src/effects/blur.css";
+import "leaflet/dist/leaflet.css";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+    document.getElementById("root") as HTMLElement
 );
 root.render(<RouterProvider router={router} />);
 
