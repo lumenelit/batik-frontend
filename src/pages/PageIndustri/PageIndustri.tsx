@@ -138,7 +138,7 @@ export default function PageIndustri() {
                                 <div>Toko online</div>
                                 <div className="inline-flex items-center justify-start gap-2">
                                     <div className="px-4 py-2 bg-[#A25B4C] rounded-xl justify-start items-start gap-2.5 flex">
-                                        <div className="text-sm font-semibold text-center text-white">
+                                        <div className="text-sm font-semibold text-center text-white ">
                                             Tokopedia
                                         </div>
                                     </div>
