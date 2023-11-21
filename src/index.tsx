@@ -7,6 +7,7 @@ import { router } from "./routes";
 import "./lang";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import "leaflet/dist/leaflet.css";
+import "primereact/resources/themes/lara-light-cyan/theme.css";
 
 const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement

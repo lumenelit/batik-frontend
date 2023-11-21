@@ -4,6 +4,7 @@ import { HiMagnifyingGlass, HiMapPin, HiUser } from "react-icons/hi2";
 import api from "../../config/api";
 import { DivIcon } from "leaflet";
 import * as ReactDOMServer from "react-dom/server";
+import { Link } from "react-router-dom";
 
 export default function PageHome() {
     const [industry, setIndustry]: Array<any> = useState([]);
@@ -18,47 +19,6 @@ export default function PageHome() {
         map._onResize();
         return null;
     };
-
-    useEffect(() => {
-        navigator.geolocation.getCurrentPosition((position) => {
-            setCurrentLocation({
-                lat: position.coords.latitude,
-                lon: position.coords.longitude
-            });
-        });
-        try {
-            api.get("/industri").then(async (res) => {
-                // sort by distance
-                const sorted = res.data.sort((a: any, b: any) => {
-                    const distanceA = distance(
-                        currentLocation.lat,
-                        currentLocation.lon,
-                        a.coordinate.lat,
-                        a.coordinate.long
-                    );
-                    const distanceB = distance(
-                        currentLocation.lat,
-                        currentLocation.lon,
-                        b.coordinate.lat,
-                        b.coordinate.long
-                    );
-
-                    return distanceA - distanceB;
-                });
-                setIndustry(sorted);
-            });
-        } catch (err) {
-            console.log(err);
-        }
-    }, []);
-
-    console.log(industry);
-
-    const marker = new DivIcon({
-        className: "marker",
-        html: ReactDOMServer.renderToString(<HiMapPin className="text-4xl" />),
-        iconAnchor: [24, 24]
-    });
 
     // get distance from current location to industry
     const distance = (
@@ -87,6 +47,32 @@ export default function PageHome() {
         return deg * (Math.PI / 180);
     };
 
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition((position) => {
+            setCurrentLocation({
+                lat: position.coords.latitude,
+                lon: position.coords.longitude
+            });
+        });
+        try {
+            api.get("/industri").then(async (res) => {
+                setIndustry(res.data);
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    }, []);
+
+    console.log(industry);
+
+    const marker = new DivIcon({
+        className: "marker",
+        html: ReactDOMServer.renderToString(
+            <HiMapPin className="text-4xl text-dark" />
+        ),
+        iconAnchor: [24, 24]
+    });
+
     const getDistance = (
         lat1: number,
         lon1: number,
@@ -101,11 +87,26 @@ export default function PageHome() {
         return distanceGap.toFixed(1);
     };
 
+    const sorted = industry.sort((a: any, b: any) => {
+        const distanceA = distance(
+            currentLocation.lat,
+            currentLocation.lon,
+            a.coordinate.lat,
+            a.coordinate.long
+        );
+        const distanceB = distance(
+            currentLocation.lat,
+            currentLocation.lon,
+            b.coordinate.lat,
+            b.coordinate.long
+        );
+        return distanceA - distanceB;
+    });
+
     return (
         <div className="w-screen h-screen">
             <MapContainer
                 className="z-0 w-full h-full"
-                // center to sulawesi utara
                 center={[1.34693, 124.774998]}
                 zoom={11}
                 scrollWheelZoom={true}
@@ -136,7 +137,7 @@ export default function PageHome() {
                                         </span>
                                     </div>
                                     <div className="flex items-center">
-                                        <HiMapPin className="text-lg" />
+                                        <HiMapPin className="text-lg text-dark" />
                                         <span className="ml-2">
                                             {item.alamat}
                                         </span>
@@ -148,10 +149,10 @@ export default function PageHome() {
                 })}
             </MapContainer>
             <div className="absolute top-0 right-0 h-full p-8 w-[400px]">
-                <div className="h-full p-4 bg-white rounded-xl backdrop-filter backdrop-blur-lg bg-opacity-20">
+                <div className="h-full p-4 bg-white rounded-xl backdrop-filter backdrop-blur-lg bg-opacity-40">
                     {/* Search Bar */}
                     <div className="max-w-md mx-auto">
-                        <div className="relative flex items-center w-full h-12 overflow-hidden border rounded-lg border-primary-500 focus-within:shadow-lg ">
+                        <div className="relative flex items-center w-full h-12 overflow-hidden border rounded-xl border-primary-500 focus-within:shadow-primary ">
                             <input
                                 className="w-full h-full pl-2 text-sm bg-transparent outline-none text-dark peer"
                                 type="text"
@@ -164,15 +165,16 @@ export default function PageHome() {
                         </div>
                     </div>
                     {/* List Industry */}
-                    <div className="mt-4">
-                        {industry.map((item: any, index: number) => {
+                    <div className="flex flex-col gap-2 mt-4">
+                        {sorted.map((item: any, index: number) => {
                             return (
-                                <div
+                                <Link
+                                    to={`/industri`}
                                     key={index}
-                                    className="flex items-center p-2 space-x-4 transition duration-300 ease-in-out rounded-lg cursor-pointer hover:bg-gray-100"
+                                    className="flex items-center p-2 space-x-4 transition duration-300 ease-in-out cursor-pointer rounded-xl hover:bg-gray-300 hover:bg-opacity-25"
                                 >
                                     <div className="flex flex-col items-center justify-center rounded-full">
-                                        <HiMapPin className="text-2xl" />
+                                        <HiMapPin className="text-2xl text-dark" />
                                         <span>
                                             {getDistance(
                                                 currentLocation.lat,
@@ -184,14 +186,14 @@ export default function PageHome() {
                                         </span>
                                     </div>
                                     <div className="flex flex-col">
-                                        <div className="font-bold">
+                                        <div className="font-bold text-primary-500">
                                             {item.nama}
                                         </div>
                                         <div className="text-sm">
                                             {item.pemilik}
                                         </div>
                                     </div>
-                                </div>
+                                </Link>
                             );
                         })}
                     </div>

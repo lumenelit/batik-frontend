@@ -32,14 +32,14 @@ module.exports = {
                 warning: "#FFBF00",
                 disabled: "#D0D0D0",
                 stroke: "#F0F4F8",
-                dark: "171717"
+                dark: "#231010"
             },
             fontFamily: {
                 sans: ["Montserrat", "sans-serif"],
                 poppins: ["Poppins", "sans-serif"]
             },
             boxShadow: {
-                dark: "0px 10px 45px 0px rgba(45,45,45,0.10);"
+                primary: "0px 5px 10px 0px rgba(0, 0, 0, 0.10);"
             }
         }
     },

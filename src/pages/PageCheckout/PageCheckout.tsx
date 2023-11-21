@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Header from "../../components/Header";
+import Header from "../../components/layouts/Header";
 import Container from "../../components/layouts/Container";
 
 export default function PageCheckout() {
@@ -39,13 +39,13 @@ export default function PageCheckout() {
         <>
             <Container center={true}>
                 <Header />
-                <div className="flex flex-row justify-center items-start gap-4 font-['Inter'] text-[#231010]">
-                    <div className="flex flex-row-reverse min-w-1/2 h-fit gap-2">
-                        <div className="min-w-[790px] h-fit flex flex-col p-4 mb-5 bg-white rounded-xl shadow justify-start items-start gap-4">
-                            <div className=" text-xl font-semibold">
+                <div className="flex flex-row justify-center items-start gap-4 font-['Inter'] text-primary">
+                    <div className="flex flex-row-reverse gap-2 min-w-1/2 h-fit">
+                        <div className="min-w-[790px] h-fit flex flex-col p-4 mb-5 bg-white rounded-xl shadow-primary justify-start items-start gap-4">
+                            <div className="text-xl font-semibold ">
                                 Rincian pembeli
                             </div>
-                            <div className="h-fit w-full flex flex-col gap-2">
+                            <div className="flex flex-col w-full gap-2 h-fit">
                                 <div className="w-full text-base font-normal leading-snug indent-1">
                                     Nama pembeli
                                 </div>
@@ -60,7 +60,7 @@ export default function PageCheckout() {
                                     }
                                 />
                             </div>
-                            <div className="h-fit w-full flex flex-col gap-2">
+                            <div className="flex flex-col w-full gap-2 h-fit">
                                 <div className="w-full text-base font-normal leading-snug indent-1">
                                     Whatsapp
                                 </div>
@@ -75,7 +75,7 @@ export default function PageCheckout() {
                                     }
                                 />
                             </div>
-                            <div className="h-fit w-full flex flex-col gap-2">
+                            <div className="flex flex-col w-full gap-2 h-fit">
                                 <div className="w-full text-base font-normal leading-snug indent-1">
                                     Catatan untuk penjual
                                 </div>
@@ -89,7 +89,7 @@ export default function PageCheckout() {
                                     }
                                 />
                             </div>
-                            <div className="h-fit w-full flex flex-col gap-2">
+                            <div className="flex flex-col w-full gap-2 h-fit">
                                 <div className="w-full text-base font-normal leading-snug indent-1">
                                     Metode pengiriman
                                 </div>
@@ -107,7 +107,7 @@ export default function PageCheckout() {
                                     <option value="GOJEK">GOJEK</option>
                                 </select>
                             </div>
-                            <div className="h-fit w-full flex flex-col gap-2">
+                            <div className="flex flex-col w-full gap-2 h-fit">
                                 <div className="w-full text-base font-normal leading-snug indent-1">
                                     Alamat
                                 </div>
@@ -121,23 +121,23 @@ export default function PageCheckout() {
                                     }
                                 />
                             </div>
-                            <div className="justify-start items-center gap-5 inline-flex">
-                                <div className=" text-xl font-semibold">
+                            <div className="inline-flex items-center justify-start gap-5">
+                                <div className="text-xl font-semibold ">
                                     Rincian penerima
                                 </div>
-                                <div className="flex flex-row gap-1 items-end">
+                                <div className="flex flex-row items-end gap-1">
                                     <input
                                         type="checkbox"
                                         className="w-4 h-4"
                                         onChange={handleToggleMirror}
                                         checked={mirror}
                                     ></input>
-                                    <div className="text-slate-400 text-xs font-normal leading-none">
+                                    <div className="text-xs font-normal leading-none text-slate-400">
                                         Rincian penerima sama dengan pembeli
                                     </div>
                                 </div>
                             </div>
-                            <div className="h-fit w-full flex flex-col gap-2">
+                            <div className="flex flex-col w-full gap-2 h-fit">
                                 <div className="w-full text-base font-normal leading-snug indent-1">
                                     Nama penerima
                                 </div>
@@ -152,7 +152,7 @@ export default function PageCheckout() {
                                     }
                                 />
                             </div>
-                            <div className="h-fit w-full flex flex-col gap-2">
+                            <div className="flex flex-col w-full gap-2 h-fit">
                                 <div className="w-full text-base font-normal leading-snug indent-1">
                                     Whatsapp penerima
                                 </div>
@@ -171,34 +171,35 @@ export default function PageCheckout() {
                         </div>
                     </div>
                     <div className="w-1/2 max-w-[600px] flex-col justify-end items-start gap-4 inline-flex ">
-                        <div className="w-[520px] h-[748px] p-4 bg-white rounded-xl shadow flex-col justify-start items-start gap-4 inline-flex">
+                        <div className="w-[520px] h-[748px] p-4 bg-white rounded-xl shadow-primary flex-col justify-start items-start gap-4 inline-flex">
                             <div className="self-stretch h-[39px]  text-[32px] font-semibold">
                                 Batik akatsuki tanah - 2x5 meter
                             </div>
                             <img
                                 className="self-stretch h-[450px] rounded-xl"
                                 src="https://via.placeholder.com/488x450"
+                                alt="motif"
                             />
                             <div className="self-stretch h-[78px] flex-col justify-start items-start gap-2 flex">
-                                <div className=" text-xl font-semibold">
+                                <div className="text-xl font-semibold ">
                                     Rincian pesanan
                                 </div>
-                                <div className="self-stretch justify-center items-center gap-2 inline-flex">
-                                    <div className=" text-base font-normal">
+                                <div className="inline-flex items-center self-stretch justify-center gap-2">
+                                    <div className="text-base font-normal ">
                                         Harga
                                     </div>
-                                    <div className="grow shrink basis-0 text-right  text-base font-normal">
+                                    <div className="text-base font-normal text-right grow shrink basis-0">
                                         Rp 100.000
                                     </div>
                                 </div>
-                                <div className="self-stretch justify-between items-center inline-flex">
-                                    <div className=" text-base font-normal">
+                                <div className="inline-flex items-center self-stretch justify-between">
+                                    <div className="text-base font-normal ">
                                         Banyak pesanan
                                     </div>
                                     <div className="px-2 rounded-[14px] border border-slate-400 justify-center items-center gap-1 flex">
                                         <div className="w-3.5 h-3.5 px-[1.75px] justify-center items-center flex" />
                                         <div className="px-2 border border-slate-400 justify-center items-center gap-2.5 flex">
-                                            <div className="text-right  text-base font-normal">
+                                            <div className="text-base font-normal text-right">
                                                 10
                                             </div>
                                         </div>
@@ -206,25 +207,25 @@ export default function PageCheckout() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="self-stretch justify-center items-center gap-2 inline-flex">
-                                <div className=" text-base font-normal">
+                            <div className="inline-flex items-center self-stretch justify-center gap-2">
+                                <div className="text-base font-normal ">
                                     Total
                                 </div>
-                                <div className="grow shrink basis-0 text-right  text-base font-normal">
+                                <div className="text-base font-normal text-right grow shrink basis-0">
                                     Rp 1.000.000
                                 </div>
                             </div>
                             <div className="self-stretch h-[50px] px-2 bg-stone-500 rounded-xl justify-center items-center inline-flex">
-                                <div className="flex-col justify-center items-center inline-flex">
-                                    <div className="h-6 justify-start items-center inline-flex">
-                                        <div className="justify-center items-center gap-1 flex">
-                                            <div className="text-center text-white text-base font-semibold leading-normal">
+                                <div className="inline-flex flex-col items-center justify-center">
+                                    <div className="inline-flex items-center justify-start h-6">
+                                        <div className="flex items-center justify-center gap-1">
+                                            <div className="text-base font-semibold leading-normal text-center text-white">
                                                 Buat pesanan
                                             </div>
-                                            <div className="w-5 h-5 relative origin-top-left rotate-180" />
+                                            <div className="relative w-5 h-5 origin-top-left rotate-180" />
                                         </div>
                                     </div>
-                                    <div className="px-3 justify-start items-start inline-flex">
+                                    <div className="inline-flex items-start justify-start px-3">
                                         <div className="w-[0px] h-[0px] bg-white" />
                                     </div>
                                 </div>

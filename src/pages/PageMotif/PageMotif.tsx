@@ -1,6 +1,6 @@
 // import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Header from "../../components/Header";
+import Header from "../../components/layouts/Header";
 import Container from "../../components/layouts/Container";
 
 export default function PageMotif() {
@@ -35,25 +35,25 @@ export default function PageMotif() {
                 <div className="flex flex-row justify-center items-start gap-4 font-['Inter'] ">
                     <div className="flex flex-row-reverse gap-2 h-fit w-1/2">
                         <img
-                            className="aspect-square w-full rounded-xl bg-cover bg-center shadow-lg"
+                            className="aspect-square w-full rounded-xl bg-cover bg-center shadow-primary"
                             src="https://via.placeholder.com/250x250"
                             alt="motif"
                         />
                         <div className="flex flex-col justify-between w-fit gap-2">
                             <img
-                                className="aspect-square h-1/2 rounded-xl bg-cover bg-center shadow-lg"
+                                className="aspect-square h-1/2 rounded-xl bg-cover bg-center shadow-primary"
                                 src="https://via.placeholder.com/250x250"
                                 alt="motif"
                             />
                             <img
-                                className="aspect-square h-1/2 rounded-xl bg-cover bg-center shadow-lg"
+                                className="aspect-square h-1/2 rounded-xl bg-cover bg-center shadow-primary"
                                 src="https://via.placeholder.com/250x250"
                                 alt="motif"
                             />
                         </div>
                     </div>
                     <div className="w-1/2 max-w-[600px] flex-col justify-end items-start gap-4 inline-flex ">
-                        <div className="min-w-[520px] h-fit p-4 bg-white rounded-xl shadow-lg flex-col justify-start items-start gap-16 inline-flex">
+                        <div className="min-w-[520px] h-fit p-4 bg-white rounded-xl shadow-primary flex-col justify-start items-start gap-16 inline-flex">
                             <div className="flex flex-col items-start justify-start gap-4 h-fit">
                                 <div className="self-stretch text-3xl font-semibold line-clamp-2">
                                     Batik akatsuki tanah - 2x5 meter
