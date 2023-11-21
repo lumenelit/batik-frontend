@@ -12,6 +12,7 @@ export default function PageCheckout() {
     const [alamat, setAlamat] = useState("");
     const [namaPenerima, setNamaPenerima] = useState("");
     const [whatsappPenerima, setWhatsappPenerima] = useState("");
+    const [jumlahPesanan, setJumlahPesanan] = useState(1);
 
     const [mirror, setMirror] = useState(true);
 
@@ -53,9 +54,10 @@ export default function PageCheckout() {
                                     type="text"
                                     className="flex-col px-5 h-[50px] rounded-lg border border-slate-200 justify-start items-center active:border-slate-200"
                                     onChange={(e) =>
-                                        handleOnchangeDefault(
+                                        handleOnchangeMirror(
                                             e.target.value,
-                                            setNamaPembeli
+                                            setNamaPembeli,
+                                            setNamaPenerima
                                         )
                                     }
                                 />
@@ -68,9 +70,10 @@ export default function PageCheckout() {
                                     type="text"
                                     className="flex-col px-5 h-[50px] rounded-lg border border-slate-200 justify-start items-center active:border-slate-200"
                                     onChange={(e) =>
-                                        handleOnchangeDefault(
+                                        handleOnchangeMirror(
                                             e.target.value,
-                                            setWhatsappPembeli
+                                            setWhatsappPembeli,
+                                            setWhatsappPenerima
                                         )
                                     }
                                 />
@@ -87,6 +90,7 @@ export default function PageCheckout() {
                                             setCatatan
                                         )
                                     }
+                                    value={catatan}
                                 />
                             </div>
                             <div className="h-fit w-full flex flex-col gap-2">
@@ -101,6 +105,7 @@ export default function PageCheckout() {
                                             setMetodePengiriman
                                         )
                                     }
+                                    value={metodePengiriman}
                                 >
                                     <option value="JNE">JNE</option>
                                     <option value="COD">COD</option>
@@ -119,6 +124,7 @@ export default function PageCheckout() {
                                             setAlamat
                                         )
                                     }
+                                    value={alamat}
                                 />
                             </div>
                             <div className="justify-start items-center gap-5 inline-flex">
@@ -143,13 +149,15 @@ export default function PageCheckout() {
                                 </div>
                                 <input
                                     type="text"
-                                    className="flex-col px-5 h-[50px] rounded-lg border border-slate-200 justify-start items-center active:border-slate-200"
+                                    className="flex-col px-5 h-[50px] rounded-lg border border-slate-200 justify-start items-center active:border-slate-200 disabled:text-gray-500"
+                                    disabled={mirror}
                                     onChange={(e) =>
                                         handleOnchangeDefault(
                                             e.target.value,
                                             setNamaPenerima
                                         )
                                     }
+                                    value={namaPenerima}
                                 />
                             </div>
                             <div className="h-fit w-full flex flex-col gap-2">
@@ -158,7 +166,8 @@ export default function PageCheckout() {
                                 </div>
                                 <input
                                     type="text"
-                                    className="flex-col px-5 h-[50px] rounded-lg border border-slate-200 justify-start items-center active:border-slate-200"
+                                    className="flex-col px-5 h-[50px] rounded-lg border border-slate-200 justify-start items-center active:border-slate-200  disabled:text-gray-500"
+                                    disabled={mirror}
                                     onChange={(e) =>
                                         handleOnchangeDefault(
                                             e.target.value,
@@ -196,13 +205,29 @@ export default function PageCheckout() {
                                         Banyak pesanan
                                     </div>
                                     <div className="px-2 rounded-[14px] border border-slate-400 justify-center items-center gap-1 flex">
-                                        <div className="w-3.5 h-3.5 px-[1.75px] justify-center items-center flex" />
+                                        <div
+                                            className="w-3.5 h-3.5 px-[1.75px] justify-center items-center flex cursor-pointer"
+                                            onClick={() => {
+                                                if (jumlahPesanan > 1) {
+                                                    setJumlahPesanan(
+                                                        jumlahPesanan - 1
+                                                    );
+                                                }
+                                            }}
+                                        />
                                         <div className="px-2 border border-slate-400 justify-center items-center gap-2.5 flex">
                                             <div className="text-right  text-base font-normal">
-                                                10
+                                                {jumlahPesanan}
                                             </div>
                                         </div>
-                                        <div className="w-3.5 h-3.5 p-[2.48px] justify-center items-center flex" />
+                                        <div
+                                            className="w-3.5 h-3.5 p-[2.48px] justify-center items-center flex cursor-pointer"
+                                            onClick={() =>
+                                                setJumlahPesanan(
+                                                    jumlahPesanan + 1
+                                                )
+                                            }
+                                        />
                                     </div>
                                 </div>
                             </div>
