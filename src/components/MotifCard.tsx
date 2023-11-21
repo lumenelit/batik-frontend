@@ -17,22 +17,20 @@ export default function MotifCard({ data }) {
     };
     return (
         <div
-            className="max-w-[180px] h-[250px] p-2 bg-white rounded-xl shadow flex-col justify-start items-start gap-2 inline-flex font-['Inter'] text-sm cursor-pointer hover:scale-105 transition-all"
+            className="w-[250px] h-[300px] p-4 bg-white rounded-xl shadow-primary flex-col justify-start items-start gap-2 inline-flex font-['Inter'] text-sm cursor-pointer hover:scale-105 transition-all"
             onClick={handleClickCard}
         >
             <img
-                className="rounded-lg w-[160px] min-h-[160px]"
-                src="https://via.placeholder.com/218x177"
+                className="rounded-lg "
+                src="https://via.placeholder.com/250x250"
                 alt="motif"
             />
 
             <div className="flex flex-col justify-between h-full">
-                <div className="text-[#231010] font-normal line-clamp-2 w-full">
+                <div className="w-full font-semibold text-dark line-clamp-2">
                     {data.nama}
                 </div>
-                <div className="text-[#231010] font-semibold">
-                    {formatRupiah(data.harga)}
-                </div>
+                <div className="text-primary">{formatRupiah(data.harga)}</div>
             </div>
         </div>
     );
