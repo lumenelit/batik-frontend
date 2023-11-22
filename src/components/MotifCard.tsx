@@ -1,3 +1,4 @@
+import { HiTrash } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
 
 function formatRupiah(int) {
@@ -8,7 +9,12 @@ function formatRupiah(int) {
     return rupiah.split(",")[0]; // remove the decimal part
 }
 
-export default function MotifCard({ data }) {
+type MotifCardProps = {
+    data: any;
+    haveDelete?: boolean;
+};
+
+export default function MotifCard({ data, haveDelete = false }) {
     const navigate = useNavigate();
 
     const handleClickCard = () => {
@@ -26,11 +32,21 @@ export default function MotifCard({ data }) {
                 alt="motif"
             />
 
-            <div className="flex flex-col justify-between h-full">
+            <div className="flex flex-col justify-between w-full h-full">
                 <div className="w-full font-semibold text-dark line-clamp-2">
                     {data.nama}
                 </div>
-                <div className="text-primary">{formatRupiah(data.harga)}</div>
+                <div className="flex justify-between text-primary">
+                    <span>{formatRupiah(data.harga)}</span>
+                    <button
+                        className="inline-block ml-2 text-red-500"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                        }}
+                    >
+                        <HiTrash className="inline-block w-5 h-5 ml-2" />
+                    </button>
+                </div>
             </div>
         </div>
     );

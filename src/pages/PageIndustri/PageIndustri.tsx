@@ -151,7 +151,7 @@ export default function PageIndustri() {
             <Container center={true}>
                 <Header />
                 <div className="flex flex-col items-start gap-5">
-                    <div className="w-full h-fit flex justify-center gap-4 flex-col cursor-default">
+                    <div className="flex flex-col justify-center w-full gap-4 cursor-default h-fit">
                         <Link
                             to={`/industri`}
                             className="text-primary w-fit text-xl font-semibold font-['Inter']"
@@ -252,14 +252,14 @@ export default function PageIndustri() {
                                             src="https://via.placeholder.com/250x250"
                                             alt="motif"
                                         />
-                                        <div className="shrink flex flex-row justify-between w-full gap-2">
+                                        <div className="flex flex-row justify-between w-full gap-2 shrink">
                                             <img
-                                                className="shrink bg-center bg-cover shadow-primary aspect-square h-1/2 rounded-xl"
+                                                className="bg-center bg-cover shrink shadow-primary aspect-square h-1/2 rounded-xl"
                                                 src="https://via.placeholder.com/250x250"
                                                 alt="motif"
                                             />
                                             <img
-                                                className="shrink bg-center bg-cover shadow-primary aspect-square h-1/2 rounded-xl"
+                                                className="bg-center bg-cover shrink shadow-primary aspect-square h-1/2 rounded-xl"
                                                 src="https://via.placeholder.com/250x250"
                                                 alt="motif"
                                             />

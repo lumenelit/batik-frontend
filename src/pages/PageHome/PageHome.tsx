@@ -56,7 +56,22 @@ export default function PageHome() {
         });
         try {
             api.get("/industri").then(async (res) => {
-                setIndustry(res.data.data);
+                const sorted = res.data.data.sort((a: any, b: any) => {
+                    const distanceA = distance(
+                        currentLocation.lat,
+                        currentLocation.lon,
+                        a.coordinate.lat,
+                        a.coordinate.long
+                    );
+                    const distanceB = distance(
+                        currentLocation.lat,
+                        currentLocation.lon,
+                        b.coordinate.lat,
+                        b.coordinate.long
+                    );
+                    return distanceA - distanceB;
+                });
+                setIndustry(sorted);
             });
         } catch (err) {
             console.log(err);
@@ -86,22 +101,6 @@ export default function PageHome() {
         }
         return distanceGap.toFixed(1);
     };
-
-    const sorted = industry.sort((a: any, b: any) => {
-        const distanceA = distance(
-            currentLocation.lat,
-            currentLocation.lon,
-            a.coordinate.lat,
-            a.coordinate.long
-        );
-        const distanceB = distance(
-            currentLocation.lat,
-            currentLocation.lon,
-            b.coordinate.lat,
-            b.coordinate.long
-        );
-        return distanceA - distanceB;
-    });
 
     return (
         <div className="w-screen h-screen">
@@ -166,7 +165,7 @@ export default function PageHome() {
                     </div>
                     {/* List Industry */}
                     <div className="flex flex-col gap-2 mt-4">
-                        {sorted.map((item: any, index: number) => {
+                        {industry.map((item: any, index: number) => {
                             return (
                                 <Link
                                     to={`/industri/${item.idIndustri}`}

@@ -2,14 +2,14 @@ import { createBrowserRouter } from "react-router-dom";
 import PageError from "./pages/PageError/PageError";
 import PageLogin from "./pages/admin/PageLogin/PageLogin";
 import PageHome from "./pages/PageHome/PageHome";
-import adminIndustriPage from "./pages/admin/PageIndustri/PageIndustri";
 import PageIndustri from "./pages/PageIndustri/PageIndustri";
-
 import PageMotif from "./pages/PageMotif/PageMotif";
 import PageLanding from "./pages/PageLanding.tsx/PageLanding";
 import PageCheckout from "./pages/PageCheckout/PageCheckout";
 import PageInvoice from "./pages/PageInvoice/PageInvoice";
 import PagePesanan from "./pages/admin/PagePesanan/PagePesanan";
+import PageIndustriEdit from "./pages/admin/PageIndustriEdit/PageIndustriEdit";
+import PageIndustriAdmin from "./pages/admin/PageIndustriAdmin/PageIndustriAdmin";
 
 export const ROUTES = {
     LANDING: "/",
@@ -67,10 +67,11 @@ export const routerList = [
     },
     {
         path: ROUTES.ADMIN_INDUSTRI,
-        element: <PageIndustri />
+        element: <PageIndustriAdmin />
     },
     {
-        path: ROUTES.ADMIN_INDUSTRI_EDIT
+        path: ROUTES.ADMIN_INDUSTRI_EDIT,
+        element: <PageIndustriEdit />
     },
     {
         path: ROUTES.ADMIN_MOTIF_EDIT
