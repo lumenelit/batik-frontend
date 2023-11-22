@@ -11,120 +11,10 @@ import { useEffect, useState } from "react";
 import api from "../../config/api";
 
 export default function PageIndustri() {
-    const motifData = [
-        {
-            idMotif: "AD123",
-            idIndustri: "HF356542",
-            nama: "Motif akatsuki air - 2mx3m",
-            harga: 100000,
-            desc: "Lorem ipsum dolor sit amet consectetur. Urna justo elementum tortor massa. Vel morbi accumsan sit laoreet massa auctor enim. Sed vestibulum quam tellus morbi magna.",
-            varian: [
-                {
-                    id: "AD123",
-                    image: "ini pake file.bit64", //ambil dari field image1 dari motif variant
-                    nama: "Motif akatsuki air - 2mx3m"
-                },
-                {
-                    id: "AD125",
-                    image: "ini pake file.bit64", //ambil dari field image1 dari motif variant
-                    nama: "Motif akatsuki air - 2mx3m"
-                }
-            ],
-            image1: "ini pake file.bit64",
-            image2: "ini pake file.bit64",
-            image3: "ini pake file.bit64"
-        },
-        {
-            idMotif: "AD123124",
-            idIndustri: "HF356542",
-            nama: "Motif akatsuki tanah - 2mx3m",
-            harga: 200000,
-            desc: "Lorem ipsum dolor sit amet consectetur. Urna justo elementum tortor massa. Vel morbi accumsan sit laoreet massa auctor enim. Sed vestibulum quam tellus morbi magna.",
-            varian: [
-                {
-                    id: "AD123",
-                    image: "ini pake file.bit64", //ambil dari field image1 dari motif variant
-                    nama: "Motif akatsuki air - 2mx3m"
-                },
-                {
-                    id: "AD125",
-                    image: "ini pake file.bit64", //ambil dari field image1 dari motif variant
-                    nama: "Motif akatsuki air - 2mx3m"
-                }
-            ],
-            image1: "ini pake file.bit64",
-            image2: "ini pake file.bit64",
-            image3: "ini pake file.bit64"
-        },
-        {
-            idMotif: "AD123124",
-            idIndustri: "HF356542",
-            nama: "Motif akatsuki tanah - 2mx3m",
-            harga: 200000,
-            desc: "Lorem ipsum dolor sit amet consectetur. Urna justo elementum tortor massa. Vel morbi accumsan sit laoreet massa auctor enim. Sed vestibulum quam tellus morbi magna.",
-            varian: [
-                {
-                    id: "AD123",
-                    image: "ini pake file.bit64", //ambil dari field image1 dari motif variant
-                    nama: "Motif akatsuki air - 2mx3m"
-                },
-                {
-                    id: "AD125",
-                    image: "ini pake file.bit64", //ambil dari field image1 dari motif variant
-                    nama: "Motif akatsuki air - 2mx3m"
-                }
-            ],
-            image1: "ini pake file.bit64",
-            image2: "ini pake file.bit64",
-            image3: "ini pake file.bit64"
-        },
-        {
-            idMotif: "AD123124",
-            idIndustri: "HF356542",
-            nama: "Motif akatsuki tanah - 2mx3m",
-            harga: 200000,
-            desc: "Lorem ipsum dolor sit amet consectetur. Urna justo elementum tortor massa. Vel morbi accumsan sit laoreet massa auctor enim. Sed vestibulum quam tellus morbi magna.",
-            varian: [
-                {
-                    id: "AD123",
-                    image: "ini pake file.bit64", //ambil dari field image1 dari motif variant
-                    nama: "Motif akatsuki air - 2mx3m"
-                },
-                {
-                    id: "AD125",
-                    image: "ini pake file.bit64", //ambil dari field image1 dari motif variant
-                    nama: "Motif akatsuki air - 2mx3m"
-                }
-            ],
-            image1: "ini pake file.bit64",
-            image2: "ini pake file.bit64",
-            image3: "ini pake file.bit64"
-        },
-        {
-            idMotif: "AD123124",
-            idIndustri: "HF356542",
-            nama: "Motif akatsuki tanah - 2mx3m",
-            harga: 200000,
-            desc: "Lorem ipsum dolor sit amet consectetur. Urna justo elementum tortor massa. Vel morbi accumsan sit laoreet massa auctor enim. Sed vestibulum quam tellus morbi magna.",
-            varian: [
-                {
-                    id: "AD123",
-                    image: "ini pake file.bit64", //ambil dari field image1 dari motif variant
-                    nama: "Motif akatsuki air - 2mx3m"
-                },
-                {
-                    id: "AD125",
-                    image: "ini pake file.bit64", //ambil dari field image1 dari motif variant
-                    nama: "Motif akatsuki air - 2mx3m"
-                }
-            ],
-            image1: "ini pake file.bit64",
-            image2: "ini pake file.bit64",
-            image3: "ini pake file.bit64"
-        }
-    ];
     const { idIndustri } = useParams();
     const [industri, setIndustri] = useState(null);
+    const [motifData, setMotifData] = useState([]);
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -139,13 +29,21 @@ export default function PageIndustri() {
         fetchData();
     }, [idIndustri]); // Include idIndustri as a dependency if it's used inside the useEffect
 
-    const marker = new DivIcon({
-        className: "marker",
-        html: ReactDOMServer.renderToString(
-            <HiMapPin className="text-4xl text-dark" />
-        ),
-        iconAnchor: [24, 24]
-    });
+    useEffect(() => {
+        try {
+            api.get(`/motif/industri/${idIndustri}`)
+                .then((res) => {
+                    setMotifData(res.data.data);
+                    console.log("motif: ", res.data.data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        } catch (error) {
+            console.log(error);
+        }
+    }, []);
+
     return (
         <>
             <Container center={true}>
@@ -153,7 +51,7 @@ export default function PageIndustri() {
                 <div className="flex flex-col items-start gap-5">
                     <div className="flex flex-col justify-center w-full gap-4 cursor-default h-fit">
                         <Link
-                            to={`/industri`}
+                            to={`/home`}
                             className="text-primary w-fit text-xl font-semibold font-['Inter']"
                         >
                             <HiChevronLeft className="inline-flex" />{" "}
@@ -237,7 +135,7 @@ export default function PageIndustri() {
                                                                 to={item.link}
                                                                 key={index}
                                                             >
-                                                                {item.label}
+                                                                {item.nama}
                                                             </Link>
                                                         )
                                                     )}
@@ -249,19 +147,23 @@ export default function PageIndustri() {
                                     <div className="flex flex-col gap-2 max-w-1/2 h-fit">
                                         <img
                                             className="bg-center bg-cover shadow-primary aspect-square rounded-xl"
-                                            src="https://via.placeholder.com/250x250"
-                                            alt="motif"
+                                            src={
+                                                industri.image1
+                                                    ? industri.image1
+                                                    : "https://via.placeholder.com/250x250"
+                                            }
+                                            alt="motif1"
                                         />
                                         <div className="flex flex-row justify-between w-full gap-2 shrink">
                                             <img
                                                 className="bg-center bg-cover shrink shadow-primary aspect-square h-1/2 rounded-xl"
-                                                src="https://via.placeholder.com/250x250"
-                                                alt="motif"
+                                                src={industri.image2}
+                                                alt="motif2"
                                             />
                                             <img
                                                 className="bg-center bg-cover shrink shadow-primary aspect-square h-1/2 rounded-xl"
-                                                src="https://via.placeholder.com/250x250"
-                                                alt="motif"
+                                                src={industri.image3}
+                                                alt="motif3"
                                             />
                                         </div>
                                     </div>
@@ -274,7 +176,12 @@ export default function PageIndustri() {
                             Motif batik
                         </div>
                         <div className="inline-flex flex-col items-start self-stretch justify-start gap-5">
-                            <div className="flex flex-wrap items-start justify-start gap-5">
+                            <div className="grid flex-wrap items-start justify-start grid-cols-1 gap-5 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+                                {motifData.length === 0 && (
+                                    <div className="text-lg text-dark">
+                                        Belum ada motif
+                                    </div>
+                                )}
                                 {motifData.map((item, index) => (
                                     <MotifCard data={item} key={index} />
                                 ))}
