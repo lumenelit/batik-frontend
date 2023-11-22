@@ -56,7 +56,7 @@ export default function PageHome() {
         });
         try {
             api.get("/industri").then(async (res) => {
-                setIndustry(res.data);
+                setIndustry(res.data.data);
             });
         } catch (err) {
             console.log(err);
@@ -169,7 +169,7 @@ export default function PageHome() {
                         {sorted.map((item: any, index: number) => {
                             return (
                                 <Link
-                                    to={`/industri`}
+                                    to={`/industri/${item.idIndustri}`}
                                     key={index}
                                     className="flex items-center p-2 space-x-4 transition duration-300 ease-in-out cursor-pointer rounded-xl hover:bg-gray-300 hover:bg-opacity-25"
                                 >
@@ -187,10 +187,10 @@ export default function PageHome() {
                                     </div>
                                     <div className="flex flex-col">
                                         <div className="font-bold text-primary-500">
-                                            {item.nama}
+                                            {item.namaIndustri || "Null"}
                                         </div>
                                         <div className="text-sm">
-                                            {item.pemilik}
+                                            {item.pemilik || "Null"}
                                         </div>
                                     </div>
                                 </Link>

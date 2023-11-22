@@ -42,9 +42,10 @@ export default function Header({ admin }: HeaderProps) {
                     )}
                 </span>
             </Switch>
-            <h1 className="text-dark text-2xl font-bold font-['Montserrat']">
+            {/* <h1 className="text-dark text-2xl font-bold font-['Montserrat']">
                 Sistem Informasi Geografis Kain Batik di Sulawesi Utara
-            </h1>
+            </h1> */}
+            <img src="/Logo.svg" className="h-12" />
             {admin && (
                 <div className="flex items-center gap-4 ms-auto text-dark">
                     <NavLink

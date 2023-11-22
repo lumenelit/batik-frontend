@@ -2,7 +2,9 @@ import { createBrowserRouter } from "react-router-dom";
 import PageError from "./pages/PageError/PageError";
 import PageLogin from "./pages/admin/PageLogin/PageLogin";
 import PageHome from "./pages/PageHome/PageHome";
-import PageIndustri from "./pages/admin/PageIndustri/PageIndustri";
+import adminIndustriPage from "./pages/admin/PageIndustri/PageIndustri";
+import PageIndustri from "./pages/PageIndustri/PageIndustri";
+
 import PageMotif from "./pages/PageMotif/PageMotif";
 import PageLanding from "./pages/PageLanding.tsx/PageLanding";
 import PageCheckout from "./pages/PageCheckout/PageCheckout";
@@ -11,11 +13,9 @@ import PagePesanan from "./pages/admin/PagePesanan/PagePesanan";
 
 export const ROUTES = {
     LANDING: "/",
-    INTRODUCTION: "/introduction",
-    LANGUAGE: "/language",
     LOGIN: "/login",
     HOME: "/home",
-    INDUSTRI: "/industri",
+    INDUSTRI: "/industri/:idIndustri",
     MOTIF: "/motif/:idMotif",
     CHECKOUT: "/checkout/:idMotif",
     INVOICE: "/invoice/:idInvoice",
