@@ -146,7 +146,7 @@ export default function PageIndustri() {
 
                                     <div className="flex flex-col gap-2 max-w-1/2 h-fit">
                                         <img
-                                            className="bg-center bg-cover shadow-primary aspect-square rounded-xl"
+                                            className="bg-center object-cover w-[36.5rem] bg-cover shadow-primary aspect-square rounded-xl"
                                             src={
                                                 industri.image1
                                                     ? industri.image1
@@ -156,12 +156,12 @@ export default function PageIndustri() {
                                         />
                                         <div className="flex flex-row justify-between w-full gap-2 shrink">
                                             <img
-                                                className="bg-center bg-cover shrink shadow-primary aspect-square h-1/2 rounded-xl"
+                                                className="bg-center object-cover w-72 bg-cover shrink shadow-primary aspect-square h-1/2 rounded-xl"
                                                 src={industri.image2}
                                                 alt="motif2"
                                             />
                                             <img
-                                                className="bg-center bg-cover shrink shadow-primary aspect-square h-1/2 rounded-xl"
+                                                className="bg-center object-cover w-72 bg-cover shrink shadow-primary aspect-square h-1/2 rounded-xl"
                                                 src={industri.image3}
                                                 alt="motif3"
                                             />
