@@ -167,7 +167,7 @@ export default function PageIndustri() {
                                         />
                                         <div className="flex flex-row justify-between w-full gap-2 shrink">
                                             <img
-                                                className="bg-center object-cover w-72 bg-cover shrink shadow-primary aspect-square h-1/2 rounded-xl"
+                                                className="object-cover bg-center bg-cover w-72 shrink shadow-primary aspect-square h-1/2 rounded-xl"
                                                 src={
                                                     industriImage &&
                                                     industriImage.image2
@@ -177,7 +177,7 @@ export default function PageIndustri() {
                                                 alt="motif2"
                                             />
                                             <img
-                                                className="bg-center object-cover w-72 bg-cover shrink shadow-primary aspect-square h-1/2 rounded-xl"
+                                                className="object-cover bg-center bg-cover w-72 shrink shadow-primary aspect-square h-1/2 rounded-xl"
                                                 src={
                                                     industriImage &&
                                                     industriImage.image3
@@ -192,7 +192,7 @@ export default function PageIndustri() {
                             </div>
                         )}
                     </div>
-                    <div className="inline-flex flex-col items-start justify-end w-full gap-4">
+                    <div className="inline-flex flex-col items-start justify-end w-full gap-4 mb-10">
                         <div className="text-primary text-xl font-semibold font-['Inter']">
                             Motif batik
                         </div>

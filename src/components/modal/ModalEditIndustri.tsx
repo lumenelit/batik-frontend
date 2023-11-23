@@ -1,15 +1,16 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { ChangeEvent, Fragment, useState } from "react";
+import { ChangeEvent, Fragment, useEffect, useState } from "react";
 import { HiPlus, HiXCircle, HiXMark } from "react-icons/hi2";
 import api from "../../config/api";
 
 type ModalEditIndustriProps = {
-    modalIndustri: boolean;
-    setModalIndustri: (modalIndustri: boolean) => void;
+    modalEditIndustri: boolean;
+    setModalEditIndustri: (modalIndustri: boolean) => void;
+    industriData: IndustriBody;
 };
 
 type IndustriBody = {
-    idIndustri: string;
+    _id: string;
     nama: string;
     pemilik: string;
     kontak: string;
@@ -34,21 +35,50 @@ type IndustriBody = {
 };
 
 export default function ModalEditIndustri({
-    modalIndustri,
-    setModalIndustri
+    modalEditIndustri,
+    setModalEditIndustri,
+    industriData
 }: ModalEditIndustriProps) {
     const [industriBody, setIndustriBody] = useState({} as IndustriBody);
     const [imagePreviews, setImagePreviews] = useState<string[]>([]);
-    const [cabangList, setCabangList] = useState<Array<string>>([""]);
+    const [cabangList, setCabangList] = useState<Array<string>>([]);
     const [eCommerceList, setECommerceList] = useState<
         Array<{ nama: string; link: string }>
     >([{ nama: "", link: "" }]);
     const [sosmedList, setSosmedList] = useState<
         Array<{ label: string; link: string }>
     >([{ label: "", link: "" }]);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    useEffect(() => {
+        try {
+            api.get(`/industri/image/${industriData._id}`).then((res) => {
+                setImagePreviews((prev) => [
+                    ...prev,
+                    ...(res.data.data[0]?.image1
+                        ? [res.data.data[0]?.image1]
+                        : []),
+                    ...(res.data.data[0]?.image2
+                        ? [res.data.data[0]?.image2]
+                        : []),
+                    ...(res.data.data[0]?.image3
+                        ? [res.data.data[0]?.image3]
+                        : [])
+                ]);
+            });
+        } catch (error) {
+            console.log(error);
+        }
+
+        setCabangList(industriData.alamatCabang);
+        setECommerceList(industriData.eCommerce);
+        setSosmedList(industriData.sosmed);
+    }, [industriData._id]);
+
+    console.log(imagePreviews);
 
     const handleSubmit = async () => {
-        const idIndustri = Math.floor(Math.random() * 1000000000).toString();
+        // const idIndustri = Math.floor(Math.random() * 1000000000).toString();
         const image1 = imagePreviews[0];
         const image2 = imagePreviews[1];
         const image3 = imagePreviews[2];
@@ -71,22 +101,62 @@ export default function ModalEditIndustri({
         }[];
         const alamatCabang = cabangList.filter((item) => item !== "");
 
-        setIndustriBody({
+        // setIndustriBody({
+        //     ...industriBody,
+        //     nama: industriBody.nama || industriData.nama,
+        //     pemilik: industriBody.pemilik || industriData.pemilik,
+        //     kontak: industriBody.kontak || industriData.kontak,
+        //     desc: industriBody.desc || industriData.desc,
+        //     alamat: industriBody.alamat || industriData.alamat,
+        //     coordinate: {
+        //         lat:
+        //             industriBody.coordinate?.lat || industriData.coordinate.lat,
+        //         long:
+        //             industriBody.coordinate?.long ||
+        //             industriData.coordinate.long
+        //     },
+        //     image1: image1 || industriData.image1,
+        //     image2: image2 || industriData.image2,
+        //     image3: image3 || industriData.image3,
+        //     eCommerce: eCommerce || industriData.eCommerce,
+        //     sosmed: sosmed || industriData.sosmed,
+        //     alamatCabang: alamatCabang || industriData.alamatCabang
+        // });
+        const body = await {
             ...industriBody,
-            idIndustri,
-            image1,
-            image2,
-            image3,
-            alamatCabang,
-            eCommerce,
-            sosmed
-        });
+            nama: industriBody.nama || industriData.nama,
+            pemilik: industriBody.pemilik || industriData.pemilik,
+            kontak: industriBody.kontak || industriData.kontak,
+            desc: industriBody.desc || industriData.desc,
+            alamat: industriBody.alamat || industriData.alamat,
+            coordinate: {
+                lat:
+                    industriBody.coordinate?.lat || industriData.coordinate.lat,
+                long:
+                    industriBody.coordinate?.long ||
+                    industriData.coordinate.long
+            },
+            image1: image1 || industriData.image1,
+            image2: image2 || industriData.image2,
+            image3: image3 || industriData.image3,
+            eCommerce: eCommerce || industriData.eCommerce,
+            sosmed: sosmed || industriData.sosmed,
+            alamatCabang: alamatCabang || industriData.alamatCabang
+        };
+        console.log(body);
         console.log(industriBody);
         // setModalIndustri(false);
+        // setInterval(() => {
+        //     setIsSubmitting(true);
+        // }, 5000);
         try {
-            api.post("/industri", await industriBody).then((res) => {
-                console.log(res);
-            });
+            api.patch(`/industri/${industriData._id}`, await body).then(
+                (res) => {
+                    console.log(res);
+                    // setIsSubmitting(false);
+                    window.location.reload();
+                }
+            );
         } catch (error) {
             console.log(error);
             // setModalIndustri(false);
@@ -173,11 +243,11 @@ export default function ModalEditIndustri({
     };
 
     return (
-        <Transition appear show={modalIndustri} as={Fragment}>
+        <Transition appear show={modalEditIndustri} as={Fragment}>
             <Dialog
                 as="div"
                 className="relative z-10"
-                onClose={() => setModalIndustri(false)}
+                onClose={() => setModalEditIndustri(false)}
             >
                 <Transition.Child
                     as={Fragment}
@@ -207,10 +277,12 @@ export default function ModalEditIndustri({
                                     as="h3"
                                     className="text-lg font-medium leading-6 text-gray-900"
                                 >
-                                    Buat Industri
+                                    Edit Industri
                                     <button
                                         className="absolute top-4 right-4"
-                                        onClick={() => setModalIndustri(false)}
+                                        onClick={() =>
+                                            setModalEditIndustri(false)
+                                        }
                                     >
                                         <HiXMark className="inline-block w-5 h-5 ml-2" />
                                     </button>
@@ -234,6 +306,9 @@ export default function ModalEditIndustri({
                                                 <input
                                                     type="text"
                                                     className="flex-col px-5 h-[50px] rounded-lg border border-slate-200 justify-start items-center active:border-slate-200"
+                                                    defaultValue={
+                                                        industriData.nama
+                                                    }
                                                     onChange={(e) =>
                                                         setIndustriBody({
                                                             ...industriBody,
@@ -254,6 +329,9 @@ export default function ModalEditIndustri({
                                                 </div>
                                                 <textarea
                                                     className="flex-col items-center justify-start h-32 px-5 py-5 border rounded-lg border-slate-200 active:border-slate-200"
+                                                    defaultValue={
+                                                        industriData.desc
+                                                    }
                                                     onChange={(e) =>
                                                         setIndustriBody({
                                                             ...industriBody,
@@ -275,6 +353,9 @@ export default function ModalEditIndustri({
                                                 <input
                                                     type="text"
                                                     className="flex-col px-5 h-[50px] rounded-lg border border-slate-200 justify-start items-center active:border-slate-200"
+                                                    defaultValue={
+                                                        industriData.pemilik
+                                                    }
                                                     onChange={(e) =>
                                                         setIndustriBody({
                                                             ...industriBody,
@@ -300,6 +381,9 @@ export default function ModalEditIndustri({
                                                 <input
                                                     type="text"
                                                     className="flex-col px-5 h-[50px] rounded-lg border border-slate-200 justify-start items-center active:border-slate-200"
+                                                    defaultValue={
+                                                        industriData.kontak
+                                                    }
                                                     onChange={(e) =>
                                                         setIndustriBody({
                                                             ...industriBody,
@@ -322,6 +406,9 @@ export default function ModalEditIndustri({
                                                 <input
                                                     type="text"
                                                     className="flex-col px-5 h-[50px] rounded-lg border border-slate-200 justify-start items-center active:border-slate-200"
+                                                    defaultValue={
+                                                        industriData.alamat
+                                                    }
                                                     onChange={(e) =>
                                                         setIndustriBody({
                                                             ...industriBody,
@@ -350,6 +437,10 @@ export default function ModalEditIndustri({
                                                     <input
                                                         type="text"
                                                         className="flex-col px-5 h-[50px] rounded-lg border border-slate-200 justify-start items-center active:border-slate-200"
+                                                        defaultValue={
+                                                            industriData
+                                                                .coordinate.long
+                                                        }
                                                         onChange={(e) =>
                                                             setIndustriBody({
                                                                 ...industriBody,
@@ -376,6 +467,10 @@ export default function ModalEditIndustri({
                                                     <input
                                                         type="text"
                                                         className="flex-col px-5 h-[50px] rounded-lg border border-slate-200 justify-start items-center active:border-slate-200"
+                                                        defaultValue={
+                                                            industriData
+                                                                .coordinate.lat
+                                                        }
                                                         onChange={(e) =>
                                                             setIndustriBody({
                                                                 ...industriBody,
@@ -417,7 +512,7 @@ export default function ModalEditIndustri({
                                                                 alt={`Preview ${
                                                                     index + 1
                                                                 }`}
-                                                                className="w-24 h-24 rounded-md"
+                                                                className="object-cover w-24 h-24 rounded-md"
                                                             />
                                                             <button
                                                                 className="absolute flex items-center justify-center w-5 h-5 p-0 text-red-500 bg-white rounded-full top-1 right-1"
@@ -452,37 +547,6 @@ export default function ModalEditIndustri({
                                                 )}
                                             </div>
                                         </div>
-                                        {/* <div className="mb-4">
-                                            <h2 className="text-xl font-semibold">
-                                                Toko Cabang
-                                            </h2>
-                                            <div>
-                                                <div className="flex flex-col w-full gap-2 h-fit">
-                                                    <div className="w-full text-base font-normal leading-snug indent-1">
-                                                        Nama E-Commerce{" "}
-                                                        <span
-                                                            className="text-red-500"
-                                                            title="Wajib diisi"
-                                                        >
-                                                            *
-                                                        </span>
-                                                    </div>
-                                                    <input
-                                                        type="text"
-                                                        className="flex-col px-5 h-[50px] rounded-lg border border-slate-200 justify-start items-center active:border-slate-200"
-                                                        onChange={(e) =>
-                                                            setIndustriBody({
-                                                                ...industriBody,
-                                                                alamatCabang: [
-                                                                    e.target
-                                                                        .value
-                                                                ]
-                                                            })
-                                                        }
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div> */}
                                         <div className="mb-4">
                                             <h2 className="text-xl font-semibold">
                                                 Toko Cabang
@@ -504,6 +568,7 @@ export default function ModalEditIndustri({
                                                     <input
                                                         type="text"
                                                         className="flex-col px-5 h-[50px] rounded-lg border border-slate-200 justify-start items-center active:border-slate-200"
+                                                        defaultValue={item}
                                                         onChange={(e) =>
                                                             handleCabangInputChange(
                                                                 e,
@@ -668,7 +733,9 @@ export default function ModalEditIndustri({
                                     <button
                                         type="button"
                                         className="inline-flex justify-center px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-transparent rounded-md hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-                                        onClick={() => setModalIndustri(false)}
+                                        onClick={() =>
+                                            setModalEditIndustri(false)
+                                        }
                                     >
                                         Batalkan
                                     </button>
@@ -677,7 +744,7 @@ export default function ModalEditIndustri({
                                         className="inline-flex justify-center px-4 py-2 text-sm font-medium border border-transparent rounded-md text-primary-900 bg-primary-100 hover:bg-primary-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
                                         onClick={() => handleSubmit()}
                                     >
-                                        Buat Industri
+                                        {isSubmitting ? "Loading..." : "Edit"}
                                     </button>
                                 </div>
                             </Dialog.Panel>

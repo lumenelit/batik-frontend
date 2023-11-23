@@ -1,16 +1,20 @@
 // import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Header from "../../components/layouts/Header";
-import Container from "../../components/layouts/Container";
+import Header from "../../../components/layouts/Header";
+import Container from "../../../components/layouts/Container";
 import { useEffect, useState } from "react";
-import api from "../../config/api";
 
-export default function PageMotif() {
+import api from "../../../config/api";
+import { HiPencil, HiTrash } from "react-icons/hi2";
+import ModalEditMotif from "../../../components/modal/ModalEditMotif";
+
+export default function PageMotifEdit() {
     const { idMotif } = useParams();
     const navigate = useNavigate();
     const [motifData, setMotifData] = useState(null);
     const [motifImage, setMotifImage] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [modalEditMotif, setModalEditMotif] = useState(false);
 
     useEffect(() => {
         try {
@@ -52,8 +56,31 @@ export default function PageMotif() {
         }
     }, [idMotif]);
 
+    const handleDelete = () => {
+        api.delete(`/motif/${motifData.idMotif}`)
+            .then((res) => {
+                console.log(res);
+                window.location.reload();
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    console.log("motifImage", motifImage);
+
     return (
         <>
+            <ModalEditMotif
+                modalEditMotif={modalEditMotif}
+                setModalEditMotif={setModalEditMotif}
+                idIndustri={motifData?.idIndustri}
+                motifData={motifData}
+            />
             <Container center={true}>
                 <Header />
                 <div className="flex flex-row justify-center items-start gap-4 font-['Inter'] ">
@@ -88,13 +115,21 @@ export default function PageMotif() {
                             />
                         </div>
                     </div>
+
                     <div className="w-1/2 max-w-[600px] flex-col justify-end items-start gap-4 inline-flex ">
-                        <div className="min-w-[520px] h-fit p-4 bg-white rounded-xl shadow-primary flex-col justify-start items-start gap-16 inline-flex">
+                        <div className="min-w-[520px] h-fit p-4 bg-white rounded-xl shadow-primary flex-col justify-start items-start gap-4 inline-flex">
                             <div className="flex flex-col items-start justify-start w-full gap-4 h-fit">
                                 <div className="flex justify-between w-full text-xl font-semibold">
                                     <div className="flex items-center justify-start gap-2">
                                         {motifData?.nama}
                                     </div>
+                                    <button
+                                        className="flex items-center justify-center gap-2 text-gray-400"
+                                        onClick={() => setModalEditMotif(true)}
+                                    >
+                                        <HiPencil className="inline-flex" />
+                                        Edit
+                                    </button>
                                 </div>
                                 <div className="relative h-fit">
                                     <div className="top-0 left-0 w-full text-base font-normal ">
@@ -106,22 +141,14 @@ export default function PageMotif() {
                                 </div>
                             </div>
                             <button
-                                type="button"
-                                className="self-stretch h-[50px] px-2 bg-[#A25B4C] rounded-xl justify-center items-center inline-flex cursor-pointer"
-                                onClick={() =>
-                                    navigate(`/checkout/${motifData._id}`)
-                                }
+                                className="flex items-center justify-center w-full gap-2 py-2 font-semibold text-white bg-red-500 rounded-lg shadow-primary hover:bg-red-600"
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleDelete();
+                                }}
                             >
-                                <div className="inline-flex flex-col items-center justify-center">
-                                    <div className="inline-flex items-center justify-start h-6">
-                                        <div className="flex items-center justify-center gap-1">
-                                            <div className="text-base font-semibold leading-normal text-center text-white">
-                                                Beli Sekarang
-                                            </div>
-                                            <div className="relative w-5 h-5 origin-top-left rotate-180" />
-                                        </div>
-                                    </div>
-                                </div>
+                                <HiTrash className="inline-block text-xl" />
+                                Hapus Motif
                             </button>
                         </div>
                     </div>

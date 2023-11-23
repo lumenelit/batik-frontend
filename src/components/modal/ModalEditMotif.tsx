@@ -1,15 +1,17 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { ChangeEvent, Fragment, useState } from "react";
+import { ChangeEvent, Fragment, useEffect, useState } from "react";
 import { HiPlus, HiXCircle, HiXMark } from "react-icons/hi2";
 import api from "../../config/api";
 
-type ModalCreateMotifProps = {
-    modalMotif: boolean;
-    setModalMotif: React.Dispatch<React.SetStateAction<boolean>>;
+type ModalEditMotifProps = {
+    modalEditMotif: boolean;
+    setModalEditMotif: React.Dispatch<React.SetStateAction<boolean>>;
     idIndustri: string;
+    motifData: MotifBody;
 };
 
 type MotifBody = {
+    _id: string;
     idIndustri: string;
     idMotif: string;
     nama: string;
@@ -20,13 +22,35 @@ type MotifBody = {
     image3: string;
 };
 
-export default function ModalCreateMotif({
-    modalMotif,
-    setModalMotif,
-    idIndustri
-}: ModalCreateMotifProps) {
+export default function ModalEditMotif({
+    modalEditMotif,
+    setModalEditMotif,
+    idIndustri,
+    motifData
+}: ModalEditMotifProps) {
     const [motifBody, setMotifBody] = useState({} as MotifBody);
     const [imagePreviews, setImagePreviews] = useState<string[]>([]);
+
+    useEffect(() => {
+        try {
+            api.get(`/motif/image/${motifData._id}`).then((res) => {
+                setImagePreviews((prev) => [
+                    ...prev,
+                    ...(res.data.data[0]?.image1
+                        ? [res.data.data[0]?.image1]
+                        : []),
+                    ...(res.data.data[0]?.image2
+                        ? [res.data.data[0]?.image2]
+                        : []),
+                    ...(res.data.data[0]?.image3
+                        ? [res.data.data[0]?.image3]
+                        : [])
+                ]);
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }, [motifData._id]);
 
     const handleSubmit = async () => {
         const idMotif = Math.random().toString(36).substr(2, 9);
@@ -63,7 +87,7 @@ export default function ModalCreateMotif({
         // }
 
         try {
-            api.post("/motif", await body).then((res) => {
+            api.patch(`/motif/${motifData._id}`, await body).then((res) => {
                 console.log(res);
                 window.location.reload();
             });
@@ -111,11 +135,11 @@ export default function ModalCreateMotif({
     };
 
     return (
-        <Transition appear show={modalMotif} as={Fragment}>
+        <Transition appear show={modalEditMotif} as={Fragment}>
             <Dialog
                 as="div"
                 className="relative z-10"
-                onClose={() => setModalMotif(false)}
+                onClose={() => setModalEditMotif(false)}
             >
                 <Transition.Child
                     as={Fragment}
@@ -148,7 +172,7 @@ export default function ModalCreateMotif({
                                     Buat Motif
                                     <button
                                         className="absolute top-4 right-4"
-                                        onClick={() => setModalMotif(false)}
+                                        onClick={() => setModalEditMotif(false)}
                                     >
                                         <HiXMark className="inline-block w-5 h-5 ml-2" />
                                     </button>
@@ -223,6 +247,7 @@ export default function ModalCreateMotif({
                                             type="text"
                                             className="flex-col px-5 h-[50px] rounded-lg border border-slate-200 justify-start items-center active:border-slate-200"
                                             placeholder="Batik Mewah Merdeka"
+                                            defaultValue={motifData?.nama}
                                             onChange={(e) =>
                                                 setMotifBody({
                                                     ...motifBody,
@@ -244,7 +269,8 @@ export default function ModalCreateMotif({
                                         <input
                                             type="text"
                                             className="flex-col px-5 h-[50px] rounded-lg border border-slate-200 justify-start items-center active:border-slate-200"
-                                            placeholder="100.000"
+                                            placeholder="100000"
+                                            defaultValue={motifData?.harga}
                                             onChange={(e) =>
                                                 setMotifBody({
                                                     ...motifBody,
@@ -268,6 +294,7 @@ export default function ModalCreateMotif({
                                         <textarea
                                             className="flex-col items-center justify-start h-32 px-5 py-5 border rounded-lg border-slate-200 active:border-slate-200"
                                             placeholder="Batik terbaik di seluruh indonesia..."
+                                            defaultValue={motifData?.desc}
                                             onChange={(e) =>
                                                 setMotifBody({
                                                     ...motifBody,
@@ -282,7 +309,7 @@ export default function ModalCreateMotif({
                                     <button
                                         type="button"
                                         className="inline-flex justify-center px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-transparent rounded-md hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-                                        onClick={() => setModalMotif(false)}
+                                        onClick={() => setModalEditMotif(false)}
                                     >
                                         Batalkan
                                     </button>

@@ -17,11 +17,13 @@ import ReactDOMServer from "react-dom/server";
 import { useEffect, useState } from "react";
 import api from "../../../config/api";
 import ModalCreateMotif from "../../../components/modal/ModalCreateMotif";
+import ModalEditIndustri from "../../../components/modal/ModalEditIndustri";
 
 export default function PageIndustriEdit() {
     const [industriData, setIndustriData] = useState(null);
     const [motifData, setMotifData] = useState([]);
     const [modalMotif, setModalMotif] = useState(false);
+    const [modalEditIndustri, setModalEditIndustri] = useState(false);
     const navigate = useNavigate();
     const { idIndustri } = useParams();
 
@@ -70,7 +72,7 @@ export default function PageIndustriEdit() {
     });
 
     const handleDelete = () => {
-        api.delete(`/industri/${industriData.idIndustri}`)
+        api.delete(`/industri/${industriData._id}`)
             .then((res) => {
                 console.log(res);
                 navigate("/admin/industri");
@@ -91,6 +93,11 @@ export default function PageIndustriEdit() {
                 setModalMotif={setModalMotif}
                 idIndustri={idIndustri}
             />
+            <ModalEditIndustri
+                modalEditIndustri={modalEditIndustri}
+                setModalEditIndustri={setModalEditIndustri}
+                industriData={industriData}
+            />
             <Container center={true}>
                 <Header />
                 <div className="flex flex-row items-start gap-5">
@@ -105,9 +112,12 @@ export default function PageIndustriEdit() {
                         <div className="p-4 bg-white rounded-xl shadow-primary flex-col justify-start items-start gap-4 inline-flex text-primary text-l font-semibold font-['Inter']">
                             <div className="flex justify-between w-full text-xl font-semibold">
                                 <div className="flex items-center justify-start gap-2">
-                                    {industriData.namaIndustri}
+                                    {industriData.nama}
                                 </div>
-                                <button className="flex items-center justify-center gap-2 text-gray-400">
+                                <button
+                                    className="flex items-center justify-center gap-2 text-gray-400"
+                                    onClick={() => setModalEditIndustri(true)}
+                                >
                                     <HiPencil className="inline-flex" />
                                     Edit
                                 </button>
@@ -278,6 +288,7 @@ export default function PageIndustriEdit() {
                                         data={item}
                                         key={index}
                                         haveDelete
+                                        admin
                                     />
                                 ))}
                             </div>

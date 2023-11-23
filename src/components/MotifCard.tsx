@@ -13,20 +13,26 @@ function formatRupiah(int) {
 type MotifCardProps = {
     data: any;
     haveDelete?: boolean;
+    admin?: boolean;
 };
 
-export default function MotifCard({ data, haveDelete = false }) {
+export default function MotifCard({ data, haveDelete, admin }: MotifCardProps) {
     const navigate = useNavigate();
 
     const handleClickCard = () => {
-        console.log("clicked");
-        navigate(`../motif/${data.idMotif}`);
+        if (admin) {
+            navigate(`/admin/motif/edit/${data._id}`);
+        }
+        if (!admin) {
+            navigate(`/motif/${data._id}`);
+        }
     };
 
     const handleDelete = () => {
-        api.delete(`/motif/${data.idMotif}`)
+        api.delete(`/motif/${data._id}`)
             .then((res) => {
                 console.log(res);
+                window.location.reload();
             })
             .catch((err) => {
                 console.log(err);

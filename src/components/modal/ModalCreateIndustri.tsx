@@ -3,6 +3,7 @@ import { ChangeEvent, Fragment, useState } from "react";
 import { HiPlus, HiXCircle, HiXMark } from "react-icons/hi2";
 import api from "../../config/api";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 type ModalCreateIndustriProps = {
     modalIndustri: boolean;
@@ -10,7 +11,6 @@ type ModalCreateIndustriProps = {
 };
 
 type IndustriBody = {
-    idIndustri: string;
     nama: string;
     pemilik: string;
     kontak: string;
@@ -49,8 +49,9 @@ export default function ModalCreateIndustri({
         Array<{ label: string; link: string }>
     >([{ label: "", link: "" }]);
 
+    const navigate = useNavigate();
+
     const handleSubmit = async () => {
-        // const idIndustri = Math.floor(Math.random() * 1000000000).toString();
         const image1 = imagePreviews[0];
         const image2 = imagePreviews[1];
         const image3 = imagePreviews[2];
@@ -73,21 +74,30 @@ export default function ModalCreateIndustri({
         }[];
         const alamatCabang = cabangList.filter((item) => item !== "");
 
-        setIndustriBody({
+        // setIndustriBody({
+        //     ...industriBody,
+        //     image1,
+        //     image2,
+        //     image3,
+        //     alamatCabang,
+        //     eCommerce,
+        //     sosmed
+        // });
+        const body = {
             ...industriBody,
-            // idIndustri,
             image1,
             image2,
             image3,
             alamatCabang,
             eCommerce,
             sosmed
-        });
+        };
         console.log(industriBody);
         // setModalIndustri(false);
         try {
-            api.post("/industri", await industriBody).then((res) => {
+            api.post("/industri", await body).then((res) => {
                 console.log(res);
+                navigate(`/admin/industri/edit/${res.data.data._id}`);
             });
         } catch (error) {
             console.log(error);
@@ -352,32 +362,6 @@ export default function ModalCreateIndustri({
                                             <div className="flex gap-4">
                                                 <div className="flex flex-col w-full gap-2 h-fit">
                                                     <div className="w-full text-base font-normal leading-snug indent-1">
-                                                        Latitude{" "}
-                                                        <span
-                                                            className="text-red-500"
-                                                            title="Wajib diisi"
-                                                        >
-                                                            *
-                                                        </span>
-                                                    </div>
-                                                    <input
-                                                        type="text"
-                                                        className="flex-col px-5 h-[50px] rounded-lg border border-slate-200 justify-start items-center active:border-slate-200"
-                                                        onChange={(e) =>
-                                                            setIndustriBody({
-                                                                ...industriBody,
-                                                                coordinate: {
-                                                                    ...industriBody.coordinate,
-                                                                    lat: e
-                                                                        .target
-                                                                        .value
-                                                                }
-                                                            })
-                                                        }
-                                                    />
-                                                </div>
-                                                <div className="flex flex-col w-full gap-2 h-fit">
-                                                    <div className="w-full text-base font-normal leading-snug indent-1">
                                                         Longitude{" "}
                                                         <span
                                                             className="text-red-500"
@@ -395,6 +379,32 @@ export default function ModalCreateIndustri({
                                                                 coordinate: {
                                                                     ...industriBody.coordinate,
                                                                     long: e
+                                                                        .target
+                                                                        .value
+                                                                }
+                                                            })
+                                                        }
+                                                    />
+                                                </div>
+                                                <div className="flex flex-col w-full gap-2 h-fit">
+                                                    <div className="w-full text-base font-normal leading-snug indent-1">
+                                                        Latitude{" "}
+                                                        <span
+                                                            className="text-red-500"
+                                                            title="Wajib diisi"
+                                                        >
+                                                            *
+                                                        </span>
+                                                    </div>
+                                                    <input
+                                                        type="text"
+                                                        className="flex-col px-5 h-[50px] rounded-lg border border-slate-200 justify-start items-center active:border-slate-200"
+                                                        onChange={(e) =>
+                                                            setIndustriBody({
+                                                                ...industriBody,
+                                                                coordinate: {
+                                                                    ...industriBody.coordinate,
+                                                                    lat: e
                                                                         .target
                                                                         .value
                                                                 }

@@ -10,6 +10,7 @@ import PageInvoice from "./pages/PageInvoice/PageInvoice";
 import PagePesanan from "./pages/admin/PagePesanan/PagePesanan";
 import PageIndustriEdit from "./pages/admin/PageIndustriEdit/PageIndustriEdit";
 import PageIndustriAdmin from "./pages/admin/PageIndustriAdmin/PageIndustriAdmin";
+import PageMotifEdit from "./pages/admin/PageMotifEdit/PageMotifEdit";
 
 export const ROUTES = {
     LANDING: "/",
@@ -18,7 +19,7 @@ export const ROUTES = {
     INDUSTRI: "/industri/:idIndustri",
     MOTIF: "/motif/:idMotif",
     CHECKOUT: "/checkout/:idMotif",
-    INVOICE: "/invoice/:idInvoice",
+    INVOICE: "/invoice/:idPesanan",
     PAGE_404: "*",
     // Admin Divider
     ADMIN_LOGIN: "/admin",
@@ -74,7 +75,8 @@ export const routerList = [
         element: <PageIndustriEdit />
     },
     {
-        path: ROUTES.ADMIN_MOTIF_EDIT
+        path: ROUTES.ADMIN_MOTIF_EDIT,
+        element: <PageMotifEdit />
     },
     {
         path: ROUTES.ADMIN_PESANAN,
