@@ -13,6 +13,7 @@ import api from "../../config/api";
 export default function PageIndustri() {
     const { idIndustri } = useParams();
     const [industri, setIndustri] = useState(null);
+    const [industriImage, setIndustriImage] = useState(null);
     const [motifData, setMotifData] = useState([]);
 
     useEffect(() => {
@@ -26,8 +27,17 @@ export default function PageIndustri() {
             }
         };
 
-        fetchData();
-    }, [idIndustri]); // Include idIndustri as a dependency if it's used inside the useEffect
+        fetchData().then(async () => {
+            try {
+                const res = await api.get(`/industri/image/${idIndustri}`);
+                setIndustriImage(res.data.data[0]);
+                console.log("image", res.data.data);
+            } catch (error) {
+                console.error("Error fetching image data:", error);
+            }
+        });
+    }, [idIndustri]);
+    // Include idIndustri as a dependency if it's used inside the useEffect
 
     useEffect(() => {
         try {
@@ -60,7 +70,7 @@ export default function PageIndustri() {
                         {industri && (
                             <div className="p-4 bg-white rounded-xl shadow-primary flex-col justify-start items-start gap-4 inline-flex text-primary text-xl font-semibold font-['Inter']">
                                 <div className="w-full text-3xl font-semibold">
-                                    {industri.namaIndustri}
+                                    {industri.nama}
                                 </div>
                                 <div className="flex flex-row justify-between w-full">
                                     <div className="flex flex-col items-start self-stretch justify-start w-1/2 gap-2 h-fit">
@@ -148,8 +158,9 @@ export default function PageIndustri() {
                                         <img
                                             className="bg-center object-cover w-[36.5rem] bg-cover shadow-primary aspect-square rounded-xl"
                                             src={
-                                                industri.image1
-                                                    ? industri.image1
+                                                industriImage &&
+                                                industriImage.image1
+                                                    ? industriImage.image1
                                                     : "https://via.placeholder.com/250x250"
                                             }
                                             alt="motif1"
@@ -157,12 +168,22 @@ export default function PageIndustri() {
                                         <div className="flex flex-row justify-between w-full gap-2 shrink">
                                             <img
                                                 className="bg-center object-cover w-72 bg-cover shrink shadow-primary aspect-square h-1/2 rounded-xl"
-                                                src={industri.image2}
+                                                src={
+                                                    industriImage &&
+                                                    industriImage.image2
+                                                        ? industriImage.image2
+                                                        : "https://via.placeholder.com/250x250"
+                                                }
                                                 alt="motif2"
                                             />
                                             <img
                                                 className="bg-center object-cover w-72 bg-cover shrink shadow-primary aspect-square h-1/2 rounded-xl"
-                                                src={industri.image3}
+                                                src={
+                                                    industriImage &&
+                                                    industriImage.image3
+                                                        ? industriImage.image3
+                                                        : "https://via.placeholder.com/250x250"
+                                                }
                                                 alt="motif3"
                                             />
                                         </div>

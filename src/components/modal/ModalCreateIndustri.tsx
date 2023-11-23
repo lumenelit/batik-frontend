@@ -50,7 +50,7 @@ export default function ModalCreateIndustri({
     >([{ label: "", link: "" }]);
 
     const handleSubmit = async () => {
-        const idIndustri = Math.floor(Math.random() * 1000000000).toString();
+        // const idIndustri = Math.floor(Math.random() * 1000000000).toString();
         const image1 = imagePreviews[0];
         const image2 = imagePreviews[1];
         const image3 = imagePreviews[2];
@@ -75,7 +75,7 @@ export default function ModalCreateIndustri({
 
         setIndustriBody({
             ...industriBody,
-            idIndustri,
+            // idIndustri,
             image1,
             image2,
             image3,

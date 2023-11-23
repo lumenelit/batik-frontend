@@ -19,8 +19,8 @@ export default function PageIndustriAdmin() {
     const navigate = useNavigate();
 
     const columns = [
-        { field: "idIndustri", header: "ID" },
-        { field: "namaIndustri", header: t("admin.industry.tableName") },
+        // { field: "_id", header: "No" },
+        { field: "nama", header: t("admin.industry.tableName") },
         { field: "pemilik", header: t("admin.industry.tableOwner") },
         { field: "kontak", header: t("admin.industry.tableContact") },
         { field: "alamat", header: t("admin.industry.tableAddress") }
@@ -66,7 +66,7 @@ export default function PageIndustriAdmin() {
                     tableStyle={{ minWidth: "50rem" }}
                     className="overflow-hidden shadow-primary rounded-xl text-dark"
                     onRowClick={(e) => {
-                        navigate(`/admin/industri/edit/${e.data.idIndustri}`);
+                        navigate(`/admin/industri/edit/${e.data._id}`);
                     }}
                 >
                     {columns.map((col, i) => (

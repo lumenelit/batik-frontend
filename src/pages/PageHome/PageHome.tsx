@@ -168,13 +168,13 @@ export default function PageHome() {
                         {industry.map((item: any, index: number) => {
                             return (
                                 <Link
-                                    to={`/industri/${item.idIndustri}`}
+                                    to={`/industri/${item._id}`}
                                     key={index}
                                     className="flex items-center p-2 space-x-4 transition duration-300 ease-in-out cursor-pointer rounded-xl hover:bg-gray-300 hover:bg-opacity-25"
                                 >
                                     <div className="flex flex-col items-center justify-center rounded-full">
                                         <HiMapPin className="text-2xl text-dark" />
-                                        {/* <span>
+                                        <span>
                                             {getDistance(
                                                 currentLocation.lat,
                                                 currentLocation.lon,
@@ -182,14 +182,14 @@ export default function PageHome() {
                                                 item.coordinate.long
                                             )}
                                             km
-                                        </span> */}
+                                        </span>
                                     </div>
                                     <div className="flex flex-col">
                                         <div className="font-bold text-primary-500">
-                                            {item.namaIndustri || "Null"}
+                                            {item.nama || "Null"}
                                         </div>
                                         <div className="text-sm">
-                                            {item.pemilik || "Null"}
+                                            {item.alamat || "Null"}
                                         </div>
                                     </div>
                                 </Link>
