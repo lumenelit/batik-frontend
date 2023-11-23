@@ -150,7 +150,7 @@ export default function PageHome() {
             <div className="absolute top-0 right-0 h-full p-8 w-[400px]">
                 <div className="h-full p-4 bg-white rounded-xl backdrop-filter backdrop-blur-lg bg-opacity-40">
                     {/* Search Bar */}
-                    <div className="max-w-md mx-auto">
+                    {/* <div className="max-w-md mx-auto">
                         <div className="relative flex items-center w-full h-12 overflow-hidden border rounded-xl border-primary-500 focus-within:shadow-primary ">
                             <input
                                 className="w-full h-full pl-2 text-sm bg-transparent outline-none text-dark peer"
@@ -162,7 +162,7 @@ export default function PageHome() {
                                 <HiMagnifyingGlass />
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                     {/* List Industry */}
                     <div className="flex flex-col gap-2 mt-4">
                         {industry.map((item: any, index: number) => {
@@ -174,7 +174,7 @@ export default function PageHome() {
                                 >
                                     <div className="flex flex-col items-center justify-center rounded-full">
                                         <HiMapPin className="text-2xl text-dark" />
-                                        <span>
+                                        {/* <span>
                                             {getDistance(
                                                 currentLocation.lat,
                                                 currentLocation.lon,
@@ -182,7 +182,7 @@ export default function PageHome() {
                                                 item.coordinate.long
                                             )}
                                             km
-                                        </span>
+                                        </span> */}
                                     </div>
                                     <div className="flex flex-col">
                                         <div className="font-bold text-primary-500">

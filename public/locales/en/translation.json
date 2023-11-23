@@ -3,5 +3,35 @@
         "title": "Discover Batik, Unveil Your Style.",
         "subtitle": "Batik fashion, your gateway to self-discovery.",
         "button": "View Map"
+    },
+    "admin": {
+        "industry": {
+            "industryList": "Industry List",
+            "tableName": "Industry Name",
+            "tableOwner": "Owner Name",
+            "tableContact": "Contact",
+            "tableAddress": "Address",
+            "createIndustry": "Create Industry",
+            "modal": {
+                "industryName": "Industry Name",
+                "industryInformation": "Industry Information",
+                "desc": "Description",
+                "ownerName": "Owner Name",
+                "contact": "Contact",
+                "address": "Address",
+                "coordinate": "Industry Coordinate",
+                "image": "Image",
+                "branchStores": "Branch Store",
+                "branchAddress": "Branch Store Address",
+                "addBranch": "Add Branch Store",
+                "eCommerceName": "E-Commerce Name",
+                "addECommerce": "Add E-Commerce",
+                "socialMedia": "Social Media",
+                "socialMediaName": "Social Media Name",
+                "addSocialMedia": "Add Social Media",
+                "cancel": "Cancel",
+                "createIndustry": "Create Industry"
+            }
+        }
     }
 }

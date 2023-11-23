@@ -47,7 +47,7 @@ export default function Header({ admin }: HeaderProps) {
             </h1> */}
             <img src="/Logo.svg" className="h-12" />
             {admin && (
-                <div className="flex items-center gap-4 ms-auto text-dark">
+                <div className="flex items-center gap-6 ms-auto text-dark px-8 py-2 bg-[#fafafa] rounded-xl shadow-lg">
                     <NavLink
                         to="/admin/pesanan"
                         className={({ isActive }) =>
@@ -63,7 +63,7 @@ export default function Header({ admin }: HeaderProps) {
                         className={({ isActive }) =>
                             isActive
                                 ? "text-primary-500 text-lg font-semibold"
-                                : "text-dark text-lg font-semibold"
+                                : "text-dark text-lg font-semibold "
                         }
                     >
                         Industri
