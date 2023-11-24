@@ -320,7 +320,7 @@ export default function PageCheckout() {
                     <div className="w-1/2 max-w-[600px] flex-col justify-end items-start gap-4 inline-flex ">
                         <div className="w-[520px] h-[748px] p-4 bg-white rounded-xl shadow-primary flex-col justify-start items-start gap-4 inline-flex">
                             <div className="self-stretch h-[39px]  text-[32px] font-semibold">
-                                Batik akatsuki tanah - 2x5 meter
+                                {motifData.nama}
                             </div>
                             <img
                                 className="self-stretch h-[450px] rounded-xl object-cover"

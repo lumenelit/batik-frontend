@@ -68,6 +68,7 @@ export default function PageIndustriAdmin() {
                     onRowClick={(e) => {
                         navigate(`/admin/industri/edit/${e.data._id}`);
                     }}
+                    pt={{ bodyRow: { className: "cursor-pointer" } }}
                 >
                     {columns.map((col, i) => (
                         <Column key={i} field={col.field} header={col.header} />

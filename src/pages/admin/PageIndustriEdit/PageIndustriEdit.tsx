@@ -83,7 +83,7 @@ export default function PageIndustriEdit() {
     };
 
     if (!industriData) {
-        return <>Not Found</>;
+        return <>Loading...</>;
     }
 
     return (
