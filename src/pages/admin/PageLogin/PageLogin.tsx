@@ -32,6 +32,7 @@ export default function PageLogin() {
             />
             <div>
                 <div className="w-[385px] h-[588px] sm:w-[485px] sm:h-[688px] bg-[#dbdbdb] bg-opacity-50 px-[44px] py-[65px] rounded-2xl backdrop-filter backdrop-blur-lg">
+                    <img src="/Logo.svg" />
                     <h1 className="text-[60px] font-bold">Hello!</h1>
                     <p className="font-medium text-[15px]">
                         Login with your Username and Password

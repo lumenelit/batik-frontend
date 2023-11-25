@@ -66,9 +66,12 @@ export default function PageIndustriAdmin() {
                     tableStyle={{ minWidth: "50rem" }}
                     className="overflow-hidden shadow-primary rounded-xl text-dark"
                     onRowClick={(e) => {
-                        navigate(`/admin/industri/edit/${e.data._id}`);
+                        navigate(
+                            `/admin/industri/edit/${e.data._id}?admin=true`
+                        );
                     }}
                     pt={{ bodyRow: { className: "cursor-pointer" } }}
+                    stripedRows
                 >
                     {columns.map((col, i) => (
                         <Column key={i} field={col.field} header={col.header} />

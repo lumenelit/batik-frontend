@@ -4,7 +4,7 @@ import { HiMagnifyingGlass, HiMapPin, HiUser } from "react-icons/hi2";
 import api from "../../config/api";
 import { DivIcon } from "leaflet";
 import * as ReactDOMServer from "react-dom/server";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 export default function PageHome() {
     const [industry, setIndustry]: Array<any> = useState([]);
@@ -13,6 +13,7 @@ export default function PageHome() {
         lon: 0
     });
     const mapRef = useRef(null);
+    const navigate = useNavigate();
 
     const ResizeMap = () => {
         const map = useMap() as any;
@@ -125,7 +126,13 @@ export default function PageHome() {
                             icon={marker}
                         >
                             <Popup>
-                                <div className="flex flex-col gap-1">
+                                {/* <Link to={`/industri/${item._id}`}> */}
+                                <div
+                                    className="flex flex-col gap-1 cursor-pointer hover:scale-105 hover:text-blue-700 text-dark"
+                                    onClick={() =>
+                                        navigate(`/industri/${item._id}`)
+                                    }
+                                >
                                     <div className="text-lg font-bold">
                                         {item.nama}
                                     </div>
@@ -136,12 +143,13 @@ export default function PageHome() {
                                         </span>
                                     </div>
                                     <div className="flex items-center">
-                                        <HiMapPin className="text-lg text-dark" />
+                                        <HiMapPin className="text-lg " />
                                         <span className="ml-2">
                                             {item.alamat}
                                         </span>
                                     </div>
                                 </div>
+                                {/* </Link> */}
                             </Popup>
                         </Marker>
                     );

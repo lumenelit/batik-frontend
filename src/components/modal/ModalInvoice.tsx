@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import Header from "../../components/layouts/Header";
-import Container from "../../components/layouts/Container";
+import Header from "../layouts/Header";
+import Container from "../layouts/Container";
 import api from "../../config/api";
 
 type PesananData = {
@@ -22,7 +22,7 @@ type PesananData = {
     __v: number;
 };
 
-export default function PageInvoice() {
+export default function ModalInvoice() {
     const navigate = useNavigate();
     const { idPesanan } = useParams();
     const [pesananData, setPesananData] = useState<PesananData>({

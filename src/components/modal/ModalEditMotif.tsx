@@ -18,8 +18,8 @@ type MotifBody = {
     harga: number;
     desc: string;
     image1: string;
-    image2: string;
-    image3: string;
+    // image2: string;
+    // image3: string;
 };
 
 export default function ModalEditMotif({
@@ -38,12 +38,6 @@ export default function ModalEditMotif({
                     ...prev,
                     ...(res.data.data[0]?.image1
                         ? [res.data.data[0]?.image1]
-                        : []),
-                    ...(res.data.data[0]?.image2
-                        ? [res.data.data[0]?.image2]
-                        : []),
-                    ...(res.data.data[0]?.image3
-                        ? [res.data.data[0]?.image3]
                         : [])
                 ]);
             });
@@ -55,8 +49,8 @@ export default function ModalEditMotif({
     const handleSubmit = async () => {
         const idMotif = Math.random().toString(36).substr(2, 9);
         const image1 = imagePreviews[0];
-        const image2 = imagePreviews[1];
-        const image3 = imagePreviews[2];
+        // const image2 = imagePreviews[1];
+        // const image3 = imagePreviews[2];
 
         // setMotifBody({
         //     ...motifBody,
@@ -70,9 +64,9 @@ export default function ModalEditMotif({
             ...motifBody,
             idMotif,
             idIndustri,
-            image1,
-            image2,
-            image3
+            image1
+            // image2,
+            // image3
         };
 
         console.log(motifBody);

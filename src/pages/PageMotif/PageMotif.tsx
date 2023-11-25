@@ -1,9 +1,18 @@
 // import React, { useState, useEffect, useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import Header from "../../components/layouts/Header";
 import Container from "../../components/layouts/Container";
 import { useEffect, useState } from "react";
+import { HiChevronLeft } from "react-icons/hi2";
 import api from "../../config/api";
+
+function formatRupiah(int) {
+    let rupiah = new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR"
+    }).format(int);
+    return rupiah.split(",")[0]; // remove the decimal part
+}
 
 export default function PageMotif() {
     const { idMotif } = useParams();
@@ -33,18 +42,18 @@ export default function PageMotif() {
                         res.data.data[0].image1
                     ]);
                 }
-                if (res.data.data[0].image2) {
-                    setMotifImage((motifImage) => [
-                        ...motifImage,
-                        res.data.data[0].image2
-                    ]);
-                }
-                if (res.data.data[0].image3) {
-                    setMotifImage((motifImage) => [
-                        ...motifImage,
-                        res.data.data[0].image3
-                    ]);
-                }
+                // if (res.data.data[0].image2) {
+                //     setMotifImage((motifImage) => [
+                //         ...motifImage,
+                //         res.data.data[0].image2
+                //     ]);
+                // }
+                // if (res.data.data[0].image3) {
+                //     setMotifImage((motifImage) => [
+                //         ...motifImage,
+                //         res.data.data[0].image3
+                //     ]);
+                // }
                 // console.log(res.data.data[0]);
             });
         } catch (error) {
@@ -56,6 +65,13 @@ export default function PageMotif() {
         <>
             <Container center={true}>
                 <Header />
+
+                <button
+                    onClick={() => navigate(-1)}
+                    className="text-primary w-fit text-xl font-semibold font-['Inter']"
+                >
+                    <HiChevronLeft className="inline-flex" /> <span>Back</span>
+                </button>
                 <div className="flex flex-row justify-center items-start gap-4 font-['Inter'] ">
                     <div className="flex flex-row-reverse w-1/2 h-auto gap-2">
                         <img
@@ -67,7 +83,7 @@ export default function PageMotif() {
                             }
                             alt="motif"
                         />
-                        <div className="flex flex-col justify-between w-auto gap-2">
+                        {/* <div className="flex flex-col justify-between w-auto gap-2">
                             <img
                                 className="w-full min-w-[250px] bg-center object-cover aspect-w-16 aspect-h-16 h-1/2 rounded-xl shadow-primary"
                                 src={
@@ -86,7 +102,7 @@ export default function PageMotif() {
                                 }
                                 alt="motif"
                             />
-                        </div>
+                        </div> */}
                     </div>
                     <div className="w-1/2 max-w-[600px] flex-col justify-end items-start gap-4 inline-flex ">
                         <div className="min-w-[520px] h-fit p-4 bg-white rounded-xl shadow-primary flex-col justify-start items-start gap-16 inline-flex">
@@ -98,7 +114,8 @@ export default function PageMotif() {
                                 </div>
                                 <div className="relative h-fit">
                                     <div className="top-0 left-0 w-full text-base font-normal ">
-                                        Rp {motifData?.harga}/meter
+                                        {formatRupiah(motifData?.harga)}
+                                        /meter
                                     </div>
                                     <div className="w-full text-base font-normal ">
                                         {motifData?.desc}

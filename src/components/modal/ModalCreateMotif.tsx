@@ -16,8 +16,8 @@ type MotifBody = {
     harga: number;
     desc: string;
     image1: string;
-    image2: string;
-    image3: string;
+    // image2: string;
+    // image3: string;
 };
 
 export default function ModalCreateMotif({
@@ -46,9 +46,9 @@ export default function ModalCreateMotif({
             ...motifBody,
             idMotif,
             idIndustri,
-            image1,
-            image2,
-            image3
+            image1
+            // image2,
+            // image3
         };
 
         console.log(motifBody);

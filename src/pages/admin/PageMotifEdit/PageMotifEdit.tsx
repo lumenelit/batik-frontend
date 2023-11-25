@@ -37,18 +37,18 @@ export default function PageMotifEdit() {
                         res.data.data[0].image1
                     ]);
                 }
-                if (res.data.data[0].image2) {
-                    setMotifImage((motifImage) => [
-                        ...motifImage,
-                        res.data.data[0].image2
-                    ]);
-                }
-                if (res.data.data[0].image3) {
-                    setMotifImage((motifImage) => [
-                        ...motifImage,
-                        res.data.data[0].image3
-                    ]);
-                }
+                // if (res.data.data[0].image2) {
+                //     setMotifImage((motifImage) => [
+                //         ...motifImage,
+                //         res.data.data[0].image2
+                //     ]);
+                // }
+                // if (res.data.data[0].image3) {
+                //     setMotifImage((motifImage) => [
+                //         ...motifImage,
+                //         res.data.data[0].image3
+                //     ]);
+                // }
                 // console.log(res.data.data[0]);
             });
         } catch (error) {
@@ -57,10 +57,11 @@ export default function PageMotifEdit() {
     }, [idMotif]);
 
     const handleDelete = () => {
-        api.delete(`/motif/${motifData.idMotif}`)
+        api.delete(`/motif/${motifData._id}`)
             .then((res) => {
                 console.log(res);
-                window.location.reload();
+                // window.location.reload();
+                navigate(-1);
             })
             .catch((err) => {
                 console.log(err);
@@ -94,7 +95,7 @@ export default function PageMotifEdit() {
                             }
                             alt="motif"
                         />
-                        <div className="flex flex-col justify-between w-auto gap-2">
+                        {/* <div className="flex flex-col justify-between w-auto gap-2">
                             <img
                                 className="w-full min-w-[250px] bg-center object-cover aspect-w-16 aspect-h-16 h-1/2 rounded-xl shadow-primary"
                                 src={
@@ -113,7 +114,7 @@ export default function PageMotifEdit() {
                                 }
                                 alt="motif"
                             />
-                        </div>
+                        </div> */}
                     </div>
 
                     <div className="w-1/2 max-w-[600px] flex-col justify-end items-start gap-4 inline-flex ">

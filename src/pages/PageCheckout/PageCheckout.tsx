@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import Header from "../../components/layouts/Header";
 import Container from "../../components/layouts/Container";
 import api from "../../config/api";
-import { HiMinus, HiPlus } from "react-icons/hi2";
+import { HiMinus, HiPlus, HiChevronLeft } from "react-icons/hi2";
+import ModalInvoice from "../../components/modal/ModalInvoice";
 
 type PesananBody = {
     _id: string;
@@ -20,10 +21,21 @@ type PesananBody = {
     totalHarga: number;
 };
 
+function formatRupiah(int) {
+    let rupiah = new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR"
+    }).format(int);
+    return rupiah.split(",")[0]; // remove the decimal part
+}
+
 export default function PageCheckout() {
     const { idMotif } = useParams();
     const navigate = useNavigate();
-    const [pesananBody, setPesananBody] = useState(null as PesananBody);
+    const [pesananBody, setPesananBody] = useState({
+        jumlah: 1
+    } as PesananBody);
+
     const [motifData, setMotifData] = useState(null);
     const [motifImage, setMotifImage] = useState([]);
     const [mirror, setMirror] = useState(false);
@@ -48,18 +60,18 @@ export default function PageCheckout() {
                         res.data.data[0].image1
                     ]);
                 }
-                if (res.data.data[0].image2) {
-                    setMotifImage((motifImage) => [
-                        ...motifImage,
-                        res.data.data[0].image2
-                    ]);
-                }
-                if (res.data.data[0].image3) {
-                    setMotifImage((motifImage) => [
-                        ...motifImage,
-                        res.data.data[0].image3
-                    ]);
-                }
+                // if (res.data.data[0].image2) {
+                //     setMotifImage((motifImage) => [
+                //         ...motifImage,
+                //         res.data.data[0].image2
+                //     ]);
+                // }
+                // if (res.data.data[0].image3) {
+                //     setMotifImage((motifImage) => [
+                //         ...motifImage,
+                //         res.data.data[0].image3
+                //     ]);
+                // }
                 // console.log(res.data.data[0]);
             });
         } catch (error) {
@@ -153,7 +165,7 @@ export default function PageCheckout() {
             return 0;
         }
 
-        return motifData.harga * pesananBody.jumlah;
+        return formatRupiah(motifData.harga * pesananBody.jumlah);
     };
 
     if (!motifData) {
@@ -162,8 +174,15 @@ export default function PageCheckout() {
 
     return (
         <>
+        <ModalInvoice/>
             <Container center={true}>
                 <Header />
+                <button
+                    onClick={() => navigate(-1)}
+                    className="text-primary w-fit text-xl font-semibold font-['Inter']"
+                >
+                    <HiChevronLeft className="inline-flex" /> <span>Back</span>
+                </button>
                 <div className="flex flex-row justify-center items-start gap-4 font-['Inter'] text-primary">
                     <div className="flex flex-row-reverse gap-2 min-w-1/2 h-fit">
                         <div className="min-w-[790px] h-fit flex flex-col p-4 mb-5 bg-white rounded-xl shadow-primary justify-start items-start gap-4">
@@ -239,9 +258,24 @@ export default function PageCheckout() {
                                         })
                                     }
                                 >
-                                    <option value="JNE">JNE</option>
-                                    <option value="COD">COD</option>
-                                    <option value="GOJEK">GOJEK</option>
+                                    <option value="Ambil di store langsung">
+                                        Ambil di store langsung
+                                    </option>
+                                    <option value="Gojek">Gojek</option>
+                                    <option value="Grab">Grab</option>
+                                    <option value="JNT Reguler">
+                                        JNT Reguler
+                                    </option>
+                                    <option value="JNT Express">
+                                        JNT Express
+                                    </option>
+                                    <option value="JNE Reguler">
+                                        JNE Reguler
+                                    </option>
+                                    <option value="JNE Express">
+                                        JNE Express
+                                    </option>
+                                    <option value="GOJEK">POS</option>
                                 </select>
                             </div>
                             <div className="flex flex-col w-full gap-2 h-fit">
@@ -340,7 +374,7 @@ export default function PageCheckout() {
                                         Harga
                                     </div>
                                     <div className="text-base font-normal text-right grow shrink (basis-0">
-                                        {motifData.harga || 0}
+                                        {formatRupiah(motifData.harga) || 0}
                                     </div>
                                 </div>
                                 <div className="inline-flex items-center self-stretch justify-between">
