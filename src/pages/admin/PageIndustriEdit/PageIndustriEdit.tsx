@@ -22,6 +22,7 @@ import { useTranslation } from "react-i18next";
 
 export default function PageIndustriEdit() {
     const [industriData, setIndustriData] = useState(null);
+    const [industriImage, setIndustriImage] = useState(null);
     const [motifData, setMotifData] = useState([]);
     const [modalMotif, setModalMotif] = useState(false);
     const [modalEditIndustri, setModalEditIndustri] = useState(false);
@@ -39,6 +40,10 @@ export default function PageIndustriEdit() {
                 .catch((err) => {
                     console.log(err);
                 });
+            api.get(`/industri/image/${idIndustri}`).then((res) => {
+                setIndustriImage(res.data.data[0]);
+                console.log(res.data.data[0]);
+            });
         } catch (error) {
             console.log(error);
         }
@@ -125,6 +130,53 @@ export default function PageIndustriEdit() {
                                 </button>
                             </div>
                             <div className="flex flex-col items-start self-stretch justify-start w-full gap-2 h-fit">
+                                <div className="w-full overflow-hidden rounded-lg h-60">
+                                    {/* <MapContainer
+                                    className="w-full h-full"
+                                    style={{ zIndex: 0 }}
+                                    // center to sulawesi utara
+                                    center={[
+                                        industriData.coordinate.lat,
+                                        industriData.coordinate.long
+                                    ]}
+                                    zoom={11}
+                                    scrollWheelZoom={true}
+                                    attributionControl={false}
+                                    zoomControl={false}
+                                >
+                                    <ResizeMap />
+                                    <TileLayer url="https://api.mapbox.com/styles/v1/sitouxz/clp1n3f0m01ci01qy2q4q3qax/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoic2l0b3V4eiIsImEiOiJja3k1emE4YnQwYTV3MnVwMXM1NzJ1aWpsIn0.yzj632wgHQSoI8MZQD9qxg" />
+
+                                    <Marker
+                                        position={[
+                                            industriData.coordinate.lat,
+                                            industriData.coordinate.long
+                                        ]}
+                                        icon={marker}
+                                    >
+                                        <Popup>
+                                            <div className="flex flex-col gap-1">
+                                                <div className="text-lg font-bold">
+                                                    {industriData.namaIndustri}
+                                                </div>
+                                                <div className="flex items-center">
+                                                    <HiUser className="text-lg" />
+                                                    <span className="ml-2">
+                                                        {industriData.pemilik}
+                                                    </span>
+                                                </div>
+                                                <div className="flex items-center">
+                                                    <HiMapPin className="text-lg text-dark" />
+                                                    <span className="ml-2">
+                                                        {industriData.alamat}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </Popup>
+                                    </Marker>
+                                </MapContainer> */}
+                                    <img src={industriImage?.image1} />
+                                </div>
                                 <div className="relative w-full">
                                     <div>{t("ownerName")}</div>
                                     <div className="w-full text-sm font-normal">
@@ -207,52 +259,6 @@ export default function PageIndustriEdit() {
                                         )}
                                     </div>
                                 </div>
-                            </div>
-                            <div className="w-full overflow-hidden rounded-lg h-60">
-                                <MapContainer
-                                    className="w-full h-full"
-                                    style={{ zIndex: 0 }}
-                                    // center to sulawesi utara
-                                    center={[
-                                        industriData.coordinate.lat,
-                                        industriData.coordinate.long
-                                    ]}
-                                    zoom={11}
-                                    scrollWheelZoom={true}
-                                    attributionControl={false}
-                                    zoomControl={false}
-                                >
-                                    <ResizeMap />
-                                    <TileLayer url="https://api.mapbox.com/styles/v1/sitouxz/clp1n3f0m01ci01qy2q4q3qax/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoic2l0b3V4eiIsImEiOiJja3k1emE4YnQwYTV3MnVwMXM1NzJ1aWpsIn0.yzj632wgHQSoI8MZQD9qxg" />
-
-                                    <Marker
-                                        position={[
-                                            industriData.coordinate.lat,
-                                            industriData.coordinate.long
-                                        ]}
-                                        icon={marker}
-                                    >
-                                        <Popup>
-                                            <div className="flex flex-col gap-1">
-                                                <div className="text-lg font-bold">
-                                                    {industriData.namaIndustri}
-                                                </div>
-                                                <div className="flex items-center">
-                                                    <HiUser className="text-lg" />
-                                                    <span className="ml-2">
-                                                        {industriData.pemilik}
-                                                    </span>
-                                                </div>
-                                                <div className="flex items-center">
-                                                    <HiMapPin className="text-lg text-dark" />
-                                                    <span className="ml-2">
-                                                        {industriData.alamat}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </Popup>
-                                    </Marker>
-                                </MapContainer>
                             </div>
                             <button
                                 className="w-full py-2 text-white bg-red-500 rounded-lg shadow-primary hover:bg-red-600"

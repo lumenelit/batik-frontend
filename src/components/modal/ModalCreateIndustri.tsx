@@ -348,32 +348,6 @@ export default function ModalCreateIndustri({
                                             <div className="flex gap-4">
                                                 <div className="flex flex-col w-full gap-2 h-fit">
                                                     <div className="w-full text-base font-normal leading-snug indent-1">
-                                                        Longitude{" "}
-                                                        <span
-                                                            className="text-red-500"
-                                                            title="Wajib diisi"
-                                                        >
-                                                            *
-                                                        </span>
-                                                    </div>
-                                                    <input
-                                                        type="text"
-                                                        className="flex-col px-5 h-[50px] rounded-lg border border-slate-200 justify-start items-center active:border-slate-200"
-                                                        onChange={(e) =>
-                                                            setIndustriBody({
-                                                                ...industriBody,
-                                                                coordinate: {
-                                                                    ...industriBody.coordinate,
-                                                                    long: e
-                                                                        .target
-                                                                        .value
-                                                                }
-                                                            })
-                                                        }
-                                                    />
-                                                </div>
-                                                <div className="flex flex-col w-full gap-2 h-fit">
-                                                    <div className="w-full text-base font-normal leading-snug indent-1">
                                                         Latitude{" "}
                                                         <span
                                                             className="text-red-500"
@@ -391,6 +365,32 @@ export default function ModalCreateIndustri({
                                                                 coordinate: {
                                                                     ...industriBody.coordinate,
                                                                     lat: e
+                                                                        .target
+                                                                        .value
+                                                                }
+                                                            })
+                                                        }
+                                                    />
+                                                </div>
+                                                <div className="flex flex-col w-full gap-2 h-fit">
+                                                    <div className="w-full text-base font-normal leading-snug indent-1">
+                                                        Longitude{" "}
+                                                        <span
+                                                            className="text-red-500"
+                                                            title="Wajib diisi"
+                                                        >
+                                                            *
+                                                        </span>
+                                                    </div>
+                                                    <input
+                                                        type="text"
+                                                        className="flex-col px-5 h-[50px] rounded-lg border border-slate-200 justify-start items-center active:border-slate-200"
+                                                        onChange={(e) =>
+                                                            setIndustriBody({
+                                                                ...industriBody,
+                                                                coordinate: {
+                                                                    ...industriBody.coordinate,
+                                                                    long: e
                                                                         .target
                                                                         .value
                                                                 }

@@ -220,7 +220,7 @@ export default function ModalEditMotif({
                                                     </div>
                                                 )
                                             )}
-                                            {imagePreviews.length < 3 && (
+                                            {imagePreviews.length < 1 && (
                                                 <button
                                                     className="flex items-center justify-center p-1 border-4 rounded-md border-disabled"
                                                     onClick={handleImageClick}

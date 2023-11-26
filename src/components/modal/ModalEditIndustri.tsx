@@ -2,6 +2,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { ChangeEvent, Fragment, useEffect, useState } from "react";
 import { HiPlus, HiXCircle, HiXMark } from "react-icons/hi2";
 import api from "../../config/api";
+import { log } from "console";
 
 type ModalEditIndustriProps = {
     modalEditIndustri: boolean;
@@ -66,6 +67,7 @@ export default function ModalEditIndustri({
                         : [])
                 ]);
             });
+            console.log("image prev", imagePreviews);
         } catch (error) {
             console.log(error);
         }
@@ -426,36 +428,6 @@ export default function ModalEditIndustri({
                                             <div className="flex gap-4">
                                                 <div className="flex flex-col w-full gap-2 h-fit">
                                                     <div className="w-full text-base font-normal leading-snug indent-1">
-                                                        Longitude{" "}
-                                                        <span
-                                                            className="text-red-500"
-                                                            title="Wajib diisi"
-                                                        >
-                                                            *
-                                                        </span>
-                                                    </div>
-                                                    <input
-                                                        type="text"
-                                                        className="flex-col px-5 h-[50px] rounded-lg border border-slate-200 justify-start items-center active:border-slate-200"
-                                                        defaultValue={
-                                                            industriData
-                                                                .coordinate.long
-                                                        }
-                                                        onChange={(e) =>
-                                                            setIndustriBody({
-                                                                ...industriBody,
-                                                                coordinate: {
-                                                                    ...industriBody.coordinate,
-                                                                    long: e
-                                                                        .target
-                                                                        .value
-                                                                }
-                                                            })
-                                                        }
-                                                    />
-                                                </div>
-                                                <div className="flex flex-col w-full gap-2 h-fit">
-                                                    <div className="w-full text-base font-normal leading-snug indent-1">
                                                         Latitude{" "}
                                                         <span
                                                             className="text-red-500"
@@ -477,6 +449,36 @@ export default function ModalEditIndustri({
                                                                 coordinate: {
                                                                     ...industriBody.coordinate,
                                                                     lat: e
+                                                                        .target
+                                                                        .value
+                                                                }
+                                                            })
+                                                        }
+                                                    />
+                                                </div>
+                                                <div className="flex flex-col w-full gap-2 h-fit">
+                                                    <div className="w-full text-base font-normal leading-snug indent-1">
+                                                        Longitude{" "}
+                                                        <span
+                                                            className="text-red-500"
+                                                            title="Wajib diisi"
+                                                        >
+                                                            *
+                                                        </span>
+                                                    </div>
+                                                    <input
+                                                        type="text"
+                                                        className="flex-col px-5 h-[50px] rounded-lg border border-slate-200 justify-start items-center active:border-slate-200"
+                                                        defaultValue={
+                                                            industriData
+                                                                .coordinate.long
+                                                        }
+                                                        onChange={(e) =>
+                                                            setIndustriBody({
+                                                                ...industriBody,
+                                                                coordinate: {
+                                                                    ...industriBody.coordinate,
+                                                                    long: e
                                                                         .target
                                                                         .value
                                                                 }

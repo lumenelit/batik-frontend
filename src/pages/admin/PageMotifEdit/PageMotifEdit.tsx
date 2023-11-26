@@ -1,11 +1,11 @@
 // import React, { useState, useEffect, useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import Header from "../../../components/layouts/Header";
 import Container from "../../../components/layouts/Container";
 import { useEffect, useState } from "react";
 
 import api from "../../../config/api";
-import { HiPencil, HiTrash } from "react-icons/hi2";
+import { HiPencil, HiTrash, HiChevronLeft } from "react-icons/hi2";
 import ModalEditMotif from "../../../components/modal/ModalEditMotif";
 import { useTranslation } from "react-i18next";
 
@@ -95,6 +95,14 @@ export default function PageMotifEdit() {
             />
             <Container center={true}>
                 <Header />
+
+                <Link
+                    to={"/admin/industri"}
+                    className="text-primary text-xl font-semibold font-['Inter']"
+                >
+                    <HiChevronLeft className="inline-flex" />{" "}
+                    <span> {t("back")}</span>
+                </Link>
                 <div className="flex flex-row justify-center items-start gap-4 font-['Inter'] ">
                     <div className="flex flex-row-reverse w-1/2 h-auto gap-2">
                         <img

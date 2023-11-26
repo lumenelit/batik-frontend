@@ -31,8 +31,8 @@ export default function ModalCreateMotif({
     const handleSubmit = async () => {
         const idMotif = Math.random().toString(36).substr(2, 9);
         const image1 = imagePreviews[0];
-        const image2 = imagePreviews[1];
-        const image3 = imagePreviews[2];
+        // const image2 = imagePreviews[1];
+        // const image3 = imagePreviews[2];
 
         // setMotifBody({
         //     ...motifBody,
@@ -199,7 +199,7 @@ export default function ModalCreateMotif({
                                                     </div>
                                                 )
                                             )}
-                                            {imagePreviews.length < 3 && (
+                                            {imagePreviews.length < 1 && (
                                                 <button
                                                     className="flex items-center justify-center p-1 border-4 rounded-md border-disabled"
                                                     onClick={handleImageClick}
