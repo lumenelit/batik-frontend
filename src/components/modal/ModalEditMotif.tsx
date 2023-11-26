@@ -2,6 +2,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { ChangeEvent, Fragment, useEffect, useState } from "react";
 import { HiPlus, HiXCircle, HiXMark } from "react-icons/hi2";
 import api from "../../config/api";
+import { useTranslation } from "react-i18next";
 
 type ModalEditMotifProps = {
     modalEditMotif: boolean;
@@ -30,6 +31,8 @@ export default function ModalEditMotif({
 }: ModalEditMotifProps) {
     const [motifBody, setMotifBody] = useState({} as MotifBody);
     const [imagePreviews, setImagePreviews] = useState<string[]>([]);
+
+    const { t } = useTranslation();
 
     useEffect(() => {
         try {
@@ -163,7 +166,7 @@ export default function ModalEditMotif({
                                     as="h3"
                                     className="text-lg font-medium leading-6 text-gray-900"
                                 >
-                                    Buat Motif
+                                    {t("createMotif")}
                                     <button
                                         className="absolute top-4 right-4"
                                         onClick={() => setModalEditMotif(false)}
@@ -173,7 +176,7 @@ export default function ModalEditMotif({
                                 </Dialog.Title>
                                 <div className="flex flex-col gap-4 mt-2">
                                     <div>
-                                        <h2>Gambar</h2>
+                                        <h2>{t("image")}</h2>
                                         <div className="flex gap-4 mb-4">
                                             <input
                                                 type="file"
@@ -229,7 +232,7 @@ export default function ModalEditMotif({
                                     </div>
                                     <div className="flex flex-col w-full gap-2 h-fit">
                                         <div className="w-full text-base font-normal leading-snug indent-1">
-                                            Nama Motif{" "}
+                                            {t("motifName")}{" "}
                                             <span
                                                 className="text-red-500"
                                                 title="Wajib diisi"
@@ -252,7 +255,7 @@ export default function ModalEditMotif({
                                     </div>
                                     <div className="flex flex-col w-full gap-2 h-fit">
                                         <div className="w-full text-base font-normal leading-snug indent-1">
-                                            Harga{" "}
+                                            {t("price")}{" "}
                                             <span
                                                 className="text-red-500"
                                                 title="Wajib diisi"
@@ -277,7 +280,7 @@ export default function ModalEditMotif({
                                     </div>
                                     <div className="flex flex-col w-full gap-2 h-fit">
                                         <div className="w-full text-base font-normal leading-snug indent-1">
-                                            Deskripsi{" "}
+                                            {t("desc")}{" "}
                                             <span
                                                 className="text-red-500"
                                                 title="Wajib diisi"
@@ -305,14 +308,14 @@ export default function ModalEditMotif({
                                         className="inline-flex justify-center px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-transparent rounded-md hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
                                         onClick={() => setModalEditMotif(false)}
                                     >
-                                        Batalkan
+                                        {t("cancel")}
                                     </button>
                                     <button
                                         type="button"
                                         className="inline-flex justify-center px-4 py-2 text-sm font-medium border border-transparent rounded-md text-primary-900 bg-primary-100 hover:bg-primary-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
                                         onClick={() => handleSubmit()}
                                     >
-                                        Buat Motif
+                                        {t("createMotif")}
                                     </button>
                                 </div>
                             </Dialog.Panel>

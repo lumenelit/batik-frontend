@@ -6,6 +6,7 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import api from "../../../config/api";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function formatRupiah(int) {
     let rupiah = new Intl.NumberFormat("id-ID", {
@@ -18,6 +19,7 @@ function formatRupiah(int) {
 export default function PagePesanan() {
     const [products, setProducts] = useState([]);
     const navigate = useNavigate();
+    const { t } = useTranslation();
     useEffect(() => {
         try {
             api.get("/pesanan")
@@ -36,7 +38,9 @@ export default function PagePesanan() {
     return (
         <Container center>
             <Header admin />
-            <h1 className="text-xl font-semibold text-dark">Daftar Pesanan</h1>
+            <h1 className="text-xl font-semibold text-dark">
+                {t("orderList")}
+            </h1>
             <DataTable
                 value={products}
                 tableStyle={{ minWidth: "50rem" }}
@@ -57,18 +61,18 @@ export default function PagePesanan() {
                         const year = date.getFullYear();
 
                         const monthNames = [
-                            "Januari",
-                            "Februari",
-                            "Maret",
-                            "April",
-                            "Mei",
-                            "Juni",
-                            "Juli",
-                            "Agustus",
-                            "September",
-                            "Oktober",
-                            "November",
-                            "Desember"
+                            t("Januari"),
+                            t("Februari"),
+                            t("Maret"),
+                            t("April"),
+                            t("Mei"),
+                            t("Juni"),
+                            t("Juli"),
+                            t("Agustus"),
+                            t("September"),
+                            t("Oktober"),
+                            t("November"),
+                            t("Desember")
                         ];
 
                         const monthName = monthNames[month];
@@ -78,10 +82,10 @@ export default function PagePesanan() {
                         return `${day} ${monthName} ${year}`;
                     }}
                 />
-                <Column field="namaMotif" header="Nama Motif" />
-                <Column field="namaPenerima" header="Nama Penerima" />
-                <Column field="kontakPenerima" header="Whatsapp Penerima" />
-                <Column field="jumlah" header="Jumlah Pesanan" />
+                <Column field="namaMotif" header={t("Nama Motif")} />
+                <Column field="namaPenerima" header={t("Nama Penerima")} />
+                <Column field="kontakPenerima" header={t("recieverContact")} />
+                <Column field="jumlah" header={t("totalOrder")} />
                 <Column
                     field="totalHarga"
                     header="Total Bayar"
@@ -100,7 +104,7 @@ export default function PagePesanan() {
                         );
                     }}
                 />
-                <Column field="alamat" header="Alamat" />
+                <Column field="alamat" header={t("address")} />
             </DataTable>
         </Container>
     );

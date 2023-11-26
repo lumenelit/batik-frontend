@@ -20,10 +20,10 @@ export default function PageIndustriAdmin() {
 
     const columns = [
         // { field: "_id", header: "No" },
-        { field: "nama", header: t("admin.industry.tableName") },
-        { field: "pemilik", header: t("admin.industry.tableOwner") },
-        { field: "kontak", header: t("admin.industry.tableContact") },
-        { field: "alamat", header: t("admin.industry.tableAddress") }
+        { field: "nama", header: t("tableName") },
+        { field: "pemilik", header: t("tableOwner") },
+        { field: "kontak", header: t("tableContact") },
+        { field: "alamat", header: t("tableAddress") }
     ];
 
     useEffect(() => {
@@ -51,14 +51,14 @@ export default function PageIndustriAdmin() {
                 <Header admin />
                 <div className="flex items-center justify-between mb-4">
                     <h1 className="text-xl font-semibold text-dark">
-                        {t("admin.industry.industryList")}
+                        {t("industryList")}
                     </h1>
                     <button
                         className="px-4 py-2 text-white rounded-lg bg-primary-500 shadow-primary hover:bg-primary-600"
                         onClick={() => setModalIndustri(true)}
                     >
                         <HiPlus className="inline-block w-5 h-5 mr-2" />
-                        {t("admin.industry.createIndustry")}
+                        {t("createIndustry")}
                     </button>
                 </div>
                 <DataTable
@@ -66,9 +66,7 @@ export default function PageIndustriAdmin() {
                     tableStyle={{ minWidth: "50rem" }}
                     className="overflow-hidden shadow-primary rounded-xl text-dark"
                     onRowClick={(e) => {
-                        navigate(
-                            `/admin/industri/edit/${e.data._id}?admin=true`
-                        );
+                        navigate(`/admin/industri/edit/${e.data._id}`);
                     }}
                     pt={{ bodyRow: { className: "cursor-pointer" } }}
                     stripedRows

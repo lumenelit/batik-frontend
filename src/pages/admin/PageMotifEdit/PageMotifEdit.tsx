@@ -7,6 +7,15 @@ import { useEffect, useState } from "react";
 import api from "../../../config/api";
 import { HiPencil, HiTrash } from "react-icons/hi2";
 import ModalEditMotif from "../../../components/modal/ModalEditMotif";
+import { useTranslation } from "react-i18next";
+
+function formatRupiah(int) {
+    let rupiah = new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR"
+    }).format(int);
+    return rupiah.split(",")[0]; // remove the decimal part
+}
 
 export default function PageMotifEdit() {
     const { idMotif } = useParams();
@@ -15,6 +24,8 @@ export default function PageMotifEdit() {
     const [motifImage, setMotifImage] = useState([]);
     const [loading, setLoading] = useState(true);
     const [modalEditMotif, setModalEditMotif] = useState(false);
+
+    const { t } = useTranslation();
 
     useEffect(() => {
         try {
@@ -134,7 +145,7 @@ export default function PageMotifEdit() {
                                 </div>
                                 <div className="relative h-fit">
                                     <div className="top-0 left-0 w-full text-base font-normal ">
-                                        Rp {motifData?.harga}/meter
+                                        {formatRupiah(motifData?.harga)}/meter
                                     </div>
                                     <div className="w-full text-base font-normal ">
                                         {motifData?.desc}

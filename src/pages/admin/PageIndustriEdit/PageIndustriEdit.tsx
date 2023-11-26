@@ -18,6 +18,7 @@ import { useEffect, useState } from "react";
 import api from "../../../config/api";
 import ModalCreateMotif from "../../../components/modal/ModalCreateMotif";
 import ModalEditIndustri from "../../../components/modal/ModalEditIndustri";
+import { useTranslation } from "react-i18next";
 
 export default function PageIndustriEdit() {
     const [industriData, setIndustriData] = useState(null);
@@ -26,6 +27,7 @@ export default function PageIndustriEdit() {
     const [modalEditIndustri, setModalEditIndustri] = useState(false);
     const navigate = useNavigate();
     const { idIndustri } = useParams();
+    const { t } = useTranslation();
 
     useEffect(() => {
         try {
@@ -107,7 +109,7 @@ export default function PageIndustriEdit() {
                             className="text-primary text-xl font-semibold font-['Inter']"
                         >
                             <HiChevronLeft className="inline-flex" />{" "}
-                            <span>Back</span>
+                            <span> {t("back")}</span>
                         </Link>
                         <div className="p-4 bg-white rounded-xl shadow-primary flex-col justify-start items-start gap-4 inline-flex text-primary text-l font-semibold font-['Inter']">
                             <div className="flex justify-between w-full text-xl font-semibold">
@@ -124,33 +126,31 @@ export default function PageIndustriEdit() {
                             </div>
                             <div className="flex flex-col items-start self-stretch justify-start w-full gap-2 h-fit">
                                 <div className="relative w-full">
-                                    <div>Pemilik</div>
+                                    <div>{t("ownerName")}</div>
                                     <div className="w-full text-sm font-normal">
                                         {industriData.pemilik}
                                     </div>
                                 </div>
                                 <div className="relative w-full ">
-                                    <div>Deskripsi</div>
+                                    <div>{t("desc")}</div>
                                     <div className="w-full text-sm font-normal">
                                         {industriData.desc}
                                     </div>
                                 </div>
                                 <div className="relative w-full">
-                                    <div>Alamat</div>
+                                    <div>{t("address")}</div>
                                     <div className="w-full text-sm font-normal">
                                         {industriData.alamat}
                                     </div>
                                 </div>
                                 <div className="relative w-full">
-                                    <div>
-                                        Kontak (No. telp, Whatsapp, Email)
-                                    </div>
+                                    <div>{t("contact")}</div>
                                     <div className="w-full text-sm font-normal">
                                         {industriData.kontak}
                                     </div>
                                 </div>
                                 <div className="flex flex-col items-start self-stretch justify-center w-full gap-1">
-                                    <div>Toko Cabang</div>
+                                    <div>{t("branchStores")}</div>
                                     <div className="text-sm font-normal">
                                         {industriData.alamatCabang.map(
                                             (item, index) => (
@@ -168,7 +168,7 @@ export default function PageIndustriEdit() {
                                     </div>
                                 </div>
                                 <div className="flex flex-col items-start justify-center w-full gap-1">
-                                    <div>Social Media</div>
+                                    <div>{t("socialMedia")}</div>
                                     <div className="inline-flex items-center justify-start gap-2">
                                         {industriData.sosmed.map(
                                             (item, index) => (
@@ -188,7 +188,7 @@ export default function PageIndustriEdit() {
                                     </div>
                                 </div>
                                 <div className="self-stretch h-[63px] flex-col justify-center items-start gap-1 flex">
-                                    <div>Toko online</div>
+                                    <div>{t("eCommerce")}</div>
                                     <div className="inline-flex items-center justify-start gap-2">
                                         {industriData.eCommerce.map(
                                             (item, index) => (
@@ -259,7 +259,7 @@ export default function PageIndustriEdit() {
                                 onClick={handleDelete}
                             >
                                 <HiTrash className="inline-block w-5 h-5 mr-2" />
-                                Hapus Industri
+                                {t("DeleteIndustry")}
                             </button>
                         </div>
                     </div>
@@ -273,14 +273,14 @@ export default function PageIndustriEdit() {
                                 onClick={() => setModalMotif(true)}
                             >
                                 <HiPlus className="inline-block w-5 h-5 mr-2" />
-                                Tambah Motif
+                                {t("addMotif")}
                             </button>
                         </div>
                         <div className="inline-flex flex-col items-start self-stretch justify-start gap-5">
                             <div className="grid grid-cols-1 gap-5 md:grid-cols-3 lg:grid-cols-4 ">
                                 {motifData.length === 0 && (
                                     <div className="text-lg text-dark">
-                                        Belum ada motif
+                                        {t("emptyMotif")}
                                     </div>
                                 )}
                                 {motifData.map((item, index) => (

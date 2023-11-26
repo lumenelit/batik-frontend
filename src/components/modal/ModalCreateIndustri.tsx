@@ -219,7 +219,7 @@ export default function ModalCreateIndustri({
                                     as="h3"
                                     className="text-3xl font-bold leading-6 text-gray-900"
                                 >
-                                    {t("admin.industry.modal.createIndustry")}
+                                    {t("createIndustry")}
                                     <button
                                         className="absolute top-4 right-4"
                                         onClick={() => setModalIndustri(false)}
@@ -231,15 +231,11 @@ export default function ModalCreateIndustri({
                                     <div className="w-1/2">
                                         <div className="flex flex-col gap-2 mb-4">
                                             <h2 className="text-xl font-semibold">
-                                                {t(
-                                                    "admin.industry.modal.industryInformation"
-                                                )}
+                                                {t("industryInformation")}
                                             </h2>
                                             <div className="flex flex-col w-full gap-2 h-fit">
                                                 <div className="w-full text-base font-normal leading-snug indent-1">
-                                                    {t(
-                                                        "admin.industry.modal.industryName"
-                                                    )}{" "}
+                                                    {t("industryName")}{" "}
                                                     <span
                                                         className="text-red-500"
                                                         title="Wajib diisi"
@@ -260,9 +256,7 @@ export default function ModalCreateIndustri({
                                             </div>
                                             <div className="flex flex-col w-full gap-2 h-fit">
                                                 <div className="w-full text-base font-normal leading-snug indent-1">
-                                                    {t(
-                                                        "admin.industry.modal.desc"
-                                                    )}{" "}
+                                                    {t("desc")}{" "}
                                                     <span
                                                         className="text-red-500"
                                                         title="Wajib diisi"
@@ -282,9 +276,7 @@ export default function ModalCreateIndustri({
                                             </div>
                                             <div className="flex flex-col w-full gap-2 h-fit">
                                                 <div className="w-full text-base font-normal leading-snug indent-1">
-                                                    {t(
-                                                        "admin.industry.modal.ownerName"
-                                                    )}{" "}
+                                                    {t("ownerName")}{" "}
                                                     <span
                                                         className="text-red-500"
                                                         title="Wajib diisi"
@@ -306,9 +298,7 @@ export default function ModalCreateIndustri({
                                             </div>
                                             <div className="flex flex-col w-full gap-2 h-fit">
                                                 <div className="w-full text-base font-normal leading-snug indent-1">
-                                                    {t(
-                                                        "admin.industry.modal.contact"
-                                                    )}
+                                                    {t("contact")}
                                                     <span
                                                         className="text-red-500"
                                                         title="Wajib diisi"
@@ -330,9 +320,7 @@ export default function ModalCreateIndustri({
                                             </div>
                                             <div className="flex flex-col w-full gap-2 h-fit">
                                                 <div className="w-full text-base font-normal leading-snug indent-1">
-                                                    {t(
-                                                        "admin.industry.modal.address"
-                                                    )}{" "}
+                                                    {t("address")}{" "}
                                                     <span
                                                         className="text-red-500"
                                                         title="Wajib diisi"
@@ -355,9 +343,7 @@ export default function ModalCreateIndustri({
                                         </div>
                                         <div className="flex flex-col gap-4">
                                             <h2 className="text-xl font-semibold">
-                                                {t(
-                                                    "admin.industry.modal.coordinate"
-                                                )}
+                                                {t("coordinate")}
                                             </h2>
                                             <div className="flex gap-4">
                                                 <div className="flex flex-col w-full gap-2 h-fit">
@@ -418,9 +404,7 @@ export default function ModalCreateIndustri({
                                     <div className="w-1/2">
                                         <div>
                                             <h2 className="text-xl font-semibold">
-                                                {t(
-                                                    "admin.industry.modal.image"
-                                                )}
+                                                {t("image")}
                                             </h2>
                                             <div className="flex gap-4 mb-4">
                                                 <input
@@ -510,9 +494,7 @@ export default function ModalCreateIndustri({
                                         </div> */}
                                         <div className="mb-4">
                                             <h2 className="text-xl font-semibold">
-                                                {t(
-                                                    "admin.industry.modal.branchStores"
-                                                )}
+                                                {t("branchStores")}
                                             </h2>
                                             {cabangList.map((item, index) => (
                                                 <div
@@ -520,9 +502,7 @@ export default function ModalCreateIndustri({
                                                     className="flex flex-col w-full gap-2 h-fit"
                                                 >
                                                     <div className="w-full text-base font-normal leading-snug indent-1">
-                                                        {t(
-                                                            "admin.industry.modal.branchAddress"
-                                                        )}{" "}
+                                                        {t("branchAddress")}{" "}
                                                         <span
                                                             className="text-red-500"
                                                             title="Wajib diisi"
@@ -548,9 +528,7 @@ export default function ModalCreateIndustri({
                                                 onClick={handleAddMoreCabang}
                                                 className="px-4 py-2 mt-4 text-sm font-medium text-white rounded-md bg-primary-500 hover:bg-primary-600"
                                             >
-                                                {t(
-                                                    "admin.industry.modal.addBranch"
-                                                )}
+                                                {t("addBranch")}
                                             </button>
                                         </div>
                                         <div className="mb-4">
@@ -566,7 +544,7 @@ export default function ModalCreateIndustri({
                                                         <div className="flex flex-col w-full gap-2 h-fit">
                                                             <div className="w-full text-base font-normal leading-snug indent-1">
                                                                 {t(
-                                                                    "admin.industry.modal.eCommerceName"
+                                                                    "eCommerceName"
                                                                 )}{" "}
                                                                 <span
                                                                     className="text-red-500"
@@ -623,16 +601,12 @@ export default function ModalCreateIndustri({
                                                 onClick={handleAddMoreECommerce}
                                                 className="px-4 py-2 mt-4 text-sm font-medium text-white rounded-md bg-primary-500 hover:bg-primary-600"
                                             >
-                                                {t(
-                                                    "admin.industry.modal.addECommerce"
-                                                )}
+                                                {t("addECommerce")}
                                             </button>
                                         </div>
                                         <div className="mb-4">
                                             <h2 className="text-xl font-semibold">
-                                                {t(
-                                                    "admin.industry.modal.socialMedia"
-                                                )}
+                                                {t("socialMedia")}
                                             </h2>
                                             {sosmedList.map((item, index) => (
                                                 <div
@@ -642,7 +616,7 @@ export default function ModalCreateIndustri({
                                                     <div className="flex flex-col w-full gap-2 h-fit">
                                                         <div className="w-full text-base font-normal leading-snug indent-1">
                                                             {t(
-                                                                "admin.industry.modal.socialMediaName"
+                                                                "socialMediaName"
                                                             )}{" "}
                                                             <span
                                                                 className="text-red-500"
@@ -698,9 +672,7 @@ export default function ModalCreateIndustri({
                                                 onClick={handleAddMoreSosmed}
                                                 className="px-4 py-2 mt-4 text-sm font-medium text-white rounded-md bg-primary-500 hover:bg-primary-600"
                                             >
-                                                {t(
-                                                    "admin.industry.modal.addSocialMedia"
-                                                )}
+                                                {t("addSocialMedia")}
                                             </button>
                                         </div>
                                     </div>
@@ -712,16 +684,14 @@ export default function ModalCreateIndustri({
                                         className="inline-flex justify-center px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-transparent rounded-md hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
                                         onClick={() => setModalIndustri(false)}
                                     >
-                                        {t("admin.industry.modal.cancel")}
+                                        {t("cancel")}
                                     </button>
                                     <button
                                         type="button"
                                         className="inline-flex justify-center px-4 py-2 text-sm font-medium border border-transparent rounded-md text-primary-900 bg-primary-100 hover:bg-primary-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
                                         onClick={() => handleSubmit()}
                                     >
-                                        {t(
-                                            "admin.industry.modal.createIndustry"
-                                        )}
+                                        {t("createIndustry")}
                                     </button>
                                 </div>
                             </Dialog.Panel>
