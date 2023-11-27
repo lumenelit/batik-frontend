@@ -159,34 +159,34 @@ export default function PageIndustri() {
                                             className="bg-center object-cover w-[36.5rem] bg-cover shadow-primary aspect-square rounded-xl"
                                             src={
                                                 industriImage &&
-                                                industriImage.image1
-                                                    ? industriImage.image1
+                                                industriImage?.image1
+                                                    ? industriImage?.image1
                                                     : "https://via.placeholder.com/250x250"
                                             }
                                             alt="motif1"
                                         />
-                                        {(industriImage.image2 ||
-                                            industriImage.image3) && (
+                                        {(industriImage?.image2 ||
+                                            industriImage?.image3) && (
                                             <div className="flex flex-row justify-between w-full gap-2 shrink">
-                                                {industriImage.image2 && (
+                                                {industriImage?.image2 && (
                                                     <img
                                                         className="object-cover bg-center bg-cover w-72 shrink shadow-primary aspect-square h-1/2 rounded-xl"
                                                         src={
                                                             industriImage &&
-                                                            industriImage.image2
-                                                                ? industriImage.image2
+                                                            industriImage?.image2
+                                                                ? industriImage?.image2
                                                                 : "https://via.placeholder.com/250x250"
                                                         }
                                                         alt="motif2"
                                                     />
                                                 )}
-                                                {industriImage.image3 && (
+                                                {industriImage?.image3 && (
                                                     <img
                                                         className="object-cover bg-center bg-cover w-72 shrink shadow-primary aspect-square h-1/2 rounded-xl"
                                                         src={
                                                             industriImage &&
-                                                            industriImage.image3
-                                                                ? industriImage.image3
+                                                            industriImage?.image3
+                                                                ? industriImage?.image3
                                                                 : "https://via.placeholder.com/250x250"
                                                         }
                                                         alt="motif3"
