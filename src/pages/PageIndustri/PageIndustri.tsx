@@ -165,10 +165,10 @@ export default function PageIndustri() {
                                             }
                                             alt="motif1"
                                         />
-                                        {(industri.image2 ||
-                                            industri.image3) && (
+                                        {(industriImage.image2 ||
+                                            industriImage.image3) && (
                                             <div className="flex flex-row justify-between w-full gap-2 shrink">
-                                                {industri.image2 && (
+                                                {industriImage.image2 && (
                                                     <img
                                                         className="object-cover bg-center bg-cover w-72 shrink shadow-primary aspect-square h-1/2 rounded-xl"
                                                         src={
@@ -180,7 +180,7 @@ export default function PageIndustri() {
                                                         alt="motif2"
                                                     />
                                                 )}
-                                                {industri.image3 && (
+                                                {industriImage.image3 && (
                                                     <img
                                                         className="object-cover bg-center bg-cover w-72 shrink shadow-primary aspect-square h-1/2 rounded-xl"
                                                         src={
