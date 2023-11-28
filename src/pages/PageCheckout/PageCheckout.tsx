@@ -39,6 +39,7 @@ export default function PageCheckout() {
     const [motifImage, setMotifImage] = useState([]);
     const [mirror, setMirror] = useState(false);
     const [modalInvoice, setModalInvoice] = useState(false);
+    const [idPesanan, setIdPesanan] = useState("");
 
     useEffect(() => {
         try {
@@ -124,6 +125,7 @@ export default function PageCheckout() {
             await api.post("/pesanan", await body).then((res) => {
                 console.log(res);
                 setModalInvoice(true);
+                setIdPesanan(res.data.data._id);
                 // navigate(`/invoice/${res.data.data._id}`);
             });
         } catch (error) {
@@ -179,6 +181,7 @@ export default function PageCheckout() {
             <ModalInvoice
                 modalInvoice={modalInvoice}
                 setModalInvoice={setModalInvoice}
+                idPesanan={idPesanan}
             />
             <Container center={true}>
                 <Header />

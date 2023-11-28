@@ -7,11 +7,13 @@ import { useTranslation } from "react-i18next";
 type ModalInvoiceProps = {
     modalInvoice: boolean;
     setModalInvoice: React.Dispatch<React.SetStateAction<boolean>>;
+    idPesanan: string;
 };
 
 export default function ModalInvoice({
     modalInvoice,
-    setModalInvoice
+    setModalInvoice,
+    idPesanan
 }: ModalInvoiceProps) {
     const navigate = useNavigate();
     const { t } = useTranslation();
@@ -71,7 +73,11 @@ export default function ModalInvoice({
                                     <div className="flex flex-col gap-4">
                                         <button
                                             className="px-4 py-2 text-white rounded-md bg-primary-500 hover:bg-primary-600"
-                                            onClick={() => navigate("/invoice")}
+                                            onClick={() =>
+                                                navigate(
+                                                    `/invoice/${idPesanan}`
+                                                )
+                                            }
                                         >
                                             {t("invoiceButton2")}
                                         </button>
