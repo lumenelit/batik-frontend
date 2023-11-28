@@ -12,8 +12,7 @@ module.exports = {
                     "linear-gradient(90deg, #F7B733 0%, #FC4A1A 100%);",
                 "angular-white":
                     "conic-gradient(from 200deg at 50% 50%, rgba(249, 249, 249, 1) 0%, rgba(255, 255, 255, 1) 100%);",
-                "landing-background":
-                    "url('./assets/images/landing-background2.jpeg')"
+                "landing-background": "url('./assets/images/bg-55.jpg')"
             },
             colors: {
                 primary: {
