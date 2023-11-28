@@ -9,12 +9,14 @@ import { DivIcon } from "leaflet";
 import ReactDOMServer from "react-dom/server";
 import { useEffect, useState } from "react";
 import api from "../../config/api";
+import { useTranslation } from "react-i18next";
 
 export default function PageIndustri() {
     const { idIndustri } = useParams();
     const [industri, setIndustri] = useState(null);
     const [industriImage, setIndustriImage] = useState(null);
     const [motifData, setMotifData] = useState([]);
+    const { t } = useTranslation();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -65,7 +67,7 @@ export default function PageIndustri() {
                             className="text-primary w-fit text-xl font-semibold font-['Inter']"
                         >
                             <HiChevronLeft className="inline-flex" />{" "}
-                            <span>Back</span>
+                            <span>{t("back")}</span>
                         </Link>
                         {industri && (
                             <div className="p-4 bg-white rounded-xl shadow-primary flex-col justify-start items-start gap-4 inline-flex text-primary text-xl font-semibold font-['Inter']">
@@ -75,33 +77,31 @@ export default function PageIndustri() {
                                 <div className="flex flex-row justify-between w-full">
                                     <div className="flex flex-col items-start self-stretch justify-start w-1/2 gap-2 h-fit">
                                         <div className="relative w-full">
-                                            <div>Pemilik</div>
+                                            <div>{t("ownerName")}</div>
                                             <div className="w-full text-lg font-normal">
                                                 {industri.pemilik}
                                             </div>
                                         </div>
                                         <div className="relative w-full ">
-                                            <div>Deskripsi</div>
+                                            <div>{t("desc")}</div>
                                             <div className="w-full text-lg font-normal">
                                                 {industri.desc}
                                             </div>
                                         </div>
                                         <div className="relative w-full">
-                                            <div>Alamat</div>
+                                            <div>{t("address")}</div>
                                             <div className="w-full text-lg font-normal">
                                                 {industri.alamat}
                                             </div>
                                         </div>
                                         <div className="relative w-full">
-                                            <div>
-                                                Kontak 
-                                            </div>
+                                            <div>{t("contact")}</div>
                                             <div className="w-full text-lg font-normal">
                                                 {industri.kontak}
                                             </div>
                                         </div>
                                         <div className="flex flex-col items-start self-stretch justify-center w-full gap-1">
-                                            <div>Toko Cabang</div>
+                                            <div>{t("branchStores")}</div>
                                             <div className="text-lg font-normal">
                                                 {industri.alamatCabang.length &&
                                                     industri.alamatCabang.map(
@@ -115,7 +115,7 @@ export default function PageIndustri() {
                                         </div>
                                         {industri.sosmed.length > 0 && (
                                             <div className="flex flex-col items-start justify-center w-full gap-1">
-                                                <div>Social Media</div>
+                                                <div>{t("socialMedia")}</div>
 
                                                 <div className="inline-flex items-center justify-start gap-2">
                                                     {industri.sosmed.map(
@@ -134,7 +134,7 @@ export default function PageIndustri() {
                                         )}
                                         {industri.eCommerce.length > 0 && (
                                             <div className="flex flex-col items-start justify-center w-full gap-1">
-                                                <div>Toko online</div>
+                                                <div>{t("eCommerce")}</div>
 
                                                 <div className="inline-flex items-center justify-start gap-2">
                                                     {industri.eCommerce.map(
@@ -206,7 +206,7 @@ export default function PageIndustri() {
                             <div className="grid flex-wrap items-start justify-start grid-cols-1 gap-5 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                                 {motifData.length === 0 && (
                                     <div className="text-lg text-dark">
-                                        Belum ada motif
+                                        {t("emptyMotif")}
                                     </div>
                                 )}
                                 {motifData.map((item, index) => (
