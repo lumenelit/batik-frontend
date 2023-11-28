@@ -116,11 +116,11 @@ export default function PageMotif() {
                                     </div>
                                 </div>
                                 <div className="relative h-fit">
-                                    <div className="top-0 left-0 w-full text-base font-normal ">
+                                    <div className="top-0 left-0 w-full text-base font-bold">
                                         {formatRupiah(motifData?.harga)}
                                         /meter
                                     </div>
-                                    <div className="w-full text-base font-normal ">
+                                    <div className="mt-2 w-full text-base font-normal ">
                                         {motifData?.desc}
                                     </div>
                                 </div>
