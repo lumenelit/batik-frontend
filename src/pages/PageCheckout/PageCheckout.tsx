@@ -35,10 +35,10 @@ export default function PageCheckout() {
     const [pesananBody, setPesananBody] = useState({
         jumlah: 1
     } as PesananBody);
-
     const [motifData, setMotifData] = useState(null);
     const [motifImage, setMotifImage] = useState([]);
     const [mirror, setMirror] = useState(false);
+    const [modalInvoice, setModalInvoice] = useState(false);
 
     useEffect(() => {
         try {
@@ -95,7 +95,8 @@ export default function PageCheckout() {
             kontakPenerima: pesananBody?.kontakPenerima || "",
             alamat: pesananBody?.alamat || "",
             namaMotif: motifData.nama || "",
-            metodePengiriman: pesananBody?.metodePengiriman || "JNE",
+            metodePengiriman:
+                pesananBody?.metodePengiriman || "Ambil di store langsung",
             reqTambahan: pesananBody?.reqTambahan || "",
             jumlah: pesananBody?.jumlah || 0,
             hargaMotif: motifData.harga || 0,
@@ -122,7 +123,8 @@ export default function PageCheckout() {
         try {
             await api.post("/pesanan", await body).then((res) => {
                 console.log(res);
-                navigate(`/invoice/${res.data.data._id}`);
+                setModalInvoice(true);
+                // navigate(`/invoice/${res.data.data._id}`);
             });
         } catch (error) {
             console.log(error);
@@ -174,7 +176,10 @@ export default function PageCheckout() {
 
     return (
         <>
-        <ModalInvoice/>
+            <ModalInvoice
+                modalInvoice={modalInvoice}
+                setModalInvoice={setModalInvoice}
+            />
             <Container center={true}>
                 <Header />
                 <button

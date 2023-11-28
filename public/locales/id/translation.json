@@ -49,5 +49,9 @@
     "price": "Harga",
     "orderList": "Daftar Pesanan",
     "recieverContact": "Kontak Penerima",
-    "totalOrder": "Jumlah Pesanan"
+    "totalOrder": "Jumlah Pesanan",
+    "invoiceTitle": "Terima Kasih",
+    "invoiceSubtitle": "Pesanan anda sedang di proses. Silahkan menunggu sampai admin kami menghubungi anda",
+    "invoiceButton": "Kembali ke Beranda",
+    "invoiceButton2": "Lihat Pesanan"
 }

@@ -1,169 +1,93 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import Header from "../layouts/Header";
-import Container from "../layouts/Container";
-import api from "../../config/api";
+import React, { Fragment } from "react";
+import { useNavigate } from "react-router-dom";
+import { Transition, Dialog } from "@headlessui/react";
+import { HiOutlineCheckCircle, HiXMark } from "react-icons/hi2";
+import { useTranslation } from "react-i18next";
 
-type PesananData = {
-    _id: string;
-    namaPembeli: string;
-    namaPenerima: string;
-    kontakPembeli: string;
-    kontakPenerima: string;
-    alamat: string;
-    namaMotif: string;
-    metodePengiriman: string;
-    reqTambahan: string;
-    jumlah: number;
-    hargaMotif: number;
-    totalHarga: number;
-    createdAt: string;
-    updatedAt: string;
-    __v: number;
+type ModalInvoiceProps = {
+    modalInvoice: boolean;
+    setModalInvoice: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function ModalInvoice() {
+export default function ModalInvoice({
+    modalInvoice,
+    setModalInvoice
+}: ModalInvoiceProps) {
     const navigate = useNavigate();
-    const { idPesanan } = useParams();
-    const [pesananData, setPesananData] = useState<PesananData>({
-        _id: "",
-        namaPembeli: "",
-        namaPenerima: "",
-        kontakPembeli: "",
-        kontakPenerima: "",
-        alamat: "",
-        namaMotif: "",
-        metodePengiriman: "",
-        reqTambahan: "",
-        jumlah: 0,
-        hargaMotif: 0,
-        totalHarga: 0,
-        createdAt: "",
-        updatedAt: "",
-        __v: 0
-    });
-
-    useEffect(() => {
-        try {
-            api.get(`/pesanan/${idPesanan}`).then((res) => {
-                setPesananData(res.data.data[0]);
-                console.log(res.data.data[0]);
-            });
-        } catch (error) {
-            console.log(error);
-        }
-    }, []);
+    const { t } = useTranslation();
 
     return (
-        <>
-            <Container center={true}>
-                <Header />
-                <div className="flex flex-row justify-center items-start gap-4 font-['Inter'] text-primary">
-                    <div className="flex flex-col w-full gap-4 p-4 bg-white shadow-primary rounded-xl">
-                        <div>
-                            <h1 className="text-xl font-semibold">
-                                Data Pesanan - {idPesanan}
-                            </h1>
-                            <div className="flex flex-col gap-4">
-                                <div className="flex justify-between">
-                                    <span>Nama pemesan</span>
-                                    <span className="max-w-xs text-end">
-                                        {pesananData.namaPembeli}
-                                    </span>
-                                </div>
-                                <div className="flex justify-between">
-                                    <span>Whatsapp</span>
-                                    <span className="max-w-xs text-end">
-                                        {pesananData.kontakPembeli}
-                                    </span>
-                                </div>
-                                <div className="flex justify-between">
-                                    <span>Catatan</span>
-                                    <span className="max-w-xs text-end">
-                                        {pesananData.reqTambahan}
-                                    </span>
-                                </div>
-                                <div className="flex justify-between">
-                                    <span>Metode Pengiriman</span>
-                                    <span className="max-w-xs text-end">
-                                        {pesananData.metodePengiriman}
-                                    </span>
-                                </div>
-                                <div className="flex justify-between">
-                                    <span>Alamat Pengiriman</span>
-                                    <span className="max-w-xs text-end">
-                                        {pesananData.alamat}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <h1 className="text-xl font-semibold">
-                                Data Penerima
-                            </h1>
-                            <div className="flex flex-col gap-4">
-                                <div className="flex justify-between">
-                                    <span>Nama Penerima</span>
-                                    <span className="max-w-xs text-end">
-                                        {pesananData.namaPenerima}
-                                    </span>
-                                </div>
-                                <div className="flex justify-between">
-                                    <span>Whatsapp</span>
-                                    <span className="max-w-xs text-end">
-                                        {pesananData.kontakPenerima}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="w-3/5 p-4 bg-white shadow-primary rounded-xl">
-                        <div className="self-stretch mb-4 text-3xl font-semibold">
-                            {pesananData.namaMotif}
-                        </div>
-                        {/* <img
-                            className="self-stretch w-full rounded-xl"
-                            src="https://via.placeholder.com/488x450"
-                            alt="motif"
-                        /> */}
-                        <div className="w-full">
-                            <h1 className="text-xl font-semibold">
-                                Data Penerima
-                            </h1>
-                            <div className="flex flex-col gap-4 mb-4">
-                                <div className="flex justify-between">
-                                    <span>Nama Penerima</span>
-                                    <span className="max-w-xs text-end">
-                                        {pesananData.namaPenerima}
-                                    </span>
-                                </div>
-                                <div className="flex justify-between">
-                                    <span>Banyak pesanan</span>
-                                    <span className="max-w-xs text-end">
-                                        {pesananData.jumlah}
-                                    </span>
-                                </div>
-                            </div>
-                            <hr className="mb-4" />
-                            <div className="flex flex-col gap-4 mb-4">
-                                <div className="flex justify-between">
-                                    <span>Total</span>
-                                    <span className="max-w-xs text-end">
-                                        {pesananData.totalHarga}
-                                    </span>
-                                </div>
-                            </div>
+        <Transition appear show={modalInvoice} as={Fragment}>
+            <Dialog
+                as="div"
+                className="relative z-10"
+                onClose={() => setModalInvoice(false)}
+            >
+                <Transition.Child
+                    as={Fragment}
+                    enter="ease-out duration-300"
+                    enterFrom="opacity-0"
+                    enterTo="opacity-100"
+                    leave="ease-in duration-200"
+                    leaveFrom="opacity-100"
+                    leaveTo="opacity-0"
+                >
+                    <div className="fixed inset-0 bg-black/25" />
+                </Transition.Child>
 
-                            <Link
-                                className="flex items-center justify-center w-full py-3 font-semibold text-white rounded-lg bg-primary-500"
-                                to="/admin/pesanan"
-                            >
-                                Kembali ke Dashboard
-                            </Link>
-                        </div>
+                <div className="fixed inset-0 overflow-y-auto">
+                    <div className="flex items-center justify-center min-h-full p-4 text-center">
+                        <Transition.Child
+                            as={Fragment}
+                            enter="ease-out duration-300"
+                            enterFrom="opacity-0 scale-95"
+                            enterTo="opacity-100 scale-100"
+                            leave="ease-in duration-200"
+                            leaveFrom="opacity-100 scale-100"
+                            leaveTo="opacity-0 scale-95"
+                        >
+                            <Dialog.Panel className="w-full max-w-xl p-6 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+                                <Dialog.Title
+                                    as="h3"
+                                    className="text-lg font-medium leading-6 text-gray-900"
+                                >
+                                    <button
+                                        className="absolute top-4 right-4"
+                                        onClick={() => setModalInvoice(false)}
+                                    >
+                                        <HiXMark className="inline-block w-5 h-5 ml-2" />
+                                    </button>
+                                </Dialog.Title>
+                                <div className="flex flex-col gap-2 mt-2">
+                                    <div className="flex items-center justify-center">
+                                        <HiOutlineCheckCircle className="inline-block w-20 h-20 text-green-500" />
+                                    </div>
+                                    <div className="text-center text-dark">
+                                        <h1 className="text-3xl font-semibold">
+                                            {t("invoiceTitle")}
+                                        </h1>
+                                        <p>{t("invoiceSubtitle")}</p>
+                                    </div>
+                                    <div className="flex flex-col gap-4">
+                                        <button
+                                            className="px-4 py-2 text-white rounded-md bg-primary-500 hover:bg-primary-600"
+                                            onClick={() => navigate("/invoice")}
+                                        >
+                                            {t("invoiceButton2")}
+                                        </button>
+                                        <button
+                                            className="px-4 py-2 bg-white border rounded-md text-dark hover:bg-white"
+                                            onClick={() => navigate("/")}
+                                        >
+                                            {t("invoiceButton")}
+                                        </button>
+                                    </div>
+                                </div>
+                            </Dialog.Panel>
+                        </Transition.Child>
                     </div>
                 </div>
-            </Container>
-        </>
+            </Dialog>
+        </Transition>
     );
 }
