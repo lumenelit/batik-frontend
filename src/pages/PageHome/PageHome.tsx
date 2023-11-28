@@ -114,7 +114,7 @@ export default function PageHome() {
                 ref={mapRef}
             >
                 <ResizeMap />
-                <TileLayer url="https://api.mapbox.com/styles/v1/sitouxz/clp1n3f0m01ci01qy2q4q3qax/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoic2l0b3V4eiIsImEiOiJja3k1emE4YnQwYTV3MnVwMXM1NzJ1aWpsIn0.yzj632wgHQSoI8MZQD9qxg" />
+                <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                 {industry.map((item: any, index: number) => {
                     return (
                         <Marker
