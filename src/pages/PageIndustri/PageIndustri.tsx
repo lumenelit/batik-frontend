@@ -94,8 +94,7 @@ export default function PageIndustri() {
                                         </div>
                                         <div className="relative w-full">
                                             <div>
-                                                Kontak (No. telp, Whatsapp,
-                                                Email)
+                                                Kontak 
                                             </div>
                                             <div className="w-full text-lg font-normal">
                                                 {industri.kontak}

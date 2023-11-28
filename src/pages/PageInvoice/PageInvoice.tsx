@@ -156,7 +156,7 @@ export default function PageInvoice() {
 
                             <Link
                                 className="flex items-center justify-center w-full py-3 font-semibold text-white rounded-lg bg-primary-500"
-                                to="/admin/pesanan"
+                                to="/home"
                             >
                                 Kembali ke Dashboard
                             </Link>
