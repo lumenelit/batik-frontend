@@ -53,5 +53,6 @@
     "invoiceTitle": "Thank you",
     "invoiceSubtitle": "Your order has been received and will be processed soon.",
     "invoiceButton": "Back to Home",
-    "invoiceButton2": "View Order"
+    "invoiceButton2": "View Order",
+    "buyNow": "Buy Now"
 }

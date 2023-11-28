@@ -53,5 +53,6 @@
     "invoiceTitle": "Terima Kasih",
     "invoiceSubtitle": "Pesanan anda sedang di proses. Silahkan menunggu sampai admin kami menghubungi anda",
     "invoiceButton": "Kembali ke Beranda",
-    "invoiceButton2": "Lihat Pesanan"
+    "invoiceButton2": "Lihat Pesanan",
+    "buyNow": "Beli Sekarang"
 }

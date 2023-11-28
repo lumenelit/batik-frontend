@@ -53,5 +53,6 @@
     "invoiceTitle": "谢谢您",
     "invoiceSubtitle": "您的订单已收到，将尽快处理。",
     "invoiceButton": "返回首页",
-    "invoiceButton2": "查看订单"
+    "invoiceButton2": "查看订单",
+    "buyNow": "立即购买"
 }

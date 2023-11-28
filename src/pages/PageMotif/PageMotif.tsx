@@ -5,6 +5,7 @@ import Container from "../../components/layouts/Container";
 import { useEffect, useState } from "react";
 import { HiChevronLeft } from "react-icons/hi2";
 import api from "../../config/api";
+import { useTranslation } from "react-i18next";
 
 function formatRupiah(int) {
     let rupiah = new Intl.NumberFormat("id-ID", {
@@ -20,6 +21,7 @@ export default function PageMotif() {
     const [motifData, setMotifData] = useState(null);
     const [motifImage, setMotifImage] = useState([]);
     const [loading, setLoading] = useState(true);
+    const { t } = useTranslation();
 
     useEffect(() => {
         try {
@@ -70,7 +72,8 @@ export default function PageMotif() {
                     onClick={() => navigate(-1)}
                     className="text-primary w-fit text-xl font-semibold font-['Inter']"
                 >
-                    <HiChevronLeft className="inline-flex" /> <span>Back</span>
+                    <HiChevronLeft className="inline-flex" />{" "}
+                    <span>{t("back")}</span>
                 </button>
                 <div className="flex flex-row justify-center items-start gap-4 font-['Inter'] ">
                     <div className="flex flex-row-reverse w-1/2 h-auto gap-2">
@@ -133,7 +136,7 @@ export default function PageMotif() {
                                     <div className="inline-flex items-center justify-start h-6">
                                         <div className="flex items-center justify-center gap-1">
                                             <div className="text-base font-semibold leading-normal text-center text-white">
-                                                Beli Sekarang
+                                                {t("buyNow")}
                                             </div>
                                             <div className="relative w-5 h-5 origin-top-left rotate-180" />
                                         </div>
