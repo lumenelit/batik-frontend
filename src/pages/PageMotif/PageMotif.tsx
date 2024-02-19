@@ -68,14 +68,14 @@ export default function PageMotif() {
             <Container center={true}>
                 <Header />
 
-                <button
+                {/* <button
                     onClick={() => navigate(-1)}
-                    className="text-primary w-fit text-xl font-semibold font-['Inter']"
+                    className="text-primary w-fit text-xl font-semibold font-['Poppins']"
                 >
                     <HiChevronLeft className="inline-flex" />{" "}
                     <span>{t("back")}</span>
-                </button>
-                <div className="flex flex-row justify-center items-start gap-4 font-['Inter'] ">
+                </button> */}
+                <div className="flex flex-row justify-center items-start gap-4 font-['Poppins'] ">
                     <div className="flex flex-row-reverse w-1/2 h-auto gap-2">
                         <img
                             className="object-cover w-[500px] h-[500px] bg-center bg-cover aspect-w-16 aspect-h-16 rounded-xl shadow-primary"
@@ -120,7 +120,7 @@ export default function PageMotif() {
                                         {formatRupiah(motifData?.harga)}
                                         /meter
                                     </div>
-                                    <div className="mt-2 w-full text-base font-normal ">
+                                    <div className="w-full mt-2 text-base font-normal ">
                                         {motifData?.desc}
                                     </div>
                                 </div>

@@ -404,7 +404,7 @@ export default function ModalCreateIndustri({
                                     <div className="w-1/2">
                                         <div>
                                             <h2 className="text-xl font-semibold">
-                                                {t("image")}
+                                                {t("image")} {t("minimalImage")}
                                             </h2>
                                             <div className="flex gap-4 mb-4">
                                                 <input
@@ -688,7 +688,7 @@ export default function ModalCreateIndustri({
                                     </button>
                                     <button
                                         type="button"
-                                        className="inline-flex justify-center px-4 py-2 text-sm font-medium border border-transparent rounded-md text-primary-900 bg-primary-100 hover:bg-primary-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+                                        className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md bg-primary-100 hover:bg-primary-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
                                         onClick={() => handleSubmit()}
                                     >
                                         {t("createIndustry")}

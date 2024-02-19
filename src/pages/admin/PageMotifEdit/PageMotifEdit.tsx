@@ -96,14 +96,14 @@ export default function PageMotifEdit() {
             <Container center={true}>
                 <Header />
 
-                <Link
+                {/* <Link
                     to={"/admin/industri"}
-                    className="text-primary text-xl font-semibold font-['Inter']"
+                    className="text-primary text-xl font-semibold font-['Poppins']"
                 >
                     <HiChevronLeft className="inline-flex" />{" "}
                     <span> {t("back")}</span>
-                </Link>
-                <div className="flex flex-row justify-center items-start gap-4 font-['Inter'] ">
+                </Link> */}
+                <div className="flex flex-row justify-center items-start gap-4 font-['Poppins'] ">
                     <div className="flex flex-row-reverse w-1/2 h-auto gap-2">
                         <img
                             className="object-cover w-[500px] h-[500px] bg-center bg-cover aspect-w-16 aspect-h-16 rounded-xl shadow-primary"

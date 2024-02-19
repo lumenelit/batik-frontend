@@ -46,6 +46,7 @@
     "emptyMotif": "Empty Motif",
     "createMotif": "Create Motif",
     "motifName": "Motif Name",
+    "minimalImage": "Minimal 3 Image",
     "price": "Price",
     "orderList": "Order List",
     "recieverContact": "Reciever Contact",
@@ -54,5 +55,12 @@
     "invoiceSubtitle": "Your order has been received and will be processed soon.",
     "invoiceButton": "Back to Home",
     "invoiceButton2": "View Order",
-    "buyNow": "Buy Now"
+    "buyNow": "Buy Now",
+    "viewDetails": "View Detail",
+
+    "done": "Done",
+    "date": "Date",
+    "recieverName": "Reciever Name",
+    "totalPrice": "Total Price",
+    "sendMethod": "Send Method"
 }

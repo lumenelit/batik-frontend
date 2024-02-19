@@ -41,7 +41,7 @@ export default function MotifCard({ data, haveDelete, admin }: MotifCardProps) {
 
     return (
         <div
-            className="min-w-[250px] w-full h-[300px] object-cover p-4 bg-white rounded-xl shadow-primary col-2 flex-col justify-start items-start gap-2 inline-flex font-['Inter'] text-sm cursor-pointer hover:scale-105 transition-all flex-1"
+            className="min-w-[250px] w-full h-[300px] object-cover p-4 bg-white rounded-xl shadow-primary col-2 flex-col justify-start items-start gap-2 inline-flex font-['Poppins'] text-sm cursor-pointer hover:scale-105 transition-all flex-1"
             onClick={handleClickCard}
         >
             <img

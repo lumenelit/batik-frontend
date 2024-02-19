@@ -6,6 +6,7 @@ import api from "../../config/api";
 
 type PesananData = {
     _id: string;
+    idMotif: string;
     namaPembeli: string;
     namaPenerima: string;
     kontakPembeli: string;
@@ -21,12 +22,18 @@ type PesananData = {
     updatedAt: string;
     __v: number;
 };
+type motifImage = {
+    _id: string;
+    image1: string;
+};
 
 export default function PageInvoice() {
     const navigate = useNavigate();
     const { idPesanan } = useParams();
+    const [motifImage, setMotifImage] = useState<motifImage>();
     const [pesananData, setPesananData] = useState<PesananData>({
         _id: "",
+        idMotif: "",
         namaPembeli: "",
         namaPenerima: "",
         kontakPembeli: "",
@@ -43,22 +50,38 @@ export default function PageInvoice() {
         __v: 0
     });
 
-    useEffect(() => {
+    const getPesanan = async (idPesanan) => {
         try {
-            api.get(`/pesanan/${idPesanan}`).then((res) => {
-                setPesananData(res.data.data[0]);
-                console.log(res.data.data[0]);
-            });
+            const res = await api.get(`/pesanan/${idPesanan}`);
+            setPesananData(res.data.data[0]);
+            console.log(res.data.data[0]);
         } catch (error) {
             console.log(error);
         }
-    }, []);
+    };
+    const getPesananImage = async (idMotif) => {
+        try {
+            const res = await api.get(`/motif/image/${idMotif}`);
+            setMotifImage(res.data.data[0]);
+            console.log(res.data.data[0]);
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
+    useEffect(() => {
+        getPesanan(idPesanan);
+    }, []);
+    useEffect(() => {
+        if (pesananData && pesananData.idMotif) {
+            getPesananImage(pesananData.idMotif);
+        }
+    }, [pesananData]);
     return (
         <>
             <Container center={true}>
                 <Header />
-                <div className="flex flex-row justify-center items-start gap-4 font-['Inter'] text-primary">
+                <div className="flex flex-row justify-center items-start gap-4 font-['Poppins'] text-primary">
                     <div className="flex flex-col w-full gap-4 p-4 bg-white shadow-primary rounded-xl">
                         <div>
                             <h1 className="text-xl font-semibold">
@@ -127,9 +150,11 @@ export default function PageInvoice() {
                             alt="motif"
                         /> */}
                         <div className="w-full">
-                            <h1 className="text-xl font-semibold">
-                                Data Penerima
-                            </h1>
+                            <img
+                                className="self-stretch h-[400px] rounded-xl object-cover mb-4"
+                                src={motifImage && motifImage.image1}
+                                alt=""
+                            />
                             <div className="flex flex-col gap-4 mb-4">
                                 <div className="flex justify-between">
                                     <span>Nama Penerima</span>
@@ -156,10 +181,21 @@ export default function PageInvoice() {
 
                             <Link
                                 className="flex items-center justify-center w-full py-3 font-semibold text-white rounded-lg bg-primary-500"
-                                to="/home"
+                                to="javascript:javascript:history.go(-1)"
                             >
                                 Kembali ke Dashboard
                             </Link>
+                            <button
+                                className="w-full px-4 py-2 mt-2 font-bold text-white bg-red-500 rounded-lg hover:bg-red-700"
+                                onClick={async () => {
+                                    const res = await api.delete(
+                                        "/pesanan/${}"
+                                    );
+                                }}
+                            >
+                                <i className="mr-3 text-white fas fa-trash"></i>
+                                Delete
+                            </button>
                         </div>
                     </div>
                 </div>

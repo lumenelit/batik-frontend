@@ -81,47 +81,54 @@ export default function PageCheckout() {
     }, [idMotif]);
 
     const handleSubmit = async () => {
-        if (mirror) {
-            setPesananBody({
-                ...pesananBody,
-                namaPenerima: pesananBody.namaPembeli,
-                kontakPenerima: pesananBody.kontakPembeli
-            });
-        }
-
-        const body = {
-            namaPembeli: pesananBody?.namaPembeli || "",
-            namaPenerima: pesananBody?.namaPenerima || "",
-            kontakPembeli: pesananBody?.kontakPembeli || "",
-            kontakPenerima: pesananBody?.kontakPenerima || "",
-            alamat: pesananBody?.alamat || "",
-            namaMotif: motifData.nama || "",
-            metodePengiriman:
-                pesananBody?.metodePengiriman || "Ambil di store langsung",
-            reqTambahan: pesananBody?.reqTambahan || "",
-            jumlah: pesananBody?.jumlah || 0,
-            hargaMotif: motifData.harga || 0,
-            totalHarga: motifData.harga * pesananBody?.jumlah || 0
-            // date: new Date().toISOString(),
-        };
-
-        console.log("body", body);
-
-        if (
-            body.namaPembeli === "" ||
-            body.kontakPembeli === "" ||
-            body.alamat === "" ||
-            body.namaMotif === "" ||
-            body.reqTambahan === "" ||
-            body.jumlah === 0 ||
-            body.hargaMotif === 0 ||
-            body.totalHarga === 0
-        ) {
-            alert("Mohon isi semua data");
-            return;
-        }
-
         try {
+            if (mirror) {
+                setPesananBody((prevPesananBody) => ({
+                    ...prevPesananBody,
+                    namaPenerima: prevPesananBody?.namaPembeli,
+                    kontakPenerima: prevPesananBody?.kontakPembeli
+                }));
+            }
+
+            const body = {
+                namaPembeli: pesananBody?.namaPembeli || "",
+                kontakPembeli: pesananBody?.kontakPembeli || "",
+                namaPenerima:
+                    mirror === true
+                        ? pesananBody?.namaPembeli
+                        : pesananBody?.namaPenerima || "",
+                kontakPenerima:
+                    mirror === true
+                        ? pesananBody?.kontakPembeli
+                        : pesananBody?.kontakPenerima || "",
+                alamat: pesananBody?.alamat || "",
+                namaMotif: motifData.nama || "",
+                metodePengiriman:
+                    pesananBody?.metodePengiriman || "Ambil di store langsung",
+                reqTambahan: pesananBody?.reqTambahan || "",
+                jumlah: pesananBody?.jumlah || 0,
+                hargaMotif: motifData.harga || 0,
+                totalHarga: motifData.harga * pesananBody?.jumlah || 0,
+                idMotif: idMotif
+                // date: new Date().toISOString(),
+            };
+            console.log(mirror);
+
+            console.log("body", body);
+
+            if (
+                body.namaPembeli === "" ||
+                body.kontakPembeli === "" ||
+                body.alamat === "" ||
+                body.namaMotif === "" ||
+                body.reqTambahan === "" ||
+                body.jumlah === 0 ||
+                body.hargaMotif === 0 ||
+                body.totalHarga === 0
+            ) {
+                alert("Mohon isi semua data");
+                return;
+            }
             await api.post("/pesanan", await body).then((res) => {
                 console.log(res);
                 setModalInvoice(true);
@@ -132,31 +139,6 @@ export default function PageCheckout() {
             console.log(error);
         }
     };
-
-    // const [mirror, setMirror] = useState(true);
-
-    // const handleOnchangeDefault = (value, setFunction) => {
-    //     console.log("On change - ", value);
-    //     setFunction(value);
-    // };
-    // const handleOnchangeMirror = (value, setFunction, setMirrorFunction) => {
-    //     setFunction(value);
-    //     if (mirror === true) {
-    //         console.log("On change mirror - ", value);
-    //         setMirrorFunction(value);
-    //     }
-    // };
-    // const handleToggleMirror = () => {
-    //     if (mirror === false) {
-    //         console.log("before", mirror);
-    //         setPesananBody({
-    //             ...pesananBody,
-    //             namaPenerima: pesananBody.namaPembeli,
-    //             kontakPenerima: pesananBody.kontakPembeli
-    //         });
-    //     }
-    //     setMirror(!mirror);
-    // };
 
     console.log(pesananBody);
 
@@ -187,11 +169,11 @@ export default function PageCheckout() {
                 <Header />
                 <button
                     onClick={() => navigate(-1)}
-                    className="text-primary w-fit text-xl font-semibold font-['Inter']"
+                    className="text-primary w-fit text-xl font-semibold font-['Poppins']"
                 >
                     <HiChevronLeft className="inline-flex" /> <span>Back</span>
                 </button>
-                <div className="flex flex-row justify-center items-start gap-4 font-['Inter'] text-primary">
+                <div className="flex flex-row justify-center items-start gap-4 font-['Poppins'] text-primary">
                     <div className="flex flex-row-reverse gap-2 min-w-1/2 h-fit">
                         <div className="min-w-[790px] h-fit flex flex-col p-4 mb-5 bg-white rounded-xl shadow-primary justify-start items-start gap-4">
                             <div className="text-xl font-semibold ">

@@ -3,13 +3,49 @@ import { Link, useParams } from "react-router-dom";
 import Header from "../../components/layouts/Header";
 import Container from "../../components/layouts/Container";
 import MotifCard from "../../components/MotifCard";
-import { HiChevronLeft, HiMapPin, HiUser } from "react-icons/hi2";
-import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
-import { DivIcon } from "leaflet";
-import ReactDOMServer from "react-dom/server";
+import { HiChevronLeft } from "react-icons/hi2";
 import { useEffect, useState } from "react";
 import api from "../../config/api";
 import { useTranslation } from "react-i18next";
+import blibli from "../../assets/images/icon-blibli.png";
+import bukalapak from "../../assets/images/icon-bukalapak.png";
+import shopee from "../../assets/images/icon-shopee.png";
+import lazada from "../../assets/images/icon-lazada.png";
+import tokopedia from "../../assets/images/icon-tokopedia.png";
+
+function showSosmedLogo(name: string) {
+    const lowerCaseName = name.toLowerCase();
+
+    if (lowerCaseName === "facebook")
+        return <i className="fab fa-facebook-f text-lg"></i>;
+    if (lowerCaseName === "instagram")
+        return <i className="fab fa-instagram  text-lg"></i>;
+    if (lowerCaseName === "whatsapp")
+        return <i className="fab fa-whatsapp  text-lg"></i>;
+    if (lowerCaseName === "twitter")
+        return <i className="fab fa-twitter  text-lg"></i>;
+    if (lowerCaseName === "pinterest")
+        return <i className="fab fa-pinterest  text-lg"></i>;
+
+    return name;
+}
+
+function showShopLogo(eCommerce: string) {
+    const lowerCase = eCommerce.toLowerCase();
+
+    if (lowerCase === "tokopedia")
+        return <img className="h-6 bg-auto" src={tokopedia} />;
+    if (lowerCase === "bukalapak")
+        return <img className="h-6 bg-auto" src={bukalapak} />;
+    if (lowerCase === "shopee")
+        return <img className="h-6 bg-auto" src={shopee} />;
+    if (lowerCase === "lazada")
+        return <img className="h-6 bg-auto" src={lazada} />;
+    if (lowerCase === "blibli")
+        return <img className="h-6 bg-auto" src={blibli} />;
+
+    return eCommerce;
+}
 
 export default function PageIndustri() {
     const { idIndustri } = useParams();
@@ -62,15 +98,15 @@ export default function PageIndustri() {
                 <Header />
                 <div className="flex flex-col items-start gap-5">
                     <div className="flex flex-col justify-center w-full gap-4 cursor-default h-fit">
-                        <Link
+                        {/* <Link
                             to={`/home`}
-                            className="text-primary w-fit text-xl font-semibold font-['Inter']"
+                            className="text-primary w-fit text-xl font-semibold font-['Poppins']"
                         >
                             <HiChevronLeft className="inline-flex" />{" "}
                             <span>{t("back")}</span>
-                        </Link>
+                        </Link> */}
                         {industri && (
-                            <div className="p-4 bg-white rounded-xl shadow-primary flex-col justify-start items-start gap-4 inline-flex text-primary text-xl font-semibold font-['Inter']">
+                            <div className="p-4 bg-white rounded-xl shadow-primary flex-col justify-start items-start gap-4 inline-flex text-primary text-xl font-semibold font-['Poppins']">
                                 <div className="w-full text-3xl font-semibold">
                                     {industri.nama}
                                 </div>
@@ -125,7 +161,9 @@ export default function PageIndustri() {
                                                                 to={item.link}
                                                                 key={index}
                                                             >
-                                                                {item.label}
+                                                                {showSosmedLogo(
+                                                                    item.label
+                                                                )}
                                                             </Link>
                                                         )
                                                     )}
@@ -140,11 +178,13 @@ export default function PageIndustri() {
                                                     {industri.eCommerce.map(
                                                         (item, index) => (
                                                             <Link
-                                                                className="py-1 px-4 bg-[#A25B4C] rounded-lg justify-start items-start gap-2.5 flex text-lg text-center text-white"
+                                                                className="py-1 px-2 bg-gray-100 rounded-lg justify-start items-start gap-2.5 flex text-lg text-center text-white"
                                                                 to={item.link}
                                                                 key={index}
                                                             >
-                                                                {item.nama}
+                                                                {showShopLogo(
+                                                                    item.nama
+                                                                )}
                                                             </Link>
                                                         )
                                                     )}
@@ -199,7 +239,7 @@ export default function PageIndustri() {
                         )}
                     </div>
                     <div className="inline-flex flex-col items-start justify-end w-full gap-4 mb-10">
-                        <div className="text-primary text-xl font-semibold font-['Inter']">
+                        <div className="text-primary text-xl font-semibold font-['Poppins']">
                             Motif batik
                         </div>
                         <div className="inline-flex flex-col items-start self-stretch justify-start gap-5">

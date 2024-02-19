@@ -19,6 +19,45 @@ import api from "../../../config/api";
 import ModalCreateMotif from "../../../components/modal/ModalCreateMotif";
 import ModalEditIndustri from "../../../components/modal/ModalEditIndustri";
 import { useTranslation } from "react-i18next";
+import blibli from "../../../assets/images/icon-blibli.png";
+import bukalapak from "../../../assets/images/icon-bukalapak.png";
+import shopee from "../../../assets/images/icon-shopee.png";
+import lazada from "../../../assets/images/icon-lazada.png";
+import tokopedia from "../../../assets/images/icon-tokopedia.png";
+
+function showSosmedLogo(name: string) {
+    const lowerCaseName = name.toLowerCase();
+
+    if (lowerCaseName === "facebook")
+        return <i className="text-lg fab fa-facebook-f"></i>;
+    if (lowerCaseName === "instagram")
+        return <i className="text-lg fab fa-instagram"></i>;
+    if (lowerCaseName === "whatsapp")
+        return <i className="text-lg fab fa-whatsapp"></i>;
+    if (lowerCaseName === "twitter")
+        return <i className="text-lg fab fa-twitter"></i>;
+    if (lowerCaseName === "pinterest")
+        return <i className="text-lg fab fa-pinterest"></i>;
+
+    return name;
+}
+
+function showShopLogo(eCommerce: string) {
+    const lowerCase = eCommerce.toLowerCase();
+
+    if (lowerCase === "tokopedia")
+        return <img className="h-6 bg-auto" src={tokopedia} />;
+    if (lowerCase === "bukalapak")
+        return <img className="h-6 bg-auto" src={bukalapak} />;
+    if (lowerCase === "shopee")
+        return <img className="h-6 bg-auto" src={shopee} />;
+    if (lowerCase === "lazada")
+        return <img className="h-6 bg-auto" src={lazada} />;
+    if (lowerCase === "blibli")
+        return <img className="h-6 bg-auto" src={blibli} />;
+
+    return eCommerce;
+}
 
 export default function PageIndustriEdit() {
     const [industriData, setIndustriData] = useState(null);
@@ -109,14 +148,14 @@ export default function PageIndustriEdit() {
                 <Header />
                 <div className="flex flex-row items-start gap-5">
                     <div className="w-1/2 max-w-[400px] h-fit flex justify-center gap-4 flex-col">
-                        <Link
+                        {/* <Link
                             to={"/admin/industri"}
-                            className="text-primary text-xl font-semibold font-['Inter']"
+                            className="text-primary text-xl font-semibold font-['Poppins']"
                         >
                             <HiChevronLeft className="inline-flex" />{" "}
                             <span> {t("back")}</span>
-                        </Link>
-                        <div className="p-4 bg-white rounded-xl shadow-primary flex-col justify-start items-start gap-4 inline-flex text-primary text-l font-semibold font-['Inter']">
+                        </Link> */}
+                        <div className="p-4 bg-white rounded-xl shadow-primary flex-col justify-start items-start gap-4 inline-flex text-primary text-l font-semibold font-['Poppins']">
                             <div className="flex justify-between w-full text-xl font-semibold">
                                 <div className="flex items-center justify-start gap-2">
                                     {industriData.nama}
@@ -195,14 +234,9 @@ export default function PageIndustriEdit() {
                                             (item, index) => (
                                                 <div
                                                     key={index}
-                                                    className="px-4 py-2 bg-[#A25B4C] rounded-lg justify-start items-start gap-2.5 flex"
+                                                    className="py-1 px-2 bg-gray-100 rounded-lg justify-start items-start gap-2.5 flex text-lg text-center text-black"
                                                 >
-                                                    <a
-                                                        href={item.link}
-                                                        className="text-sm font-semibold text-white"
-                                                    >
-                                                        {item.label}
-                                                    </a>
+                                                    {showSosmedLogo(item.label)}
                                                 </div>
                                             )
                                         )}
@@ -215,14 +249,9 @@ export default function PageIndustriEdit() {
                                             (item, index) => (
                                                 <div
                                                     key={index}
-                                                    className="px-4 py-2 bg-[#A25B4C] rounded-lg justify-start items-start gap-2.5 flex"
+                                                    className="py-1 px-2 bg-gray-100 rounded-lg justify-start items-start gap-2.5 flex text-lg text-center text-white"
                                                 >
-                                                    <a
-                                                        href={item.link}
-                                                        className="text-sm font-semibold text-white"
-                                                    >
-                                                        {item.nama}
-                                                    </a>
+                                                    {showShopLogo(item.nama)}
                                                 </div>
                                             )
                                         )}
@@ -240,7 +269,7 @@ export default function PageIndustriEdit() {
                     </div>
                     <div className="inline-flex flex-col items-start justify-end w-full gap-4">
                         <div className="flex items-center justify-between w-full">
-                            <span className="text-xl font-semibold font-['Inter']">
+                            <span className="text-xl font-semibold font-['Poppins']">
                                 Motif batik
                             </span>
                             <button

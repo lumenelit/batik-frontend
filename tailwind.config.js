@@ -3,6 +3,11 @@ module.exports = {
     content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
     theme: {
         extend: {
+            fontFamily: {
+                customFont: ["'Protest Riot'", "sans-serif"],
+                poppins: ["Poppins"]
+                // customFont: ["Montserrat"]
+            },
             backgroundImage: {
                 "button-gradient":
                     "linear-gradient(90deg, rgba(54,110,216,1) 0%, rgba(39,74,140,1) 100%);",
@@ -12,7 +17,8 @@ module.exports = {
                     "linear-gradient(90deg, #F7B733 0%, #FC4A1A 100%);",
                 "angular-white":
                     "conic-gradient(from 200deg at 50% 50%, rgba(249, 249, 249, 1) 0%, rgba(255, 255, 255, 1) 100%);",
-                "landing-background": "url('./assets/images/bg-55.jpg')"
+                "landing-background": "url('./assets/images/bg-simple.png')"
+                // "landing-background": "url('./assets/images/bg-55.jpg')"
             },
             colors: {
                 primary: {

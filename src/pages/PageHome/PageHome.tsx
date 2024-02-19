@@ -5,6 +5,7 @@ import api from "../../config/api";
 import { DivIcon } from "leaflet";
 import * as ReactDOMServer from "react-dom/server";
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import Header from "../../components/layouts/Header";
 
 export default function PageHome() {
     const [industry, setIndustry]: Array<any> = useState([]);
@@ -106,7 +107,7 @@ export default function PageHome() {
     return (
         <div className="w-screen h-screen">
             <MapContainer
-                className="z-0 w-full h-full"
+                className="z-0 w-full h-full "
                 center={[1.34693, 124.774998]}
                 zoom={11}
                 scrollWheelZoom={true}
@@ -127,6 +128,7 @@ export default function PageHome() {
                         >
                             <Popup>
                                 {/* <Link to={`/industri/${item._id}`}> */}
+
                                 <div
                                     className="flex flex-col gap-1 cursor-pointer hover:scale-105 hover:text-blue-700 text-dark"
                                     onClick={() =>
@@ -155,7 +157,10 @@ export default function PageHome() {
                     );
                 })}
             </MapContainer>
-            <div className="absolute top-0 right-0 h-full p-8 w-[400px]">
+            <div className="absolute left-0 w-full -top-6 ">
+                <Header />
+            </div>
+            <div className="absolute top-0 right-0 h-full p-8 w-[400px] pt-24">
                 <div className="h-full p-4 bg-white rounded-xl backdrop-filter backdrop-blur-lg bg-opacity-40">
                     {/* Search Bar */}
                     {/* <div className="max-w-md mx-auto">

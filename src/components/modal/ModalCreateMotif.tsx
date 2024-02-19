@@ -2,6 +2,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { ChangeEvent, Fragment, useState } from "react";
 import { HiPlus, HiXCircle, HiXMark } from "react-icons/hi2";
 import api from "../../config/api";
+import { useTranslation } from "react-i18next";
 
 type ModalCreateMotifProps = {
     modalMotif: boolean;
@@ -27,6 +28,7 @@ export default function ModalCreateMotif({
 }: ModalCreateMotifProps) {
     const [motifBody, setMotifBody] = useState({} as MotifBody);
     const [imagePreviews, setImagePreviews] = useState<string[]>([]);
+    const { t } = useTranslation();
 
     const handleSubmit = async () => {
         const idMotif = Math.random().toString(36).substr(2, 9);
@@ -52,15 +54,6 @@ export default function ModalCreateMotif({
         };
 
         console.log(motifBody);
-
-        // if (
-        //     image1 === undefined ||
-        //     image2 === undefined ||
-        //     image3 === undefined
-        // ) {
-        //     alert("Mohon upload 3 gambar");
-        //     return;
-        // }
 
         try {
             api.post("/motif", await body).then((res) => {
@@ -155,7 +148,7 @@ export default function ModalCreateMotif({
                                 </Dialog.Title>
                                 <div className="flex flex-col gap-4 mt-2">
                                     <div>
-                                        <h2>Gambar</h2>
+                                        <h2>{t("image")}</h2>
                                         <div className="flex gap-4 mb-4">
                                             <input
                                                 type="file"
@@ -211,7 +204,7 @@ export default function ModalCreateMotif({
                                     </div>
                                     <div className="flex flex-col w-full gap-2 h-fit">
                                         <div className="w-full text-base font-normal leading-snug indent-1">
-                                            Nama Motif{" "}
+                                            {t("motifName")}{" "}
                                             <span
                                                 className="text-red-500"
                                                 title="Wajib diisi"
@@ -233,7 +226,7 @@ export default function ModalCreateMotif({
                                     </div>
                                     <div className="flex flex-col w-full gap-2 h-fit">
                                         <div className="w-full text-base font-normal leading-snug indent-1">
-                                            Harga{" "}
+                                            {t("price")}{" "}
                                             <span
                                                 className="text-red-500"
                                                 title="Wajib diisi"
@@ -257,7 +250,7 @@ export default function ModalCreateMotif({
                                     </div>
                                     <div className="flex flex-col w-full gap-2 h-fit">
                                         <div className="w-full text-base font-normal leading-snug indent-1">
-                                            Deskripsi{" "}
+                                            {t("desc")}{" "}
                                             <span
                                                 className="text-red-500"
                                                 title="Wajib diisi"
@@ -284,14 +277,14 @@ export default function ModalCreateMotif({
                                         className="inline-flex justify-center px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-transparent rounded-md hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
                                         onClick={() => setModalMotif(false)}
                                     >
-                                        Batalkan
+                                        {t("cancel")}
                                     </button>
                                     <button
                                         type="button"
-                                        className="inline-flex justify-center px-4 py-2 text-sm font-medium border border-transparent rounded-md text-primary-900 bg-primary-100 hover:bg-primary-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+                                        className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md bg-primary-100 hover:bg-primary-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
                                         onClick={() => handleSubmit()}
                                     >
-                                        Buat Motif
+                                        {t("createMotif")}
                                     </button>
                                 </div>
                             </Dialog.Panel>

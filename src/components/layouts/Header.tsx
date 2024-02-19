@@ -20,7 +20,7 @@ export default function Header({ admin }: HeaderProps) {
     }, [enabled]);
 
     return (
-        <div className="w-full h-[81px] items-center inline-flex">
+        <div className="w-full h-[81px] items-center inline-flex bg-white shadow-xl rounded-2xl px-5 my-6">
             <Switch
                 checked={enabled}
                 onChange={setEnabled}
@@ -42,24 +42,11 @@ export default function Header({ admin }: HeaderProps) {
                     )}
                 </span>
             </Switch>
-            {/* <h1 className="text-dark text-2xl font-bold font-['Montserrat']">
-                Sistem Informasi Geografis Kain Batik di Sulawesi Utara
-            </h1> */}
             <Link to="/">
                 <img src="/Logo.svg" alt="logo" className="h-12" />
             </Link>
             {admin && (
-                <div className="flex items-center gap-6 ms-auto text-dark px-8 py-2 bg-[#fafafa] rounded-xl shadow-lg">
-                    <NavLink
-                        to="/admin/pesanan"
-                        className={({ isActive }) =>
-                            isActive
-                                ? "text-primary-500 text-lg font-semibold"
-                                : "text-dark text-lg font-semibold"
-                        }
-                    >
-                        Pesanan
-                    </NavLink>
+                <div className="flex items-center gap-6 px-8 py-2 ms-auto text-dark ">
                     <NavLink
                         to="/admin/industri"
                         className={({ isActive }) =>
@@ -69,6 +56,16 @@ export default function Header({ admin }: HeaderProps) {
                         }
                     >
                         Industri
+                    </NavLink>
+                    <NavLink
+                        to="/admin/pesanan"
+                        className={({ isActive }) =>
+                            isActive
+                                ? "text-primary-500 text-lg font-semibold"
+                                : "text-dark text-lg font-semibold"
+                        }
+                    >
+                        Pesanan
                     </NavLink>
                 </div>
             )}

@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HiEye, HiEyeSlash } from "react-icons/hi2";
 import logoVector from "../../../assets/images/Logo-vector.svg";
+import bg from "../../../assets/images/bg-simple.png";
 import { useNavigate } from "react-router-dom";
 
 export default function PageLogin() {
@@ -13,6 +14,15 @@ export default function PageLogin() {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [isPasswordEmpty, setIsPasswordEmpty] = useState(true);
+
+    useEffect(() => {
+        if (username === "" || password === "") {
+            setIsPasswordEmpty(true);
+        } else {
+            setIsPasswordEmpty(false);
+        }
+    }, [username, password]);
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
@@ -24,22 +34,22 @@ export default function PageLogin() {
     };
 
     return (
-        <div className="relative flex items-center justify-center h-screen overflow-hidden">
-            <img
-                src={logoVector}
+        <div className="relative flex items-center justify-center h-screen overflow-hidden bg-cover bg-landing-background">
+            {/* <img
+                src={bg}
                 alt="U"
-                className="absolute w-full -translate-x-1/2 -bottom-20 left-1/2 -z-10"
-            />
+                className="absolute w-full -translate-x-1/2 bg-cover -bottom-20 left-1/2 -z-10"
+            /> */}
             <div>
-                <div className="w-[385px] h-[588px] sm:w-[485px] sm:h-[688px] bg-[#dbdbdb] bg-opacity-50 px-[44px] py-[65px] rounded-2xl backdrop-filter backdrop-blur-lg">
+                <div className="w-[385px] h-fit sm:w-[485px]  bg-white bg-opacity-70 px-[44px] py-[65px] rounded-2xl backdrop-filter backdrop-blur-lg shadow-xl">
                     <img src="/Logo.svg" />
-                    <h1 className="text-[60px] font-bold">Hello!</h1>
+                    <h1 className="text-[60px] custom-font">Hello!</h1>
                     <p className="font-medium text-[15px]">
                         Login with your Username and Password
                     </p>
                     <form
                         action="#"
-                        className="login-input mt-[75px]"
+                        className="flex flex-col gap-4 mt-10 login-input"
                         onSubmit={handleSubmit}
                     >
                         <div className="flex flex-col mb-3">
@@ -63,7 +73,7 @@ export default function PageLogin() {
                             <div className="absolute inset-y-0 right-0 flex items-center px-2">
                                 <button
                                     type="button"
-                                    className="font-mono text-sm underline bg-gray-300 rounded cursor-pointer hover:bg-gray-400 js-password-label"
+                                    className="font-mono text-sm underline bg-gray-100 rounded cursor-pointer hover:bg-gray-200 js-password-label"
                                     onClick={togglePasswordVisiblity}
                                 >
                                     {passwordShown ? (
@@ -74,13 +84,47 @@ export default function PageLogin() {
                                 </button>
                             </div>
                         </div>
-
-                        <button
+                        <div className="flex flex-row opacity-80">
+                            <p className="inline text-red-500">*</p>
+                            <p className="block ml-1 text-sm">
+                                Login dengan password minimal 6 karakter,
+                                kombinasi huruf dan angka. Hindari karakter
+                                khusus, spasi, atau informasi pribadi. Gunakan
+                                password yang tidak mudah ditebak dan belum
+                                pernah digunakan sebelumnya untuk keamanan
+                                maksimal.
+                            </p>
+                        </div>
+                        {/* <button
                             type="submit"
-                            className="flex justify-end items-center text-white w-[80px] h-[80px] mt-[40px] bg-primary-300 text-[20px] font-medium p-0 rounded-[20px] relative hover:w-full transition-all ease-in-out duration-300 shadow-primary-500 shadow-2xl"
+                            disabled={isPasswordEmpty}
+                            className={`flex justify-end items-center text-white w-[80px] h-[60px] mt-[25px] ${
+                                isPasswordEmpty
+                                    ? "bg-gray-200 cursor-not-allowed"
+                                    : "bg-primary-300 "
+                            }  text-[20px] font-medium hover:w-full p-0 rounded-[20px] relative  transition-all ease-in-out duration-300 shadow-primary-500 shadow-2xl`}
                         >
                             <span className="w-full text-center">Login</span>
-                            <i className="flex justify-center items-center fa-solid fa-arrow-right text-4xl text-white bg-primary-500 z-10 -ml-[80px] rounded-[20px] w-[80px] h-[80px] shadow-sm" />
+                            <i
+                                className={`flex justify-center items-center fa-solid fa-arrow-right text-2xl text-white ${
+                                    isPasswordEmpty
+                                        ? "bg-gray-400 cursor-not-allowed"
+                                        : "bg-primary-500 hover:w-full"
+                                }  z-10 -ml-[80px] rounded-[20px] w-[80px] h-[60px] shadow-sm`}
+                            />
+                        </button> */}
+                        <button
+                            type="submit"
+                            disabled={isPasswordEmpty}
+                            className={`flex justify-end  py-1.5 px-6 w-fit self-end
+                        text-lg text-center font-medium p-0 rounded-[20px] relative  transition-all ease-in-out duration-300 shadow-primary-500 shadow-2xl 
+                        ${
+                            isPasswordEmpty
+                                ? "bg-gray-200 cursor-not-allowed text-primary-300 ring-primary-300 ring-2"
+                                : "bg-primary-300 text-white"
+                        }`}
+                        >
+                            Login
                         </button>
                     </form>
                 </div>
