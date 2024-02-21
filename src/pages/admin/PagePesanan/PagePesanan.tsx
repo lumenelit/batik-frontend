@@ -29,9 +29,9 @@ export default function PagePesanan() {
         try {
             const res = await api.get("/pesanan");
             setProducts(res.data.data);
-            console.log(res.data.data);
+            // console.log(res.data.data);
             const select = findDoneData(res.data.data);
-            console.log(select);
+            // console.log(select);
             setSelectedProducts(select);
         } catch (error) {
             console.log(error);
@@ -52,7 +52,7 @@ export default function PagePesanan() {
         });
     }, [products]);
 
-    console.log("image", image);
+    // console.log("image", image);
     const handleCheckboxChange = async (e) => {
         const product = e[0];
         console.log("before hit", product.isDone);
@@ -136,15 +136,23 @@ export default function PagePesanan() {
 
     const showImage = (rowData) => {
         const idMotif = rowData.idMotif;
+        //the image from "image" variable by comparing the idMotif in the rowData with the idMotif in the image variable
 
-        return (
-            <img
-                src={"https://via.placeholder.com/150"}
-                alt="motif"
-                width="100%"
-                height="100%"
-            />
-        );
+        const img = image.find((img) => {
+            if (img && img.id === idMotif) return img.img;
+        });
+        if (img) {
+            return <img src={img.img} alt="motif" width="100%" height="100%" />;
+        } else {
+            return (
+                <img
+                    src={"https://via.placeholder.com/150"}
+                    alt="motif"
+                    width="100%"
+                    height="100%"
+                />
+            );
+        }
     };
 
     return (
@@ -211,14 +219,7 @@ export default function PagePesanan() {
                         return `${day} ${monthName} ${year}`;
                     }}
                 />
-                <Column
-                    body={(rowData) => {
-                        console.log(rowData);
-                        return "0";
-                    }}
-                    header="Motif Image"
-                    // header={t("motifImage")}
-                />
+                <Column body={showImage} header="Motif Image" />
                 <Column field="namaMotif" header={t("motifName")} />
                 <Column field="namaPenerima" header={t("recieverName")} />
                 <Column field="kontakPenerima" header={t("recieverContact")} />

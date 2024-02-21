@@ -11,6 +11,9 @@ import PagePesanan from "./pages/admin/PagePesanan/PagePesanan";
 import PageIndustriEdit from "./pages/admin/PageIndustriEdit/PageIndustriEdit";
 import PageIndustriAdmin from "./pages/admin/PageIndustriAdmin/PageIndustriAdmin";
 import PageMotifEdit from "./pages/admin/PageMotifEdit/PageMotifEdit";
+import { useState, useRef } from "react";
+import * as htmlToImage from "html-to-image";
+import { saveAs } from "file-saver";
 
 export const ROUTES = {
     LANDING: "/",
@@ -29,7 +32,7 @@ export const ROUTES = {
     ADMIN_PESANAN: "/admin/pesanan"
 };
 
-export const routerList = [
+const routerList = [
     {
         path: ROUTES.LANDING,
         element: <PageLanding />

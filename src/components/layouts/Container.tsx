@@ -2,10 +2,19 @@
 // import bgRight from "../../assets/images/bg-right.png";
 import bgSimple from "../../assets/images/bg-simple.png";
 
-export default function Container({ children, center = true }) {
+export default function Container({
+    children,
+    center = true,
+    ss = null,
+    loading = false
+}) {
     // return <div className='container max-w-5xl px-4 mx-auto'>{children}</div>;
+
     return (
-        <>
+        <div
+            ref={ss}
+            className={`${loading ? "pointer-events-none select-none" : ""}`}
+        >
             {/* <div className="fixed z-0 w-full h-screen overflow-hidden">
                 <img
                     src={bgLeft}
@@ -22,7 +31,7 @@ export default function Container({ children, center = true }) {
                 <img
                     src={bgSimple}
                     alt="bg"
-                    className="absolute h-screen w-screen"
+                    className="absolute w-screen h-screen"
                 />
             </div>
             <div
@@ -30,6 +39,6 @@ export default function Container({ children, center = true }) {
             >
                 {children}
             </div>
-        </>
+        </div>
     );
 }

@@ -5,9 +5,10 @@ import { Link, NavLink } from "react-router-dom";
 
 type HeaderProps = {
     admin?: boolean;
+    hide?: boolean;
 };
 
-export default function Header({ admin }: HeaderProps) {
+export default function Header({ admin, hide }: HeaderProps) {
     const [enabled, setEnabled] = useState(false);
     const { i18n } = useTranslation();
 
@@ -20,7 +21,11 @@ export default function Header({ admin }: HeaderProps) {
     }, [enabled]);
 
     return (
-        <div className="w-full h-[81px] items-center inline-flex bg-white shadow-xl rounded-2xl px-5 my-6">
+        <div
+            className={`w-full h-[81px] items-center inline-flex bg-white shadow-xl rounded-2xl px-5 my-6 ${
+                hide ? "invisible" : ""
+            }`}
+        >
             <Switch
                 checked={enabled}
                 onChange={setEnabled}

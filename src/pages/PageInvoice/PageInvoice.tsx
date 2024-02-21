@@ -1,5 +1,9 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import * as htmlToImage from "html-to-image";
+import { saveAs } from "file-saver";
+import "primeicons/primeicons.css";
+
 import Header from "../../components/layouts/Header";
 import Container from "../../components/layouts/Container";
 import api from "../../config/api";
@@ -30,6 +34,7 @@ type motifImage = {
 export default function PageInvoice() {
     const navigate = useNavigate();
     const { idPesanan } = useParams();
+    const webViewRef = useRef(null);
     const [motifImage, setMotifImage] = useState<motifImage>();
     const [pesananData, setPesananData] = useState<PesananData>({
         _id: "",
@@ -49,6 +54,25 @@ export default function PageInvoice() {
         updatedAt: "",
         __v: 0
     });
+    const [loadingDownload, setLoadingDownload] = useState(false);
+
+    const handleDownload = async () => {
+        setLoadingDownload(true);
+        try {
+            await htmlToImage
+                .toPng(webViewRef.current)
+                .then(function (dataUrl) {
+                    saveAs(dataUrl, "webview.png");
+                })
+                .catch(function (error) {
+                    console.error("Error:", error);
+                });
+        } catch (e) {
+            console.log("error", e);
+            alert("Error");
+        }
+        setLoadingDownload(false);
+    };
 
     const getPesanan = async (idPesanan) => {
         try {
@@ -79,14 +103,32 @@ export default function PageInvoice() {
     }, [pesananData]);
     return (
         <>
-            <Container center={true}>
-                <Header />
+            <Container center={true} ss={webViewRef} loading={loadingDownload}>
+                <Header hide={loadingDownload} />
                 <div className="flex flex-row justify-center items-start gap-4 font-['Poppins'] text-primary">
                     <div className="flex flex-col w-full gap-4 p-4 bg-white shadow-primary rounded-xl">
                         <div>
-                            <h1 className="text-xl font-semibold">
-                                Data Pesanan - {idPesanan}
-                            </h1>
+                            <div className="flex flex-row items-center justify-between w-full gap-4 mb-5">
+                                <h1 className="text-xl font-semibold">
+                                    Data Pesanan - {idPesanan}
+                                </h1>
+                                <button
+                                    onClick={handleDownload}
+                                    className="w-10 h-10 text-lg text-blue-400 rounded-full bg-slate-100 hover:text-white hover:bg-blue-400"
+                                >
+                                    {loadingDownload ? (
+                                        <i
+                                            className="pi pi-spin pi-spinner"
+                                            style={{ fontSize: "1rem" }}
+                                        ></i>
+                                    ) : (
+                                        <i
+                                            className="pi pi-download text-primary"
+                                            style={{ fontSize: "1rem" }}
+                                        ></i>
+                                    )}
+                                </button>
+                            </div>
                             <div className="flex flex-col gap-4">
                                 <div className="flex justify-between">
                                     <span>Nama pemesan</span>
@@ -121,7 +163,7 @@ export default function PageInvoice() {
                             </div>
                         </div>
                         <div>
-                            <h1 className="text-xl font-semibold">
+                            <h1 className="text-xl font-semibold ">
                                 Data Penerima
                             </h1>
                             <div className="flex flex-col gap-4">
@@ -180,13 +222,17 @@ export default function PageInvoice() {
                             </div>
 
                             <Link
-                                className="flex items-center justify-center w-full py-3 font-semibold text-white rounded-lg bg-primary-500"
+                                className={`flex items-center justify-center w-full py-3 font-semibold text-white rounded-lg bg-primary-500 ${
+                                    loadingDownload ? "hidden" : ""
+                                } `}
                                 to="javascript:javascript:history.go(-1)"
                             >
                                 Kembali ke Dashboard
                             </Link>
                             <button
-                                className="w-full px-4 py-2 mt-2 font-bold text-white bg-red-500 rounded-lg hover:bg-red-700"
+                                className={`w-full px-4 py-2 mt-2 font-bold text-white bg-red-500 rounded-lg hover:bg-red-700 ${
+                                    loadingDownload ? "hidden" : ""
+                                }`}
                                 onClick={async () => {
                                     const res = await api.delete(
                                         "/pesanan/${}"
