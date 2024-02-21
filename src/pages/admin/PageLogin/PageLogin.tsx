@@ -3,6 +3,7 @@ import { HiEye, HiEyeSlash } from "react-icons/hi2";
 import logoVector from "../../../assets/images/Logo-vector.svg";
 import bg from "../../../assets/images/bg-simple.png";
 import { useNavigate } from "react-router-dom";
+import api from "../../../config/api";
 
 export default function PageLogin() {
     const [passwordShown, setPasswordShown] = useState(false);
@@ -24,12 +25,28 @@ export default function PageLogin() {
         }
     }, [username, password]);
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (username === "admin" && password === "admin") {
-            navigate("/admin/industri");
-        } else {
-            alert("Username atau Password salah");
+
+        try {
+            const response = await api.post("/admin/login", {
+                username,
+                password
+            });
+            console.log(response.data);
+
+            if (response.data.status === false) {
+                alert("Username atau Password salah");
+            } else {
+                navigate("/admin/industri");
+            }
+        } catch (error) {
+            // console.log(error);
+            if (error.response.status === 404) {
+                alert("Username atau Password salah");
+            } else {
+                alert("Something went wrong");
+            }
         }
     };
 

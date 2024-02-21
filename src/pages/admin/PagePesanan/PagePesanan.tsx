@@ -248,7 +248,11 @@ export default function PagePesanan() {
                         return (
                             <button
                                 onClick={(e) => {
-                                    navigate("/invoice/" + rowData._id);
+                                    navigate(
+                                        "/invoice/" +
+                                            rowData._id +
+                                            "?admin=true"
+                                    );
                                 }}
                                 className="p-2 m-2 text-sm text-white bg-blue-500 rounded-md whitespace-nowrap"
                             >

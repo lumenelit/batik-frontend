@@ -74,8 +74,7 @@ export default function ModalInvoice({
                                         <button
                                             className="px-4 py-2 text-white rounded-md bg-primary-500 hover:bg-primary-600"
                                             onClick={() =>
-                                                navigate(
-                                                    `/invoice/${idPesanan}`
+                                                navigate(`/invoice/${idPesanan}`
                                                 )
                                             }
                                         >

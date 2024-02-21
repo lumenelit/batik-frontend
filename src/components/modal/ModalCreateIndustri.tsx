@@ -52,6 +52,24 @@ export default function ModalCreateIndustri({
     const navigate = useNavigate();
 
     const handleSubmit = async () => {
+        if (
+            !industriBody.nama ||
+            !industriBody.pemilik ||
+            !industriBody.kontak ||
+            !industriBody.desc ||
+            !industriBody.alamat ||
+            !industriBody.coordinate.lat ||
+            !industriBody.coordinate.long ||
+            !imagePreviews[0] ||
+            !cabangList[0] ||
+            !eCommerceList.length ||
+            cabangList.length < 1 ||
+            eCommerceList.length < 1 ||
+            sosmedList.length < 1
+        ) {
+            alert("Please fill in all fields");
+            return;
+        }
         const image1 = imagePreviews[0];
         const image2 = imagePreviews[1];
         const image3 = imagePreviews[2];
@@ -404,8 +422,9 @@ export default function ModalCreateIndustri({
                                     <div className="w-1/2">
                                         <div>
                                             <h2 className="text-xl font-semibold">
-                                                {t("image")} {t("minimalImage")}
+                                                {t("image")}
                                             </h2>
+                                            <p>{t("minimalImage")}</p>
                                             <div className="flex gap-4 mb-4">
                                                 <input
                                                     type="file"

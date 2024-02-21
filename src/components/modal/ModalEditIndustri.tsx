@@ -103,27 +103,6 @@ export default function ModalEditIndustri({
         }[];
         const alamatCabang = cabangList.filter((item) => item !== "");
 
-        // setIndustriBody({
-        //     ...industriBody,
-        //     nama: industriBody.nama || industriData.nama,
-        //     pemilik: industriBody.pemilik || industriData.pemilik,
-        //     kontak: industriBody.kontak || industriData.kontak,
-        //     desc: industriBody.desc || industriData.desc,
-        //     alamat: industriBody.alamat || industriData.alamat,
-        //     coordinate: {
-        //         lat:
-        //             industriBody.coordinate?.lat || industriData.coordinate.lat,
-        //         long:
-        //             industriBody.coordinate?.long ||
-        //             industriData.coordinate.long
-        //     },
-        //     image1: image1 || industriData.image1,
-        //     image2: image2 || industriData.image2,
-        //     image3: image3 || industriData.image3,
-        //     eCommerce: eCommerce || industriData.eCommerce,
-        //     sosmed: sosmed || industriData.sosmed,
-        //     alamatCabang: alamatCabang || industriData.alamatCabang
-        // });
         const body = await {
             ...industriBody,
             nama: industriBody.nama || industriData.nama,
@@ -145,12 +124,6 @@ export default function ModalEditIndustri({
             sosmed: sosmed || industriData.sosmed,
             alamatCabang: alamatCabang || industriData.alamatCabang
         };
-        console.log(body);
-        console.log(industriBody);
-        // setModalIndustri(false);
-        // setInterval(() => {
-        //     setIsSubmitting(true);
-        // }, 5000);
         try {
             api.patch(`/industri/${industriData._id}`, await body).then(
                 (res) => {

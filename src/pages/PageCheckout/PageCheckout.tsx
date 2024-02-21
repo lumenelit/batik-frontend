@@ -61,19 +61,6 @@ export default function PageCheckout() {
                         res.data.data[0].image1
                     ]);
                 }
-                // if (res.data.data[0].image2) {
-                //     setMotifImage((motifImage) => [
-                //         ...motifImage,
-                //         res.data.data[0].image2
-                //     ]);
-                // }
-                // if (res.data.data[0].image3) {
-                //     setMotifImage((motifImage) => [
-                //         ...motifImage,
-                //         res.data.data[0].image3
-                //     ]);
-                // }
-                // console.log(res.data.data[0]);
             });
         } catch (error) {
             console.log(error);
@@ -112,9 +99,6 @@ export default function PageCheckout() {
                 idMotif: idMotif
                 // date: new Date().toISOString(),
             };
-            console.log(mirror);
-
-            console.log("body", body);
 
             if (
                 body.namaPembeli === "" ||
@@ -124,7 +108,10 @@ export default function PageCheckout() {
                 body.reqTambahan === "" ||
                 body.jumlah === 0 ||
                 body.hargaMotif === 0 ||
-                body.totalHarga === 0
+                body.totalHarga === 0 ||
+                body.kontakPembeli === "" ||
+                (!mirror && body.namaPenerima === "") ||
+                (!mirror && body.kontakPenerima === "")
             ) {
                 alert("Mohon isi semua data");
                 return;
@@ -182,6 +169,12 @@ export default function PageCheckout() {
                             <div className="flex flex-col w-full gap-2 h-fit">
                                 <div className="w-full text-base font-normal leading-snug indent-1">
                                     Nama pembeli
+                                    <span
+                                        className="text-red-500"
+                                        title="Wajib diisi"
+                                    >
+                                        *
+                                    </span>
                                 </div>
                                 <input
                                     type="text"
@@ -209,6 +202,12 @@ export default function PageCheckout() {
                             <div className="flex flex-col w-full gap-2 h-fit">
                                 <div className="w-full text-base font-normal leading-snug indent-1">
                                     Whatsapp
+                                    <span
+                                        className="text-red-500"
+                                        title="Wajib diisi"
+                                    >
+                                        *
+                                    </span>
                                 </div>
                                 <input
                                     type="text"
@@ -224,6 +223,12 @@ export default function PageCheckout() {
                             <div className="flex flex-col w-full gap-2 h-fit">
                                 <div className="w-full text-base font-normal leading-snug indent-1">
                                     Catatan untuk penjual
+                                    <span
+                                        className="text-red-500"
+                                        title="Wajib diisi"
+                                    >
+                                        *
+                                    </span>
                                 </div>
                                 <textarea
                                     className="flex-col px-5 py-2 h-[120px] rounded-lg border border-slate-200 active:border-slate-200 resize-none"
@@ -238,6 +243,12 @@ export default function PageCheckout() {
                             <div className="flex flex-col w-full gap-2 h-fit">
                                 <div className="w-full text-base font-normal leading-snug indent-1">
                                     Metode pengiriman
+                                    <span
+                                        className="text-red-500"
+                                        title="Wajib diisi"
+                                    >
+                                        *
+                                    </span>
                                 </div>
                                 <select
                                     className="px-5 h-[50px] rounded-lg border border-slate-200 justify-center  active:border-slate-200 items-center"
@@ -271,6 +282,12 @@ export default function PageCheckout() {
                             <div className="flex flex-col w-full gap-2 h-fit">
                                 <div className="w-full text-base font-normal leading-snug indent-1">
                                     Alamat
+                                    <span
+                                        className="text-red-500"
+                                        title="Wajib diisi"
+                                    >
+                                        *
+                                    </span>
                                 </div>
                                 <textarea
                                     className="flex-col px-5 py-2 h-[120px] rounded-lg border border-slate-200 active:border-slate-200 resize-none"
@@ -306,6 +323,12 @@ export default function PageCheckout() {
                             >
                                 <div className="w-full text-base font-normal leading-snug indent-1">
                                     Nama penerima
+                                    <span
+                                        className="text-red-500"
+                                        title="Wajib diisi"
+                                    >
+                                        *
+                                    </span>
                                 </div>
                                 <input
                                     type="text"
@@ -326,6 +349,12 @@ export default function PageCheckout() {
                             >
                                 <div className="w-full text-base font-normal leading-snug indent-1">
                                     Whatsapp penerima
+                                    <span
+                                        className="text-red-500"
+                                        title="Wajib diisi"
+                                    >
+                                        *
+                                    </span>
                                 </div>
                                 <input
                                     type="text"

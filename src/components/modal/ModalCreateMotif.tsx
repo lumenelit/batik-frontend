@@ -31,31 +31,42 @@ export default function ModalCreateMotif({
     const { t } = useTranslation();
 
     const handleSubmit = async () => {
-        const idMotif = Math.random().toString(36).substr(2, 9);
-        const image1 = imagePreviews[0];
-        // const image2 = imagePreviews[1];
-        // const image3 = imagePreviews[2];
-
-        // setMotifBody({
-        //     ...motifBody,
-        //     idMotif,
-        //     idIndustri,
-        //     image1,
-        //     image2,
-        //     image3
-        // });
-        const body = {
-            ...motifBody,
-            idMotif,
-            idIndustri,
-            image1
-            // image2,
-            // image3
-        };
-
-        console.log(motifBody);
-
         try {
+            if (
+                !motifBody ||
+                !motifBody.nama ||
+                !motifBody.harga ||
+                !motifBody.desc
+            ) {
+                alert("Nama, harga, dan deskripsi tidak boleh kosong");
+                return;
+            }
+            console.log(motifBody);
+
+            const idMotif = Math.random().toString(36).substr(2, 9);
+            const image1 = imagePreviews[0];
+            // const image2 = imagePreviews[1];
+            // const image3 = imagePreviews[2];
+
+            // setMotifBody({
+            //     ...motifBody,
+            //     idMotif,
+            //     idIndustri,
+            //     image1,
+            //     image2,
+            //     image3
+            // });
+            const body = {
+                ...motifBody,
+                idMotif,
+                idIndustri,
+                image1
+                // image2,
+                // image3
+            };
+
+            console.log(motifBody);
+
             api.post("/motif", await body).then((res) => {
                 console.log(res);
                 window.location.reload();

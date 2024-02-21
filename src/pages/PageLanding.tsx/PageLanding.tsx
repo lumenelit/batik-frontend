@@ -7,8 +7,8 @@ export default function PageLanding() {
     return (
         <div className="h-screen bg-cover bg-landing-background">
             <div className=" mx-[20%] flex flex-col items-center justify-between h-screen">
-                {/* <header className=""> */}
-                <Header />
+                {/* <header className="z-50"> */}
+                <Header landing={true} />
                 {/* </header> */}
                 <div className="absolute flex flex-col items-center justify-center w-[70%] text-center h-full">
                     <h1 className="text-3xl md:text-5xl md:leading-none font-bold text-[#32768A] mb-5 ">

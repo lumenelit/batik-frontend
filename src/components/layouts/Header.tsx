@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { Switch } from "@headlessui/react";
 import { useTranslation } from "react-i18next";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, Navigate } from "react-router-dom";
 
 type HeaderProps = {
     admin?: boolean;
+    landing?: boolean;
     hide?: boolean;
 };
 
-export default function Header({ admin, hide }: HeaderProps) {
+export default function Header({ admin, landing, hide }: HeaderProps) {
     const [enabled, setEnabled] = useState(false);
     const { i18n } = useTranslation();
 
@@ -22,7 +23,7 @@ export default function Header({ admin, hide }: HeaderProps) {
 
     return (
         <div
-            className={`w-full h-[81px] items-center inline-flex bg-white shadow-xl rounded-2xl px-5 my-6 ${
+            className={`w-full h-[81px] items-center inline-flex bg-white shadow-xl rounded-2xl px-5 my-6 z-10 ${
                 hide ? "invisible" : ""
             }`}
         >
@@ -72,6 +73,17 @@ export default function Header({ admin, hide }: HeaderProps) {
                     >
                         Pesanan
                     </NavLink>
+                </div>
+            )}
+
+            {!admin && landing && (
+                <div className="w-full text-end">
+                    <Link
+                        className="p-1 px-2.5 text-white rounded-xl button bg-primary-200"
+                        to={"/login"}
+                    >
+                        Admin
+                    </Link>
                 </div>
             )}
         </div>

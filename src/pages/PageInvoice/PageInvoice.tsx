@@ -1,5 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import {
+    Link,
+    useNavigate,
+    useParams,
+    useSearchParams
+} from "react-router-dom";
 import * as htmlToImage from "html-to-image";
 import { saveAs } from "file-saver";
 import "primeicons/primeicons.css";
@@ -35,6 +40,8 @@ export default function PageInvoice() {
     const navigate = useNavigate();
     const { idPesanan } = useParams();
     const webViewRef = useRef(null);
+    const [searchParams, setSearchParams] = useSearchParams();
+    const isAdmin = searchParams.get("admin");
     const [motifImage, setMotifImage] = useState<motifImage>();
     const [pesananData, setPesananData] = useState<PesananData>({
         _id: "",
@@ -221,27 +228,40 @@ export default function PageInvoice() {
                                 </div>
                             </div>
 
-                            <Link
-                                className={`flex items-center justify-center w-full py-3 font-semibold text-white rounded-lg bg-primary-500 ${
-                                    loadingDownload ? "hidden" : ""
-                                } `}
-                                to="javascript:javascript:history.go(-1)"
-                            >
-                                Kembali ke Dashboard
-                            </Link>
-                            <button
-                                className={`w-full px-4 py-2 mt-2 font-bold text-white bg-red-500 rounded-lg hover:bg-red-700 ${
-                                    loadingDownload ? "hidden" : ""
-                                }`}
-                                onClick={async () => {
-                                    const res = await api.delete(
-                                        "/pesanan/${}"
-                                    );
-                                }}
-                            >
-                                <i className="mr-3 text-white fas fa-trash"></i>
-                                Delete
-                            </button>
+                            {isAdmin ? (
+                                <Link
+                                    className={`flex items-center justify-center w-full py-3 font-semibold text-white rounded-lg bg-primary-500 ${
+                                        loadingDownload ? "hidden" : ""
+                                    } `}
+                                    to="javascript:javascript:history.go(-1)"
+                                >
+                                    Kembali ke Dashboard
+                                </Link>
+                            ) : (
+                                <Link
+                                    className={`flex items-center justify-center w-full py-3 font-semibold text-white rounded-lg bg-primary-500 ${
+                                        loadingDownload ? "hidden" : ""
+                                    } `}
+                                    to="javascript:javascript:history.go(-3)"
+                                >
+                                    Kembali
+                                </Link>
+                            )}
+                            {isAdmin && (
+                                <button
+                                    className={`w-full px-4 py-2 mt-2 font-bold text-white bg-red-500 rounded-lg hover:bg-red-700 ${
+                                        loadingDownload ? "hidden" : ""
+                                    }`}
+                                    onClick={async () => {
+                                        const res = await api.delete(
+                                            "/pesanan/${}"
+                                        );
+                                    }}
+                                >
+                                    <i className="mr-3 text-white fas fa-trash"></i>
+                                    Delete
+                                </button>
+                            )}
                         </div>
                     </div>
                 </div>
