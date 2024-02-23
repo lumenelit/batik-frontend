@@ -7,45 +7,9 @@ import { HiChevronLeft } from "react-icons/hi2";
 import { useEffect, useState } from "react";
 import api from "../../config/api";
 import { useTranslation } from "react-i18next";
-import blibli from "../../assets/images/icon-blibli.png";
-import bukalapak from "../../assets/images/icon-bukalapak.png";
-import shopee from "../../assets/images/icon-shopee.png";
-import lazada from "../../assets/images/icon-lazada.png";
-import tokopedia from "../../assets/images/icon-tokopedia.png";
 
-function showSosmedLogo(name: string) {
-    const lowerCaseName = name.toLowerCase();
-
-    if (lowerCaseName === "facebook")
-        return <i className="fab fa-facebook-f text-lg"></i>;
-    if (lowerCaseName === "instagram")
-        return <i className="fab fa-instagram  text-lg"></i>;
-    if (lowerCaseName === "whatsapp")
-        return <i className="fab fa-whatsapp  text-lg"></i>;
-    if (lowerCaseName === "twitter")
-        return <i className="fab fa-twitter  text-lg"></i>;
-    if (lowerCaseName === "pinterest")
-        return <i className="fab fa-pinterest  text-lg"></i>;
-
-    return name;
-}
-
-function showShopLogo(eCommerce: string) {
-    const lowerCase = eCommerce.toLowerCase();
-
-    if (lowerCase === "tokopedia")
-        return <img className="h-6 bg-auto" src={tokopedia} />;
-    if (lowerCase === "bukalapak")
-        return <img className="h-6 bg-auto" src={bukalapak} />;
-    if (lowerCase === "shopee")
-        return <img className="h-6 bg-auto" src={shopee} />;
-    if (lowerCase === "lazada")
-        return <img className="h-6 bg-auto" src={lazada} />;
-    if (lowerCase === "blibli")
-        return <img className="h-6 bg-auto" src={blibli} />;
-
-    return eCommerce;
-}
+// import { showShopLogo, showSosmedLogo } from
+import { showShopLogo, showSosmedLogo } from "../../customHooks";
 
 export default function PageIndustri() {
     const { idIndustri } = useParams();
