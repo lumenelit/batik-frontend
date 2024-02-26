@@ -16,10 +16,10 @@ export default function Header({ admin, landing, hide, setLang }: HeaderProps) {
     useEffect(() => {
         if (enabled) {
             i18n.changeLanguage("id");
-            setLang("id");
+            setLang && setLang("id");
         } else {
             i18n.changeLanguage("en");
-            setLang("en");
+            setLang && setLang("en");
         }
     }, [enabled]);
 

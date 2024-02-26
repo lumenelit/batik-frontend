@@ -19,6 +19,7 @@ import api from "../../../config/api";
 import ModalCreateMotif from "../../../components/modal/ModalCreateMotif";
 import ModalEditIndustri from "../../../components/modal/ModalEditIndustri";
 import { useTranslation } from "react-i18next";
+import translate from "translate";
 
 import { showShopLogo, showSosmedLogo } from "../../../customHooks";
 
@@ -31,32 +32,53 @@ export default function PageIndustriEdit() {
     const navigate = useNavigate();
     const { idIndustri } = useParams();
     const { t } = useTranslation();
+    const [lang, setLang] = useState("id");
+    const [description, setDescription] = useState("processing...");
 
     useEffect(() => {
-        try {
-            api.get(`/industri/${idIndustri}`)
-                .then((res) => {
-                    setIndustriData(res.data.data[0]);
-                    console.log("industri: ", res.data.data);
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-            api.get(`/industri/image/${idIndustri}`).then((res) => {
-                setIndustriImage(res.data.data[0]);
-                console.log(res.data.data[0]);
-            });
-        } catch (error) {
-            console.log(error);
-        }
-    }, []);
+        const fetchData = async () => {
+            try {
+                const industriResponse = await api.get(
+                    `/industri/${idIndustri}`
+                );
+                setIndustriData(industriResponse.data.data[0]);
+                console.log("industri: ", industriResponse.data.data);
+
+                const descriptionText =
+                    lang === "en"
+                        ? await translateToEnglish(
+                              industriResponse.data.data[0].desc
+                          )
+                        : industriResponse.data.data[0].desc;
+                setDescription(descriptionText);
+
+                const imageResponse = await api.get(
+                    `/industri/image/${idIndustri}`
+                );
+                setIndustriImage(imageResponse.data.data[0]);
+                // console.log(imageResponse.data.data[0]);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        fetchData();
+    }, [idIndustri, lang]);
+
+    const translateToEnglish = async (text) => {
+        return await translate(text, {
+            from: "id",
+            to: "en",
+            engine: "google"
+        });
+    };
 
     useEffect(() => {
         try {
             api.get(`/motif/industri/${idIndustri}`)
                 .then((res) => {
                     setMotifData(res.data.data);
-                    console.log("motif: ", res.data.data);
+                    // console.log("motif: ", res.data.data);
                 })
                 .catch((err) => {
                     console.log(err);
@@ -108,7 +130,7 @@ export default function PageIndustriEdit() {
                 industriData={industriData}
             />
             <Container center={true}>
-                <Header />
+                <Header setLang={setLang} />
                 <div className="flex flex-row items-start gap-5">
                     <div className="w-1/2 max-w-[400px] h-fit flex justify-center gap-4 flex-col">
                         {/* <Link
@@ -157,7 +179,7 @@ export default function PageIndustriEdit() {
                                 <div className="relative w-full ">
                                     <div>{t("desc")}</div>
                                     <div className="w-full text-sm font-normal">
-                                        {industriData.desc}
+                                        {description}
                                     </div>
                                 </div>
                                 <div className="relative w-full">
