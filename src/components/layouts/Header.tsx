@@ -1,23 +1,25 @@
 import { useEffect, useState } from "react";
 import { Switch } from "@headlessui/react";
 import { useTranslation } from "react-i18next";
-import { Link, NavLink, Navigate } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
-type HeaderProps = {
+interface HeaderProps {
     admin?: boolean;
     landing?: boolean;
     hide?: boolean;
-};
+    setLang?: any;
+}
 
-export default function Header({ admin, landing, hide }: HeaderProps) {
+export default function Header({ admin, landing, hide, setLang }: HeaderProps) {
     const [enabled, setEnabled] = useState(false);
     const { i18n } = useTranslation();
-
     useEffect(() => {
         if (enabled) {
             i18n.changeLanguage("id");
+            setLang("id");
         } else {
             i18n.changeLanguage("en");
+            setLang("en");
         }
     }, [enabled]);
 

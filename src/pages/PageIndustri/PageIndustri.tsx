@@ -7,6 +7,7 @@ import { HiChevronLeft } from "react-icons/hi2";
 import { useEffect, useState } from "react";
 import api from "../../config/api";
 import { useTranslation } from "react-i18next";
+import translate from "translate";
 
 // import { showShopLogo, showSosmedLogo } from
 import { showShopLogo, showSosmedLogo } from "../../customHooks";
@@ -17,13 +18,19 @@ export default function PageIndustri() {
     const [industriImage, setIndustriImage] = useState(null);
     const [motifData, setMotifData] = useState([]);
     const { t } = useTranslation();
+    const [lang, setLang] = useState("id");
+
+    // const trans = true;
+    const [description, setDescription] = useState("");
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const res = await api.get(`/industri/${idIndustri}`);
                 setIndustri(res.data.data[0]);
-                console.log("get", res.data.data);
+                console.log(res.data.data[0].desc);
+                const desc = await translateToEnglish(res.data.data[0].desc);
+                setDescription(desc);
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
@@ -33,7 +40,6 @@ export default function PageIndustri() {
             try {
                 const res = await api.get(`/industri/image/${idIndustri}`);
                 setIndustriImage(res.data.data[0]);
-                console.log("image", res.data.data);
             } catch (error) {
                 console.error("Error fetching image data:", error);
             }
@@ -46,7 +52,6 @@ export default function PageIndustri() {
             api.get(`/motif/industri/${idIndustri}`)
                 .then((res) => {
                     setMotifData(res.data.data);
-                    console.log("motif: ", res.data.data);
                 })
                 .catch((err) => {
                     console.log(err);
@@ -56,10 +61,32 @@ export default function PageIndustri() {
         }
     }, []);
 
+    useEffect(() => {
+        if (lang === "id") {
+            setDescription(industri && industri.desc);
+        } else {
+            translateToEnglish(industri && industri.desc).then((res) => {
+                setDescription(res);
+            });
+        }
+        // setDescription(industri.desc);
+    }, [lang]);
+
+    const translateToEnglish = async (text) => {
+        // if (lang === "en") {
+        return await translate(text, {
+            from: "id",
+            to: "en",
+            engine: "google"
+        });
+        // } else {
+        //     return text;
+        // }
+    };
     return (
         <>
             <Container center={true}>
-                <Header />
+                <Header setLang={setLang} />
                 <div className="flex flex-col items-start gap-5">
                     <div className="flex flex-col justify-center w-full gap-4 cursor-default h-fit">
                         {/* <Link
@@ -85,7 +112,7 @@ export default function PageIndustri() {
                                         <div className="relative w-full ">
                                             <div>{t("desc")}</div>
                                             <div className="w-full text-lg font-normal">
-                                                {industri.desc}
+                                                {description}
                                             </div>
                                         </div>
                                         <div className="relative w-full">

@@ -112,24 +112,6 @@ export default function PageLogin() {
                                 maksimal.
                             </p>
                         </div>
-                        {/* <button
-                            type="submit"
-                            disabled={isPasswordEmpty}
-                            className={`flex justify-end items-center text-white w-[80px] h-[60px] mt-[25px] ${
-                                isPasswordEmpty
-                                    ? "bg-gray-200 cursor-not-allowed"
-                                    : "bg-primary-300 "
-                            }  text-[20px] font-medium hover:w-full p-0 rounded-[20px] relative  transition-all ease-in-out duration-300 shadow-primary-500 shadow-2xl`}
-                        >
-                            <span className="w-full text-center">Login</span>
-                            <i
-                                className={`flex justify-center items-center fa-solid fa-arrow-right text-2xl text-white ${
-                                    isPasswordEmpty
-                                        ? "bg-gray-400 cursor-not-allowed"
-                                        : "bg-primary-500 hover:w-full"
-                                }  z-10 -ml-[80px] rounded-[20px] w-[80px] h-[60px] shadow-sm`}
-                            />
-                        </button> */}
                         <button
                             type="submit"
                             disabled={isPasswordEmpty}
