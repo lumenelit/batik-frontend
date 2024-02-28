@@ -43,23 +43,17 @@ export default function PageIndustri() {
     }, [idIndustri, lang]);
 
     useEffect(() => {
-        const fetchMotifData = async () => {
-            try {
-                const [motifPage1Res, motifPage2Res] = await Promise.all([
-                    api.get(`/motif/industri/${idIndustri}?page=1`),
-                    api.get(`/motif/industri/${idIndustri}?page=2`)
-                ]);
-                const motifDataMerged = [
-                    ...motifPage1Res.data.data,
-                    ...motifPage2Res.data.data
-                ];
-                setMotifData(motifDataMerged);
-            } catch (error) {
-                console.error("Error fetching motif data:", error);
-            }
-        };
-
-        fetchMotifData();
+        try {
+            api.get(`/motif/industri/${idIndustri}`)
+                .then((res) => {
+                    setMotifData(res.data.data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        } catch (error) {
+            console.log(error);
+        }
     }, [idIndustri]);
 
     const translateToEnglish = async (text) => {
