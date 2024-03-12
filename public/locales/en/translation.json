@@ -58,9 +58,16 @@
     "buyNow": "Buy Now",
     "viewDetails": "View Detail",
 
+    "delete": "delete",
     "done": "Done",
     "date": "Date",
     "recieverName": "Reciever Name",
     "totalPrice": "Total Price",
-    "sendMethod": "Send Method"
+    "shippingMethod": "Shipping Method",
+
+    "buyerName": "Buyer Name",
+    "noteForSeller": "Note for seller",
+    "orderDetail": "Order Detail",
+    "recieverDetail":"Receiver Detail",
+    "sameBuyerAndReciever":"Same buyer and receiver detail"
 }

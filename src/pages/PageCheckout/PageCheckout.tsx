@@ -5,6 +5,7 @@ import Container from "../../components/layouts/Container";
 import api from "../../config/api";
 import { HiMinus, HiPlus, HiChevronLeft } from "react-icons/hi2";
 import ModalInvoice from "../../components/modal/ModalInvoice";
+import { useTranslation } from "react-i18next";
 
 type PesananBody = {
     _id: string;
@@ -40,6 +41,7 @@ export default function PageCheckout() {
     const [mirror, setMirror] = useState(false);
     const [modalInvoice, setModalInvoice] = useState(false);
     const [idPesanan, setIdPesanan] = useState("");
+    const { t } = useTranslation();
 
     useEffect(() => {
         try {
@@ -164,11 +166,11 @@ export default function PageCheckout() {
                     <div className="flex flex-row-reverse gap-2 min-w-1/2 h-fit">
                         <div className="min-w-[790px] h-fit flex flex-col p-4 mb-5 bg-white rounded-xl shadow-primary justify-start items-start gap-4">
                             <div className="text-xl font-semibold ">
-                                Rincian pembeli
+                                {t("orderDetail")}
                             </div>
                             <div className="flex flex-col w-full gap-2 h-fit">
                                 <div className="w-full text-base font-normal leading-snug indent-1">
-                                    Nama pembeli
+                                    {t("buyerName")}
                                     <span
                                         className="text-red-500"
                                         title="Wajib diisi"
@@ -201,7 +203,7 @@ export default function PageCheckout() {
                             </div>
                             <div className="flex flex-col w-full gap-2 h-fit">
                                 <div className="w-full text-base font-normal leading-snug indent-1">
-                                    Whatsapp
+                                    {t("contact")}
                                     <span
                                         className="text-red-500"
                                         title="Wajib diisi"
@@ -222,7 +224,7 @@ export default function PageCheckout() {
                             </div>
                             <div className="flex flex-col w-full gap-2 h-fit">
                                 <div className="w-full text-base font-normal leading-snug indent-1">
-                                    Catatan untuk penjual
+                                    {t("noteForSeller")}
                                     <span
                                         className="text-red-500"
                                         title="Wajib diisi"
@@ -242,7 +244,7 @@ export default function PageCheckout() {
                             </div>
                             <div className="flex flex-col w-full gap-2 h-fit">
                                 <div className="w-full text-base font-normal leading-snug indent-1">
-                                    Metode pengiriman
+                                    {t("shippingMethod")}
                                     <span
                                         className="text-red-500"
                                         title="Wajib diisi"
@@ -281,7 +283,7 @@ export default function PageCheckout() {
                             </div>
                             <div className="flex flex-col w-full gap-2 h-fit">
                                 <div className="w-full text-base font-normal leading-snug indent-1">
-                                    Alamat
+                                    {t("address")}
                                     <span
                                         className="text-red-500"
                                         title="Wajib diisi"
@@ -301,7 +303,7 @@ export default function PageCheckout() {
                             </div>
                             <div className="inline-flex items-center justify-start gap-5">
                                 <div className="text-xl font-semibold ">
-                                    Rincian penerima
+                                    {t("recieverDetail")}
                                 </div>
                                 <div className="flex flex-row items-end gap-1">
                                     <input
@@ -312,7 +314,7 @@ export default function PageCheckout() {
                                         onClick={() => setMirror(!mirror)}
                                     ></input>
                                     <div className="text-xs font-normal leading-none text-slate-400">
-                                        Rincian penerima sama dengan pembeli
+                                        {t("sameBuyerAndReciever")}
                                     </div>
                                 </div>
                             </div>
@@ -322,7 +324,7 @@ export default function PageCheckout() {
                                 }`}
                             >
                                 <div className="w-full text-base font-normal leading-snug indent-1">
-                                    Nama penerima
+                                    {t("recieverName")}
                                     <span
                                         className="text-red-500"
                                         title="Wajib diisi"
@@ -348,7 +350,7 @@ export default function PageCheckout() {
                                 }`}
                             >
                                 <div className="w-full text-base font-normal leading-snug indent-1">
-                                    Whatsapp penerima
+                                    {t("contact")}
                                     <span
                                         className="text-red-500"
                                         title="Wajib diisi"
@@ -386,11 +388,11 @@ export default function PageCheckout() {
                             />
                             <div className="self-stretch h-[78px] flex-col justify-start items-start gap-2 flex">
                                 <div className="text-xl font-semibold ">
-                                    Rincian pesanan
+                                    {t("orderDetail")}
                                 </div>
                                 <div className="inline-flex items-center self-stretch justify-center gap-2">
                                     <div className="text-base font-normal ">
-                                        Harga
+                                        {t("price")}
                                     </div>
                                     <div className="text-base font-normal text-right grow shrink (basis-0">
                                         {formatRupiah(motifData.harga) || 0}
@@ -398,7 +400,7 @@ export default function PageCheckout() {
                                 </div>
                                 <div className="inline-flex items-center self-stretch justify-between">
                                     <div className="text-base font-normal ">
-                                        Banyak pesanan
+                                        {t("totalOrder")}
                                     </div>
                                     <div className="px-2 rounded-[14px] bg-primary-500 justify-center items-center gap-1 flex">
                                         <div
@@ -440,7 +442,7 @@ export default function PageCheckout() {
                             </div>
                             <div className="inline-flex items-center self-stretch justify-center gap-2">
                                 <div className="text-base font-normal ">
-                                    Total
+                                    {t("totalPrice")}
                                 </div>
                                 <div className="text-base font-normal text-right grow shrink basis-0">
                                     {getTotalHarga() || 0}

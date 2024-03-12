@@ -233,7 +233,7 @@ export default function PagePesanan() {
                 />
                 <Column
                     field="metodePengiriman"
-                    header={t("sendMethod")}
+                    header={t("shippingMethod")}
                     body={(rowData) => {
                         return (
                             <span className="p-1 px-2 text-sm font-semibold text-blue-700 border border-blue-700 rounded-sm whitespace-nowrap">

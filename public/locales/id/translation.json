@@ -51,6 +51,7 @@
     "orderList": "Daftar Pesanan",
     "recieverContact": "Kontak Penerima",
 
+    "delete": "hapus",
     "done": "Selesai",
     "date": "tanggal",
     "recieverName": "Nama Penerima",
@@ -63,5 +64,11 @@
     "invoiceButton": "Kembali ke Beranda",
     "invoiceButton2": "Lihat Pesanan",
     "buyNow": "Beli Sekarang",
-    "viewDetails": "Lihat detail"
+    "viewDetails": "Lihat detail",
+
+    "buyerName": "Nama Pembeli",
+    "noteForSeller": "Catatan untuk Penjual",
+    "orderDetail": "Rincian pesanan",
+    "recieverDetail": "Rincian Penerima",
+    "sameBuyerAndReciever": "Rincian penerima sama dengan pembeli"
 }

@@ -12,6 +12,10 @@ import "primeicons/primeicons.css";
 import Header from "../../components/layouts/Header";
 import Container from "../../components/layouts/Container";
 import api from "../../config/api";
+import { useTranslation } from "react-i18next";
+
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
 type PesananData = {
     _id: string;
@@ -62,20 +66,24 @@ export default function PageInvoice() {
         __v: 0
     });
     const [loadingDownload, setLoadingDownload] = useState(false);
+    const { t } = useTranslation();
 
     const handleDownload = async () => {
-        setLoadingDownload(true);
+        await setLoadingDownload(true);
         try {
-            await htmlToImage
-                .toPng(webViewRef.current)
-                .then(function (dataUrl) {
-                    saveAs(dataUrl, "webview.png");
-                })
-                .catch(function (error) {
-                    console.error("Error:", error);
-                });
-        } catch (e) {
-            console.log("error", e);
+            const canvas = await html2canvas(webViewRef.current);
+            const imageData = canvas.toDataURL("image/png");
+
+            const pdf = new jsPDF({
+                orientation: "l", // Portrait orientation
+                unit: "pt", // Points, default value is 'mm'
+                format: [canvas.width, canvas.height] // Matches the canvas size
+            });
+
+            pdf.addImage(imageData, "PNG", 0, 0, canvas.width, canvas.height);
+            await pdf.save("webview.pdf");
+        } catch (error) {
+            console.error("Error:", error);
             alert("Error");
         }
         setLoadingDownload(false);
@@ -112,12 +120,12 @@ export default function PageInvoice() {
         <>
             <Container center={true} ss={webViewRef} loading={loadingDownload}>
                 <Header hide={loadingDownload} />
-                <div className="flex flex-row justify-center items-start gap-4 font-['Poppins'] text-primary">
+                <div className="flex flex-row justify-center items-start gap-4 font-['Poppins'] text-primary mb-24">
                     <div className="flex flex-col w-full gap-4 p-4 bg-white shadow-primary rounded-xl">
                         <div>
                             <div className="flex flex-row items-center justify-between w-full gap-4 mb-5">
                                 <h1 className="text-xl font-semibold">
-                                    Data Pesanan - {idPesanan}
+                                    {t("orderDetail")} - {idPesanan}
                                 </h1>
                                 <button
                                     onClick={handleDownload}
@@ -138,31 +146,31 @@ export default function PageInvoice() {
                             </div>
                             <div className="flex flex-col gap-4">
                                 <div className="flex justify-between">
-                                    <span>Nama pemesan</span>
+                                    <span>{t("buyerName")}</span>
                                     <span className="max-w-xs text-end">
                                         {pesananData.namaPembeli}
                                     </span>
                                 </div>
                                 <div className="flex justify-between">
-                                    <span>Whatsapp</span>
+                                    <span>{t("contact")}</span>
                                     <span className="max-w-xs text-end">
                                         {pesananData.kontakPembeli}
                                     </span>
                                 </div>
                                 <div className="flex justify-between">
-                                    <span>Catatan</span>
+                                    <span>{t("noteForSeller")}</span>
                                     <span className="max-w-xs text-end">
                                         {pesananData.reqTambahan}
                                     </span>
                                 </div>
                                 <div className="flex justify-between">
-                                    <span>Metode Pengiriman</span>
+                                    <span>{t("shippingMethod")}</span>
                                     <span className="max-w-xs text-end">
                                         {pesananData.metodePengiriman}
                                     </span>
                                 </div>
                                 <div className="flex justify-between">
-                                    <span>Alamat Pengiriman</span>
+                                    <span>{t("address")}</span>
                                     <span className="max-w-xs text-end">
                                         {pesananData.alamat}
                                     </span>
@@ -171,17 +179,17 @@ export default function PageInvoice() {
                         </div>
                         <div>
                             <h1 className="text-xl font-semibold ">
-                                Data Penerima
+                                {t("recieverDetail")}
                             </h1>
                             <div className="flex flex-col gap-4">
                                 <div className="flex justify-between">
-                                    <span>Nama Penerima</span>
+                                    <span>{t("recieverName")}</span>
                                     <span className="max-w-xs text-end">
                                         {pesananData.namaPenerima}
                                     </span>
                                 </div>
                                 <div className="flex justify-between">
-                                    <span>Whatsapp</span>
+                                    <span>{t("contact")}</span>
                                     <span className="max-w-xs text-end">
                                         {pesananData.kontakPenerima}
                                     </span>
@@ -206,13 +214,7 @@ export default function PageInvoice() {
                             />
                             <div className="flex flex-col gap-4 mb-4">
                                 <div className="flex justify-between">
-                                    <span>Nama Penerima</span>
-                                    <span className="max-w-xs text-end">
-                                        {pesananData.namaPenerima}
-                                    </span>
-                                </div>
-                                <div className="flex justify-between">
-                                    <span>Banyak pesanan</span>
+                                    <span>{t("totalOrder")}</span>
                                     <span className="max-w-xs text-end">
                                         {pesananData.jumlah}
                                     </span>
@@ -221,7 +223,7 @@ export default function PageInvoice() {
                             <hr className="mb-4" />
                             <div className="flex flex-col gap-4 mb-4">
                                 <div className="flex justify-between">
-                                    <span>Total</span>
+                                    <span>{t("totalPrice")}</span>
                                     <span className="max-w-xs text-end">
                                         {pesananData.totalHarga}
                                     </span>
@@ -253,13 +255,18 @@ export default function PageInvoice() {
                                         loadingDownload ? "hidden" : ""
                                     }`}
                                     onClick={async () => {
-                                        const res = await api.delete(
-                                            "/pesanan/${}"
-                                        );
+                                        try {
+                                            const res = await api.delete(
+                                                `/pesanan/${pesananData._id}`
+                                            );
+                                            navigate(-1);
+                                        } catch (err) {
+                                            alert(err);
+                                        }
                                     }}
                                 >
                                     <i className="mr-3 text-white fas fa-trash"></i>
-                                    Delete
+                                    {t("Delete")}
                                 </button>
                             )}
                         </div>
