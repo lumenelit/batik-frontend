@@ -27,8 +27,8 @@ export const ROUTES = {
     // Admin Divider
     ADMIN_LOGIN: "/admin",
     ADMIN_INDUSTRI: "/admin/industri",
-    ADMIN_INDUSTRI_EDIT: "/admin/industri/edit/:idIndustri",
-    ADMIN_MOTIF_EDIT: "/admin/motif/edit/:idMotif",
+    ADMIN_INDUSTRI_EDIT: "/admin/industri/:idIndustri",
+    ADMIN_MOTIF_EDIT: "/admin/motif/:idMotif",
     ADMIN_PESANAN: "/admin/pesanan"
 };
 

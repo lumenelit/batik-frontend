@@ -115,7 +115,7 @@ export default function ModalCreateIndustri({
         try {
             api.post("/industri", await body).then((res) => {
                 console.log(res);
-                navigate(`/admin/industri/edit/${res.data.data._id}`);
+                navigate(`/admin/industri/${res.data.data._id}`);
             });
         } catch (error) {
             console.log(error);

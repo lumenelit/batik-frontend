@@ -21,7 +21,7 @@ export default function MotifCard({ data, haveDelete, admin }: MotifCardProps) {
 
     const handleClickCard = () => {
         if (admin) {
-            navigate(`/admin/motif/edit/${data._id}`);
+            navigate(`/admin/motif/${data._id}`);
         }
         if (!admin) {
             navigate(`/motif/${data._id}`);

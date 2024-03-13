@@ -22,6 +22,7 @@ import { useTranslation } from "react-i18next";
 import translate from "translate";
 
 import { showShopLogo, showSosmedLogo } from "../../../customHooks";
+import i18next from "i18next";
 
 export default function PageIndustriEdit() {
     const [industriData, setIndustriData] = useState(null);
@@ -32,7 +33,7 @@ export default function PageIndustriEdit() {
     const navigate = useNavigate();
     const { idIndustri } = useParams();
     const { t } = useTranslation();
-    const [lang, setLang] = useState("id");
+    const [lang, setLang] = useState(i18next.language);
     const [description, setDescription] = useState("processing...");
 
     useEffect(() => {

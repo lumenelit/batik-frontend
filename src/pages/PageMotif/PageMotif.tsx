@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { HiChevronLeft } from "react-icons/hi2";
 import api from "../../config/api";
 import { useTranslation } from "react-i18next";
+import i18next from "i18next";
+import translate from "translate";
 
 function formatRupiah(int) {
     let rupiah = new Intl.NumberFormat("id-ID", {
@@ -22,18 +24,37 @@ export default function PageMotif() {
     const [motifImage, setMotifImage] = useState([]);
     const [loading, setLoading] = useState(true);
     const { t } = useTranslation();
+    const [lang, setLang] = useState(i18next.language);
+    const [description, setDescription] = useState("processing...");
 
+    const translateToEnglish = async (text) => {
+        return await translate(text, {
+            from: "id",
+            to: "en",
+            engine: "google"
+        });
+    };
     useEffect(() => {
-        try {
-            api.get(`/motif/${idMotif}`).then((res) => {
-                setMotifData(res.data.data[0]);
-                console.log(res.data.data[0]);
+        const fetchData = async () => {
+            try {
+                const response = await api.get(`/motif/${idMotif}`);
+                const motifData = response.data.data[0];
+                setMotifData(motifData);
+                console.log(motifData);
+
+                const descriptionText =
+                    lang === "en"
+                        ? await translateToEnglish(motifData.desc)
+                        : motifData.desc;
+                setDescription(descriptionText);
                 setLoading(false);
-            });
-        } catch (error) {
-            console.log(error);
-        }
-    }, [idMotif]);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        fetchData();
+    }, [idMotif, lang]);
 
     useEffect(() => {
         try {
@@ -66,7 +87,7 @@ export default function PageMotif() {
     return (
         <>
             <Container center={true}>
-                <Header />
+                <Header setLang={setLang} />
 
                 {/* <button
                     onClick={() => navigate(-1)}
@@ -121,7 +142,7 @@ export default function PageMotif() {
                                         /meter
                                     </div>
                                     <div className="w-full mt-2 text-base font-normal ">
-                                        {motifData?.desc}
+                                        {description}
                                     </div>
                                 </div>
                             </div>

@@ -8,6 +8,7 @@ import api from "../../config/api";
 import { useTranslation } from "react-i18next";
 import translate from "translate";
 import { showShopLogo, showSosmedLogo } from "../../customHooks";
+import i18next from "i18next";
 
 export default function PageIndustri() {
     const { idIndustri } = useParams();
@@ -15,7 +16,7 @@ export default function PageIndustri() {
     const [industriImage, setIndustriImage] = useState(null);
     const [motifData, setMotifData] = useState([]);
     const { t } = useTranslation();
-    const [lang, setLang] = useState("id");
+    const [lang, setLang] = useState(i18next.language);
     const [description, setDescription] = useState("processing...");
 
     useEffect(() => {
